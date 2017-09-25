@@ -1,17 +1,40 @@
-package com.icooding.doc;
+package com.icooding.doc.core;
 
-public class MarkdownParam {
-    private String name;
-    private String type;
-    private String must;
-    private String def;
-    private String desc;
-    private String simple;
+public class Param {
 
-    public MarkdownParam() {
+    public enum Must{
+        YES,NO
     }
 
-    public MarkdownParam(String name, String type, String must, String def, String desc, String simple) {
+    /**
+     * 参数名
+     */
+    private String name;
+    /**
+     * 类型
+     */
+    private String type;
+    /**
+     * 必须 YES/NO
+     */
+    private Must must;
+    /**
+     * 默认值
+     */
+    private String def;
+    /**
+     * 描述
+     */
+    private String desc;
+    /**
+     * 示例
+     */
+    private String simple;
+
+    public Param() {
+    }
+
+    public Param(String name, String type, Must must, String def, String desc, String simple) {
         this.name = name;
         this.type = type;
         this.must = must;
@@ -44,11 +67,11 @@ public class MarkdownParam {
         this.type = type;
     }
 
-    public String getMust() {
+    public Must getMust() {
         return must;
     }
 
-    public void setMust(String must) {
+    public void setMust(Must must) {
         this.must = must;
     }
 

@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
-icooding/icooding-utils/target
+icooding-utils/target
+icooding-doc/target
+*.iml
+*.idea
 # Log file
 *.log
 

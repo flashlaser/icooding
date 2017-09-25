@@ -7,14 +7,29 @@
     <groupId>com.icooding</groupId>
     <artifactId>icooding-doc</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <flexmark.version>0.26.4</flexmark.version>
+    </properties>
 
 
     <dependencies>
-        <dependency>
-            <groupId>cn.ligth</groupId>
-            <artifactId>ligth-weixin</artifactId>
-            <version>1.0.1</version>
-        </dependency>
+        <!--markdown to html-->
+        <!--<dependency>-->
+            <!--<groupId>com.vladsch.flexmark</groupId>-->
+            <!--<artifactId>flexmark</artifactId>-->
+            <!--<version>${flexmark.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.vladsch.flexmark</groupId>-->
+            <!--<artifactId>flexmark-util</artifactId>-->
+            <!--<version>${flexmark.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.vladsch.flexmark</groupId>-->
+            <!--<artifactId>flexmark-ext-tables</artifactId>-->
+            <!--<version>${flexmark.version}</version>-->
+        <!--</dependency>-->
+        <!--markdown to html end-->
 
     </dependencies>
 
