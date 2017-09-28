@@ -2,6 +2,7 @@
 *.class
 icooding-utils/target
 icooding-doc/target
+icooding-jfinal-restful/target
 *.iml
 *.idea
 # Log file
