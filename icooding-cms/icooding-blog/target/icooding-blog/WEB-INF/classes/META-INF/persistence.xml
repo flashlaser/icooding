@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+	http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+
+	<persistence-unit name="fate-persistence"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.icooding.cms.model.Theme</class>
+		<class>com.icooding.cms.model.ThemeTag</class>
+		<class>com.icooding.cms.model.Comments</class>
+		<!-- <class>com.icooding.cms.model.FileEntity</class> -->
+		<class>com.icooding.cms.model.GlobalSetting</class>
+		<class>com.icooding.cms.model.SecurityVerification</class>
+		<class>com.icooding.cms.model.ThirdPartyAccess</class>
+		<class>com.icooding.cms.model.ThirdPartyAccount</class>
+		<class>com.icooding.cms.model.User</class>
+		<class>com.icooding.cms.model.UserSession</class>
+		<class>com.icooding.cms.model.SystemMessage</class>
+		<class>com.icooding.cms.model.VoteRecord</class>
+		<class>com.icooding.cms.model.Forum</class>
+		<class>com.icooding.cms.model.Media</class>
+		<class>com.icooding.cms.model.Param</class>
+		<class>com.icooding.cms.model.Announcement</class>
+		<class>com.icooding.cms.model.PingRecord</class>
+		<class>com.icooding.cms.model.Navi</class>
+		<class>com.icooding.cms.model.Spider</class>
+		<!-- <class>com.icooding.cms.model.AgentLog</class> -->
+		<class>com.icooding.cms.model.Advertisement</class>
+		<class>com.icooding.cms.model.ApiLog</class>
+		<class>com.icooding.cms.model.FriendLink</class>
+		<class>com.icooding.cms.model.ExceptionLog</class>
+		<class>com.icooding.cms.model.DuoShuo</class>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>
