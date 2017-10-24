@@ -26,7 +26,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Table(name = "reinforce_comments")
+@Table(name = "t_comments")
 public class Comments implements Serializable{
 
 	/**

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,fate.webapp.blog.model.GlobalSetting" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.icooding.cms.dto.GlobalSetting" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
@@ -54,7 +54,7 @@
     					<div class="col-sm-2"></div>
   					</div>
 					<jsp:useBean id="geetestSdk"
-							class="fate.webapp.blog.api.open.GeetestLib" scope="request" />
+							class="com.icooding.cms.web.api.open.GeetestLib" scope="request" />
 					<%
 							//TODO： replace your own ID here  after create a Captcha App in 'my.geetest.com'
 							GlobalSetting globalSetting = GlobalSetting.getInstance();
@@ -113,7 +113,8 @@
 						<hr>
 					</div>
 					<div class="col-sm-offset-3 col-sm-9">
-						<div class="help-block">注册太麻烦？那就试试第三方登录吧</div>
+						<%--<div class="help-block">注册太麻烦？那就试试第三方登录吧</div>--%>
+						<div class="help-block"> </div>
 						<button class="qq_login_btn" onclick="location.href='op/login/toQQ'"></button>
 						<button class="wb_connect_btn" onclick="location.href='op/login/toWeibo'"></button>
 					</div>

@@ -26,7 +26,7 @@ import org.hibernate.annotations.Where;
  *
  */
 @Entity
-@Table(name = "reinforce_theme")
+@Table(name = "t_theme")
 public class Theme implements Serializable{
 
 	/**

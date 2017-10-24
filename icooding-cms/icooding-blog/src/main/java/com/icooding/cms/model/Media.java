@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "reinforce_media")
+@Table(name = "t_media")
 public class Media implements Serializable {
 
 	/**

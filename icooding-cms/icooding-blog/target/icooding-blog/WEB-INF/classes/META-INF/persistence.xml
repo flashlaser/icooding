@@ -12,7 +12,7 @@
 		<class>com.icooding.cms.model.ThemeTag</class>
 		<class>com.icooding.cms.model.Comments</class>
 		<!-- <class>com.icooding.cms.model.FileEntity</class> -->
-		<class>com.icooding.cms.model.GlobalSetting</class>
+		<class>com.icooding.cms.dto.GlobalSetting</class>
 		<class>com.icooding.cms.model.SecurityVerification</class>
 		<class>com.icooding.cms.model.ThirdPartyAccess</class>
 		<class>com.icooding.cms.model.ThirdPartyAccount</class>
@@ -37,7 +37,7 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.format_sql" value="false" />
 		</properties>
 	</persistence-unit>
 </persistence>

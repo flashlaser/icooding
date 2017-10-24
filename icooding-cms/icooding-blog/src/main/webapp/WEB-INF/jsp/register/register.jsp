@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,fate.webapp.blog.model.GlobalSetting" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.icooding.cms.dto.GlobalSetting" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
@@ -78,7 +78,7 @@
 						<span class="Validform_checktip help"></span>
 					</div>
 				</div>
-				<jsp:useBean id="geetestSdk" class="fate.webapp.blog.api.open.GeetestLib" scope="request" />
+				<jsp:useBean id="geetestSdk" class="com.icooding.cms.web.api.open.GeetestLib" scope="request" />
 				<%
 					GlobalSetting globalSetting = GlobalSetting.getInstance();
 					String captcha_id = globalSetting.getGeetestId();//It's a capthca whihc needs to be register

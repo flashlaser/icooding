@@ -17,12 +17,12 @@ public class DuoShuoDao extends BaseDao<DuoShuo>{
 	public void update(String ids, String action, long logId){
 		if(action.equals("approve"))
 			action += "d";
-		String sql = "update reinforce_duoshuo set status=:action,log_id=:logId where post_id in ("+ids+")";
+		String sql = "update t_duoshuo set status=:action,log_id=:logId where post_id in ("+ids+")";
 		em.createNativeQuery(sql).setParameter("action", action).setParameter("logId", logId).executeUpdate();
 	}
 	
 	public void delete(String ids){
-		String sql = "delete from reinforce_duoshuo where post_id in ("+ids+")";
+		String sql = "delete from t_duoshuo where post_id in ("+ids+")";
 		em.createNativeQuery(sql).executeUpdate();
 	}
 	

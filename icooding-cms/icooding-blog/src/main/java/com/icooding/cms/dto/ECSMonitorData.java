@@ -1,4 +1,4 @@
-package com.icooding.cms.model;
+package com.icooding.cms.dto;
 
 import java.util.Date;
 import java.util.List;

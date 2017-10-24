@@ -1,4 +1,4 @@
-package com.icooding.cms.model;
+package com.icooding.cms.dto;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;

@@ -1,6 +1,6 @@
 package com.icooding.cms.web.api.open;
 
-import com.icooding.cms.model.Page;
+import com.icooding.cms.dto.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

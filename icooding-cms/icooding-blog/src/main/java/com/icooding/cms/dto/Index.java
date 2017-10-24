@@ -1,4 +1,6 @@
-package com.icooding.cms.model;
+package com.icooding.cms.dto;
+
+import com.icooding.cms.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

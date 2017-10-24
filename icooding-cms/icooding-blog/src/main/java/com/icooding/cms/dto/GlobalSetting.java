@@ -1,5 +1,6 @@
-package com.icooding.cms.model;
+package com.icooding.cms.dto;
 
+import com.icooding.cms.model.ThirdPartyAccess;
 import org.springframework.mail.javamail.JavaMailSender;
 
 /**

@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
  *
  */
 @Entity
-@Table(name = "reinforce_spider")
+@Table(name = "t_spider")
 public class Spider {
 
 	@Id

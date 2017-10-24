@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
  *
  */
 @Table
-@Entity(name = "reinforce_apiLog")
+@Entity(name = "t_apiLog")
 public class ApiLog {
 	
 	@Id

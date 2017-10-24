@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icooding.cms.web.base.Constants;
 import com.icooding.cms.model.Advertisement;
-import com.icooding.cms.model.Index;
+import com.icooding.cms.dto.Index;
 import com.icooding.cms.service.AdvertisementService;
 
 /**

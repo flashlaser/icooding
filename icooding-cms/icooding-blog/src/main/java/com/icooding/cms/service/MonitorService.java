@@ -1,6 +1,6 @@
 package com.icooding.cms.service;
 
-import com.icooding.cms.model.MonitorInfoBean;
+import com.icooding.cms.dto.MonitorInfoBean;
 
 /**
  * 获取系统信息的业务逻辑类接口.

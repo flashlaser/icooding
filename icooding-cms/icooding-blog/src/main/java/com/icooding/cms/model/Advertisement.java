@@ -15,7 +15,7 @@ import javax.persistence.Table;
  *
  */
 @Table
-@Entity(name = "reinforce_advertisement")
+@Entity(name = "t_advertisement")
 public class Advertisement implements Serializable{
 	
 	/**

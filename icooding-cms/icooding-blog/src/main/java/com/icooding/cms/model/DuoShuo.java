@@ -18,7 +18,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "reinforce_duoshuo")
+@Table(name = "t_duoshuo")
 public class DuoShuo implements Serializable{
 
 	/**

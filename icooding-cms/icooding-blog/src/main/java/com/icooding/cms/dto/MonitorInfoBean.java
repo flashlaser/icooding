@@ -1,4 +1,4 @@
-package com.icooding.cms.model;
+package com.icooding.cms.dto;
 
 public class MonitorInfoBean {
     /** 可使用内存. */

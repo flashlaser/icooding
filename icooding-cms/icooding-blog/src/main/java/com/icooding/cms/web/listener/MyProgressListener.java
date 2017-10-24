@@ -1,6 +1,6 @@
 package com.icooding.cms.web.listener;
 
-import com.icooding.cms.model.ProgressEntity;
+import com.icooding.cms.dto.ProgressEntity;
 
 import java.util.List;
 

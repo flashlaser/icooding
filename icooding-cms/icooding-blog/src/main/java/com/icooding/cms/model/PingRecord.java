@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
  *
  */
 @Entity
-@Table(name = "reinforce_ping_record")
+@Table(name = "t_ping_record")
 public class PingRecord implements Serializable{
 
 	/**

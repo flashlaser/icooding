@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "reinforce_system_message")
+@Table(name = "t_system_message")
 public class SystemMessage {
 
 	private String guid;

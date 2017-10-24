@@ -161,7 +161,7 @@ public class ThemeDao extends BaseDao<Theme>{
 	}
 	
 	public Theme findByDateAndTitle(String date, String title){
-		String hql = "select * from reinforce_theme t where t.title=:title and t.publish_date like :date";
+		String hql = "select * from t_theme t where t.title=:title and t.publish_date like :date";
 		List<Theme> themes = em.createNativeQuery(hql, Theme.class).setParameter("title", title).setParameter("date", "%"+date+"%").getResultList();
 		if(themes.size()==0)
 			return null;

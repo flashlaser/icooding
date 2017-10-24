@@ -13,7 +13,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "reinforce_param")
+@Table(name = "t_param")
 public class Param {
 
 	public static final int TYPE_TEXT = 1;

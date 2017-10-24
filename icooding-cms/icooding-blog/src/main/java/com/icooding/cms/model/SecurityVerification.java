@@ -19,7 +19,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Table(name = "reinforce_security_verification")
+@Table(name = "t_security_verification")
 public class SecurityVerification {
 
 	/**

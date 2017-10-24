@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.sun.management.OperatingSystemMXBean;
 
-import com.icooding.cms.model.MonitorInfoBean;
+import com.icooding.cms.dto.MonitorInfoBean;
 import com.icooding.cms.service.MonitorService;
 import com.icooding.cms.utils.Bytes;
 

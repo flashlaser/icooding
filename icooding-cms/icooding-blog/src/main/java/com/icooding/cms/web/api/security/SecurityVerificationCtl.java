@@ -10,7 +10,7 @@ import java.util.Map;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
-import com.icooding.cms.model.GlobalSetting;
+import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.model.SecurityVerification;
 import com.icooding.cms.model.User;
 import com.icooding.cms.model.UserSession;

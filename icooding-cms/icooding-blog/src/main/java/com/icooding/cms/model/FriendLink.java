@@ -15,7 +15,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "reinforce_friendlink")
+@Table(name = "t_friendlink")
 public class FriendLink {
 
 	public final static int STATE_APPLY = 0;

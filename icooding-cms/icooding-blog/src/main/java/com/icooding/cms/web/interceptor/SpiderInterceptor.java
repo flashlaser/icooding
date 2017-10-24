@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.icooding.cms.model.GlobalSetting;
+import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.model.Spider;
 import com.icooding.cms.service.ExceptionLogService;
 import com.icooding.cms.service.SpiderService;

@@ -17,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Table(name = "reinforce_third_party_account")
+@Table(name = "t_third_party_account")
 public class ThirdPartyAccount {
 
 	public final static int ACCOUNT_TYPE_QQ = 1;

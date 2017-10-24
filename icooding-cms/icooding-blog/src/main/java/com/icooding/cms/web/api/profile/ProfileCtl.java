@@ -1,5 +1,6 @@
 package com.icooding.cms.web.api.profile;
 
+import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.model.*;
 import com.icooding.cms.service.*;
 import com.icooding.cms.utils.Base64;

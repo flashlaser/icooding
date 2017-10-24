@@ -43,8 +43,8 @@ import com.aliyun.oss.model.PutObjectResult;
 import com.aliyun.oss.model.UploadPartRequest;
 import com.aliyun.oss.model.UploadPartResult;
 
-import com.icooding.cms.model.Aliyun;
-import com.icooding.cms.model.ProgressEntity;
+import com.icooding.cms.dto.Aliyun;
+import com.icooding.cms.dto.ProgressEntity;
 import com.icooding.cms.service.OSSService;
 import com.icooding.cms.utils.MD5;
 

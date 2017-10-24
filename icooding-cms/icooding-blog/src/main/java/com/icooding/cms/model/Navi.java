@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
-@Table(name = "reinforce_navi")
+@Table(name = "t_navi")
 public class Navi {
 
 	/**

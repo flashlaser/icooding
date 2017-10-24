@@ -15,7 +15,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "reinforce_exception_log")
+@Table(name = "t_exception_log")
 public class ExceptionLog {
 
 	@Id

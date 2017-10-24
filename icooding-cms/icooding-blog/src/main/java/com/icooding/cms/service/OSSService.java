@@ -31,7 +31,7 @@ public interface OSSService {
 	/**
 	 * 头像上传
 	 * @param bucketName
-	 * @param clientFile
+	 * @param file
 	 * @param folder
 	 * @return
 	 */
@@ -61,7 +61,6 @@ public interface OSSService {
 	
 	/**
 	 * 取消上传
-	 * @param bucketName
 	 * @param fileName
 	 * @param uploadId
 	 */
@@ -98,7 +97,6 @@ public interface OSSService {
 	
 	/**
 	 * 给Bucket设置referer
-	 * @param ossClient
 	 * @param referer
 	 * @param allowEmptyReferer
 	 */

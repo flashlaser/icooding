@@ -28,11 +28,11 @@ import com.aliyun.oss.model.PartListing;
 import com.aliyun.oss.model.PartSummary;
 
 import com.icooding.cms.web.base.Constants;
-import com.icooding.cms.model.Aliyun;
-import com.icooding.cms.model.FileListItem;
-import com.icooding.cms.model.GlobalSetting;
+import com.icooding.cms.dto.Aliyun;
+import com.icooding.cms.dto.FileListItem;
+import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.model.Param;
-import com.icooding.cms.model.ProgressEntity;
+import com.icooding.cms.dto.ProgressEntity;
 import com.icooding.cms.service.OSSService;
 import com.icooding.cms.service.ParamService;
 import com.icooding.cms.utils.Convert;

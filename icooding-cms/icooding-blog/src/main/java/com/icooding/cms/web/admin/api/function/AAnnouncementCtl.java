@@ -9,7 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import com.icooding.cms.model.Announcement;
-import com.icooding.cms.model.Index;
+import com.icooding.cms.dto.Index;
 import com.icooding.cms.model.UserSession;
 import com.icooding.cms.service.AnnouncementService;
 import com.icooding.cms.web.base.Constants;

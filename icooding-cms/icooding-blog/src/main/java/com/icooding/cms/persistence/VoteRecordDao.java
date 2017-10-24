@@ -10,7 +10,7 @@ import com.icooding.cms.model.VoteRecord;
 public class VoteRecordDao extends BaseDao<VoteRecord>{
 
 	public VoteRecord findBySessionAndTheme(String sessionId,String guid) {
-		String hql = "select * from reinforce_vote_record where session_id=:sessionId and theme_guid=:guid";
+		String hql = "select * from t_vote_record where session_id=:sessionId and theme_guid=:guid";
 		List<VoteRecord> list = em.createNativeQuery(hql, VoteRecord.class).setParameter("sessionId", sessionId).setParameter("guid", guid).getResultList();
 		if(list.size()==0)
 			return null;
@@ -19,7 +19,7 @@ public class VoteRecordDao extends BaseDao<VoteRecord>{
 	}
 	
 	public VoteRecord findBySessionAndComment(String sessionId,String commentGuid) {
-		String hql = "select * from reinforce_vote_record where session_id=:sessionId and comments_guid=:commentGuid";
+		String hql = "select * from t_vote_record where session_id=:sessionId and comments_guid=:commentGuid";
 		List<VoteRecord> list = em.createNativeQuery(hql, VoteRecord.class).setParameter("sessionId", sessionId).setParameter("commentGuid", commentGuid).getResultList();
 		if(list.size()==0)
 			return null;

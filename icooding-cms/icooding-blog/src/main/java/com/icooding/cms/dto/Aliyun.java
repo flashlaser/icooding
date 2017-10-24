@@ -1,20 +1,13 @@
-package com.icooding.cms.model;
+package com.icooding.cms.dto;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.opensearch.javasdk.CloudsearchClient;
 import com.opensearch.javasdk.CloudsearchSearch;
-import com.opensearch.javasdk.object.KeyTypeEnum;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.aliyun.oss.ClientConfiguration;
 import com.aliyun.oss.OSSClient;

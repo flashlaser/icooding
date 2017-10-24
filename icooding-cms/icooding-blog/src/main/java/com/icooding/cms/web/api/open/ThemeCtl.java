@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.model.*;
 import com.icooding.cms.service.*;
 import com.icooding.cms.utils.FilterHTMLTag;

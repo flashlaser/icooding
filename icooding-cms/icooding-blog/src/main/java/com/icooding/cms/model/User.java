@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
  *
  */
 @Entity
-@Table(name = "reinforce_user")
+@Table(name = "t_user")
 public class User implements Serializable {
 
 	/**

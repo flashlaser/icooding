@@ -13,7 +13,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "reinforce_vote_record")
+@Table(name = "t_vote_record")
 public class VoteRecord {
 
 	/**

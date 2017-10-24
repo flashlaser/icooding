@@ -3,7 +3,7 @@ package com.icooding.cms.web.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.icooding.cms.model.GlobalSetting;
+import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.utils.Strings;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

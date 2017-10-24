@@ -20,7 +20,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Table(name = "reinforce_user_session")
+@Table(name = "t_user_session")
 public class UserSession {
 
 	public final static int TYPE_LOCAL = 0;

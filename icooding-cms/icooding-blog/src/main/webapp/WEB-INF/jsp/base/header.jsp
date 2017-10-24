@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="logo hidden-xs hidden-sm">
 		<div class="left pull-left">
-			<div class="header-logo pull-left"><a href="/"><img src="images/logo.png" width=100 alt="${setting.appName}"></a></div>
+			<div class="header-logo pull-left"><a href="/"><img src="images/logo-white.png" width=100 alt="${setting.appName}"></a></div>
 			<div class="header-text pull-left"><div class="name"><a href="http://${setting.appUrl}/" rel="home" id="name">${setting.appName}</a></div><div class="help-block" id="desc">${setting.appEnName}</div></div>
 		</div>
 		<div class="right pull-right">

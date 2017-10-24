@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.icooding.cms.model.GlobalSetting;
+import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.model.User;
 import com.icooding.cms.model.UserSession;
 import com.icooding.cms.service.UserSessionService;
@@ -27,6 +27,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		String bwSessionId = (String) session.getAttribute("bwSessionId");
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		String base = request.getContextPath();
+		System.out.println("getContextPath="+base);
 		GlobalSetting globalSetting = GlobalSetting.getInstance();
 		boolean flag = false;
 		if(userSession!=null&&bwSessionId!=null && bwSessionId.equals(userSession.getSessionId())){

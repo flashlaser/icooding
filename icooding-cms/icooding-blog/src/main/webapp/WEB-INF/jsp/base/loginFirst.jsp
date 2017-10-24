@@ -10,7 +10,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>祝福之风</title>
+<title></title>
 <link rel="stylesheet" href="http://open.reinforce.cn/artdialog/6.0.4/css/ui-dialog.css">
 <script src="http://open.reinforce.cn/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://open.reinforce.cn/artdialog/6.0.4/js/dialog-plus-min.js"></script>

@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.icooding.cms.dto.Index;
 import com.icooding.cms.model.*;
 import com.icooding.cms.service.ForumService;
 import com.icooding.cms.service.FriendLinkService;

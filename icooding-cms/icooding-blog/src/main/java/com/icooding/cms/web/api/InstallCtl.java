@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.icooding.cms.model.GlobalSetting;
+import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.model.Param;
 import com.icooding.cms.model.User;
 import com.icooding.cms.service.ParamService;

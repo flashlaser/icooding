@@ -13,7 +13,7 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="http://${setting.appUrl}/">
-				<img src="images/logo.png" width="40" height="40" alt="${setting.appName}" >
+				<img src="images/logo-white.png" width="40" height="40" alt="${setting.appName}" >
 			</a>
 		</div>
 
@@ -48,13 +48,14 @@
 
 			<ul class="nav navbar-nav navbar-right">
 				<c:if test="${userSession==null}">
-					<li><a href="op/login/toLogin" class="login-icon"><img src="images/nana.png" width="18" height="22" alt="登录"/></a></li>
-					<c:if test="${setting.qq}">
-						<li><a href="op/login/toQQ" class="login-icon"><img src="images/qq/qq.png" width="25" height="25" alt="QQ登录"/></a></li>
-					</c:if>
-					<c:if test="${setting.weibo}">
-						<li><a href="op/login/toWeibo" class="login-icon"><img src="images/weibo/weibo.png" width="25" height="25" alt="新浪登录" /></a></li>
-					</c:if>
+					<li><a href="op/register/goRegister" ><img src="images/filetype/34.png" style="margin-right: 4px; float: left; top: 0px;" width="18" height="18" alt="注册"/>注册</a></li>
+					<li><a href="op/login/toLogin" ><img src="images/filetype/35.png" style="margin-right: 4px; float: left; top: 0px;" width="18" height="18" alt="登录"/>登录</a></li>
+					<%--<c:if test="${setting.qq}">--%>
+						<%--<li><a href="op/login/toQQ" class="login-icon"><img src="images/qq/qq.png" width="18" height="18" alt="QQ登录"/></a></li>--%>
+					<%--</c:if>--%>
+					<%--<c:if test="${setting.weibo}">--%>
+						<%--<li><a href="op/login/toWeibo" class="login-icon"><img src="images/weibo/weibo.png" width="18" height="18" alt="新浪登录" /></a></li>--%>
+					<%--</c:if>--%>
 				</c:if>
 				<c:if test="${userSession!=null}">
 					<li class="dropdown">

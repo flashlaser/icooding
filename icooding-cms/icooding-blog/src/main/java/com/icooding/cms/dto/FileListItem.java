@@ -1,4 +1,4 @@
-package com.icooding.cms.model;
+package com.icooding.cms.dto;
 
 /**
  * 用于从赛利亚OSS获取到文件信息后，经过处理之后返回给页面的格式

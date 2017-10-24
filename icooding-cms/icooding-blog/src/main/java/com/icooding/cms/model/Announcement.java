@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
  *
  */
 @Entity
-@Table(name = "reinforce_announcement")
+@Table(name = "t_announcement")
 public class Announcement implements Serializable {
 
 	/**

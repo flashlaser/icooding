@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.icooding.cms.model.Forum;
-import com.icooding.cms.model.Index;
+import com.icooding.cms.dto.Index;
 import com.icooding.cms.model.Param;
 import com.icooding.cms.model.Theme;
 import com.icooding.cms.service.ForumService;

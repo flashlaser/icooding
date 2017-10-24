@@ -8,8 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.icooding.cms.model.Forum;
-import com.icooding.cms.model.GlobalSetting;
-import com.icooding.cms.model.Index;
+import com.icooding.cms.dto.GlobalSetting;
+import com.icooding.cms.dto.Index;
 import com.icooding.cms.model.Param;
 import com.icooding.cms.service.ForumService;
 import com.icooding.cms.service.OSSService;

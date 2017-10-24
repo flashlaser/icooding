@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.icooding.cms.model.FriendLink;
-import com.icooding.cms.model.Index;
+import com.icooding.cms.dto.Index;
 import com.icooding.cms.service.FriendLinkService;
 import com.icooding.cms.utils.Strings;
 import org.apache.log4j.Logger;

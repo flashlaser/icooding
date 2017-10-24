@@ -69,6 +69,7 @@
 						</h3>
 						<h4 class="h4 visible-xs-block visible-sm-block">
 							${theme.title}
+								：${theme.authorId==userSession.user.uid}
 							<c:if test="${theme.authorId==userSession.user.uid}">
 								<label><a href="theme/addTheme?tid=${theme.guid}">编辑</a></label>
 							</c:if>

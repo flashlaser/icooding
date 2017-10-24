@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.model.*;
 import com.icooding.cms.service.TPAService;
 import com.icooding.cms.service.ThirdPartyAccessService;
@@ -20,7 +21,6 @@ import com.icooding.qq.Oauth;
 import com.icooding.qq.qzone.UserInfo;
 import com.icooding.weibo.Account;
 import com.icooding.weibo.Users;
-import com.icooding.weibo.Weibo;
 import com.icooding.weibo.model.WeiboException;
 import com.icooding.weibo.org.json.JSONException;
 import com.icooding.weibo.org.json.JSONObject;

@@ -19,7 +19,7 @@ public interface ThemeService {
 	
 	/**
 	 * 按版块统计总数
-	 * @param type
+	 * @param fid
 	 * @param isDelete
 	 * @param state
 	 * @return

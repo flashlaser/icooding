@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.icooding.cms.model.GlobalSetting;
+import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.model.SecurityVerification;
 import com.icooding.cms.service.SecurityVerificationService;
 import com.icooding.cms.utils.JHUtils;

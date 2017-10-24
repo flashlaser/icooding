@@ -15,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Table(name = "reinforce_third_party_access")
+@Table(name = "t_third_party_access")
 public class ThirdPartyAccess {
 
 	public static final int TYPE_QQ = 0;

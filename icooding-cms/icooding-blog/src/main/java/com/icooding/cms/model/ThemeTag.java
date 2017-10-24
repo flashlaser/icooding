@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
  *
  */
 @Entity
-@Table(name = "reinforce_theme_tag")
+@Table(name = "t_theme_tag")
 public class ThemeTag {
 
 	@Id

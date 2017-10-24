@@ -1,4 +1,4 @@
-package com.icooding.cms.model;
+package com.icooding.cms.dto;
 
 /**
  * 分页类，简化分页操作，配合特定的js使用

@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
-@Table(name = "reinforce_forum")
+@Table(name = "t_forum")
 public class Forum implements Serializable{
 	
 	/**
