@@ -79,12 +79,12 @@ body {
 }
 </style>
 <meta charset=utf-8 />
-<title>404哟</title>
+<title>404</title>
 </head>
 <body>
   <div class="demo">
     <p><span>4</span><span>0</span><span>4</span></p>
-    <p>您查找的页面正在打酱油(´･ω･`)</p>
+    <p>您查找的页面不在线(´･ω･`)</p>
   </div>
 </body>
 </html>

@@ -12,8 +12,9 @@
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="http://${setting.appUrl}/">
-				<img src="images/logo-white.png" width="40" height="40" alt="${setting.appName}" >
+			<a class="navbar-brand" style="    line-height: 40px;" href="http://${setting.appUrl}">
+				<%--<img src="images/logo-white.png" width="40" height="40" alt="${setting.appName}" >--%>
+				首页
 			</a>
 		</div>
 
@@ -39,14 +40,15 @@
 					</c:if>
 				</c:forEach>
 			</ul>
-			<form class="navbar-form navbar-left" role="search" action="javascript:opensearch()">
-				<div class="form-group has-feedback">
-					<input type="text" class="form-control" placeholder="Search" id="keyword" />
-					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
-				</div>
-			</form>
+
 
 			<ul class="nav navbar-nav navbar-right">
+				<form class="navbar-form navbar-left" role="search" action="javascript:opensearch()">
+					<div class="form-group has-feedback">
+					<input type="text" class="form-control" placeholder="Java" id="keyword" />
+					<span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+				</div>
+				</form>
 				<c:if test="${userSession==null}">
 					<li><a href="op/register/goRegister" ><img src="images/filetype/34.png" style="margin-right: 4px; float: left; top: 0px;" width="18" height="18" alt="注册"/>注册</a></li>
 					<li><a href="op/login/toLogin" ><img src="images/filetype/35.png" style="margin-right: 4px; float: left; top: 0px;" width="18" height="18" alt="登录"/>登录</a></li>
@@ -64,6 +66,10 @@
 							${userSession.user.nickName}<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
+							<c:if test="${userSession!=null&&userSession.user.userType==1}">
+								<li><a href="admin/siteSet/siteInfo" rel="nofollow"><span
+										class="glyphicon glyphicon-align-justify"></span>&nbsp;&nbsp;管理中心</a></li>
+							</c:if>
 							<li><a href="profile/basicInfo"><span
 									class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;个人资料</a></li>
 							<li><a href="profile/headIcon"><span
@@ -74,9 +80,7 @@
 							<li><a href="javascript:logout()"><span
 									class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;退出</a></li>
 						</ul></li>
-					<c:if test="${userSession!=null&&userSession.user.userType==1}">
-						<li><a href="admin/siteSet/siteInfo" rel="nofollow">管理中心</a></li>
-					</c:if>
+
 				</c:if>
 			</ul>
 		</div>

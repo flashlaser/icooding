@@ -20,7 +20,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="keywords" content="搜索:${keyword}" />
-<meta name="description" content="搜索:${keyword},搜索用时：${searchTime}秒，共搜索到<em>${count}</em>个结果" />
+<meta name="description" content="搜索:${keyword},搜索用时：${searchTime}毫秒，共搜索到<em>${count}</em>个结果" />
 <c:import url="/op/head"></c:import>
 </head>
 <body>
@@ -40,7 +40,7 @@
 			<div class=" col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-body result">
-						<div class="help-block">搜索用时：${searchTime}秒，共搜索到<em>${count}</em>个结果</div>
+						<div class="help-block">搜索用时：${searchTime}毫秒，共搜索到<em>${count}</em>个结果</div>
 						<div class=" row">
 						<c:forEach items="${themes}" var="theme">
 							<div class="col-xs-12">

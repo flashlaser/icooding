@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.TypedQuery;
 
+import com.icooding.cms.dto.Pagination;
 import org.springframework.stereotype.Repository;
 
 import com.icooding.cms.model.Theme;
@@ -192,5 +193,35 @@ public class ThemeDao extends BaseDao<Theme>{
 			query = query.setParameter("state", state);
 		return query.setFirstResult((curPage-1)*per).setMaxResults(per).getResultList();
 	}
-	
+
+    public List<Theme> listTheme(Pagination<Theme> pagination) {
+		StringBuffer hql = new StringBuffer("from Theme where 1=1 and isDelete = false and state = 2 ");
+		for (int i = 0; i < pagination.getSearchNames().size(); i++) {
+			hql.append(" and "+pagination.getSearchNames().get(i)+" like :value"+i);
+		}
+		hql.append(" order by publishDate desc");
+
+		TypedQuery<Theme> query = em.createQuery(hql.toString(), Theme.class);
+		for (int i = 0; i < pagination.getSearchValues().size(); i++) {
+			query.setParameter("value"+i,"%"+pagination.getSearchValues().get(i)+"%");
+		}
+
+		query.setFirstResult((pagination.getPageNo()-1)*pagination.getPageSize());
+		query.setMaxResults(pagination.getPageSize());
+		return query.getResultList();
+    }
+
+	public int getTotal(Pagination<Theme> pagination) {
+		StringBuffer hql = new StringBuffer("select count(1) from Theme where 1=1  and isDelete = false and state = 2 ");
+		for (int i = 0; i < pagination.getSearchNames().size(); i++) {
+			hql.append(" and "+pagination.getSearchNames().get(i)+" like :value"+i);
+		}
+		hql.append(" order by publishDate desc");
+
+		TypedQuery<Long> query = em.createQuery(hql.toString(),Long.class);
+		for (int i = 0; i < pagination.getSearchValues().size(); i++) {
+			query.setParameter("value"+i,"%"+pagination.getSearchValues().get(i)+"%");
+		}
+		return query.getSingleResult().intValue();
+	}
 }

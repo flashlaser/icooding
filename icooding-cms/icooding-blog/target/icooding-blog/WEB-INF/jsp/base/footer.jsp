@@ -1,11 +1,29 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div>${adv.active?adv.code:''}</div>
 <footer class="footer">
+
+<div class="container">
+			<div class=" panel-default text-left">
+				<div class="panel-body">
+					<b>友情链接:</b>
+					<c:forEach items="${friendLinks}" var="f">
+						<c:if test="${fn:startsWith(f.url,'http://')}">
+							<a href="${f.url}" title="${f.siteName}" class="friend-link">${f.siteName}</a>
+						</c:if>
+						<c:if test="${!fn:startsWith(f.url,'http://')}">
+							<a href="http://${f.url}" title="${f.siteName}" class="friend-link">${f.siteName}</a>
+						</c:if>
+					</c:forEach>
+				</div>
+			</div>
+</div>
+
     <p>Copyright©2014-${year}  ${setting.appName} All Rights Reserved</p>
     <p><a href="http://${setting.appUrl}/"><strong>${setting.appName}</strong></a>&nbsp;
 		<c:if test="${setting.icp!=null}">
-			(<a href="http://www.miitbeian.gov.cn/" rel="nofollow">${setting.icp}</a>)&nbsp;
+			(<a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">${setting.icp}</a>)&nbsp;
 		</c:if>
 		|&nbsp;&nbsp;<a href="javascript:;" rel="nofollow" data-toggle="modal" data-target="#myModal">申请友链</a>&nbsp;
 		|&nbsp;&nbsp;<a href="sitemap.xml" target="_blank">网站地图</a>&nbsp;
@@ -22,7 +40,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">提交友链申请</h4>
+        <h4 class="modal-title">申请友链</h4>
       </div>
       <div class="modal-body">
 				<form class="form-horizontal" id="linkForm" autocomplete="off">
@@ -161,6 +179,7 @@ toastr.options.progressBar = true;
     	}
     	$("#linkForm")
 				.Validform(
+
 						{
 							btnReset : "",
 							tiptype : function(msg, o, cssctl) {
@@ -275,18 +294,22 @@ toastr.options.progressBar = true;
 			success : function(data) {
 				if (data.success) {
 					dialog.alert("提交成功，请在您的网站上挂上本站链接，${userSession.user.nickName}将会尽快审核~~");
-				} else
-					dialog.alert(data.msg);
+				} else {
+                    dialog.alert(data.msg);
+                }
+                $("#myModal").modal({show:false})
 			},
 			error : function(data) {
-				if (data.status == 404)
-					dialog.alert("请求地址不存在");
-				else if (data.status == 500)
-					dialog.alert("系统内部错误");
-				else if (data.status == 200) {
-					dialog.alert("登录超时，为保证您填写的内容不丢失，请勿刷新页面，并在新开页面中重新登录");
-				} else
-					dialog.alert("通信异常");
+				if (data.status == 404) {
+                    dialog.alert("请求地址不存在");
+                }else if (data.status == 500) {
+                    dialog.alert("系统内部错误");
+                }else if (data.status == 200) {
+					dialog.alert("登录超时");
+				} else {
+                    dialog.alert("通信异常");
+                }
+                $("#myModal").modal({show:false})
 			}
 
 		};

@@ -58,6 +58,7 @@ public class InstallCtl {
 			updateParam(Constants.QQ, 0, Param.TYPE_INT);
 			updateParam(Constants.WEIBO, 0, Param.TYPE_INT);
 			updateParam(Constants.REDIS_OPEN, 0, Param.TYPE_INT);
+			updateParam(Constants.SEARCH_TYPE, 1, Param.TYPE_INT);
 			globalSetting.setSiteName(appName);
 			globalSetting.setAppName(appName);
 			globalSetting.setAppUrl(url);

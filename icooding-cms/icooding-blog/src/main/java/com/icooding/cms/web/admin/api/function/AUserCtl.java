@@ -43,8 +43,13 @@ public class AUserCtl {
 			map.put("activateDate", user.getActivateDate());
 			map.put("state", user.getState());
 			UserSession userSession = userSessionService.findByUserId(user.getUid());
-			map.put("loginDate", userSession.getLoginDate());
-			map.put("loginIp", userSession.getLoginIp());
+			if(userSession != null){
+				map.put("loginDate", userSession.getLoginDate());
+				map.put("loginIp", userSession.getLoginIp());
+			}else{
+				map.put("loginDate", "");
+				map.put("loginIp", "");
+			}
 			map.put("headIconUsed", user.getHeadIconUsed());
 			list.add(map);
 		}

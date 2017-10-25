@@ -111,7 +111,7 @@
 						<div class="col-md-12">
 							<div class="alert alert-success" role="alert" style="margin: 20px 0;border-left: 0;border-right: 0;border-radius:0;">
 								<span class="glyphicon glyphicon-play"></span>&nbsp;本文链接：<a href="${theme.url}" rel="author">${theme.title}</a>
-								，${userSession.user.nickName}花了好多脑细胞写的，转载请注明链接喔~~
+								，${userSession.user.nickName},转载请注明链接~~
 							</div>
 						</div>
 					</div>

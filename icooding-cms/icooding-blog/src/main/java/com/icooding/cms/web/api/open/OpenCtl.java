@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.icooding.cms.dto.Aliyun;
 import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.dto.Index;
+import com.icooding.cms.dto.Pagination;
 import com.icooding.cms.model.*;
 import com.icooding.cms.service.*;
 import com.icooding.cms.utils.DateUtil;
@@ -85,6 +86,7 @@ public class OpenCtl {
 		Calendar cal = Calendar.getInstance();
 		mv.addObject("year", cal.get(Calendar.YEAR));
 		Index index = Index.getInstance();
+		mv.addObject("friendLinks", index.getFriendLinks());
 		mv.addObject("adv", index.getAdvBottom());
 		return mv;
 	}
@@ -176,10 +178,11 @@ public class OpenCtl {
 	}
 	
 	@RequestMapping("/search")
-	public ModelAndView search(String keyword, @RequestParam(defaultValue = "1")int curPage){
+	public ModelAndView search(String keyword, @RequestParam(defaultValue = "1")int curPage, @RequestParam(defaultValue = "10")int pageSize){
 		ModelAndView mv = new ModelAndView("search/result");
 		/*本地计数操作*/
 		Param search = paramService.findByKey(Constants.SEARCH_COUNT);
+
         if(search!=null){
         	search.setIntValue(search.getIntValue()+1);
         }else{
@@ -191,47 +194,67 @@ public class OpenCtl {
         search = paramService.update(search);
         SiteStatistics.setSearch(search.getIntValue());
 
-		/*本地计数操作*/
-		
-		try {
-			String res = Aliyun.getInstance().search(keyword, curPage, 10);
-			JSONObject data = new JSONObject(res);
-			String status = data.getString("status");
-			JSONObject result = data.getJSONObject("result");
-			double searchTime = result.getDouble("searchtime");
-			long total = result.getLong("total");
-			long num = result.getLong("num");
-			long viewTotal = result.getLong("viewtotal");
-			JSONArray items = result.getJSONArray("items");
-			List<Theme> themes = new ArrayList<Theme>();
-			for(int i=0;i<items.length();i++){
-				Theme theme = new Theme();
-				JSONObject obj = items.getJSONObject(i);
-				theme.setGuid(obj.getString("guid"));
-				theme.setAuthor(obj.getString("author"));
-				theme.setPublishDate(new Date(obj.getLong("publish_date")));
-				theme.setPriority(obj.getInt("priority"));
-				theme.setReplies(obj.getInt("replies"));
-				theme.setTags(obj.getString("tags"));
-				theme.setTitle(obj.getString("title"));
-				theme.setUrl(obj.getString("url"));
-				theme.setViews(obj.getInt("views"));
-				theme.setContent(FilterHTMLTag.delHTMLTag(obj.getString("content")));
-				themes.add(theme);
-			}
-			mv.addObject("status", status);
-			mv.addObject("themes", themes);
-			mv.addObject("searchTime", searchTime);
-			mv.addObject("count", total);
+		Param search_type = paramService.findByKey(Constants.SEARCH_TYPE);
+
+		if(search_type.getIntValue() == 1){//本地搜索
+			long start = System.currentTimeMillis();
+			Pagination<Theme> pagination = new Pagination<>();
+			pagination.setPageNo(curPage);
+			pagination.setPageSize(pageSize);
+			pagination.addSearch("title",keyword);
+			pagination.addSearch("content",keyword);
+			pagination = themeService.search(pagination);
+			long end = System.currentTimeMillis();
+			mv.addObject("status", "");
+			mv.addObject("themes", pagination.getRows());
+			mv.addObject("searchTime", (end-start));
+			mv.addObject("count", pagination.total);
 			mv.addObject("curPage", curPage);
-			mv.addObject("pageSize", 10);
+			mv.addObject("pageSize", pageSize);
 			mv.addObject("keyword", keyword);
-		} catch (ClientProtocolException e) {
-			LOG.error("HTTP协议异常", e);
-		} catch (IOException e) {
-		    LOG.error("IO异常", e);
-		} catch (JSONException e) {
-		    LOG.error("JSON解析异常", e);
+		}else {
+
+		/*本地计数操作*/
+			try {
+				String res = Aliyun.getInstance().search(keyword, curPage, 10);
+				JSONObject data = new JSONObject(res);
+				String status = data.getString("status");
+				JSONObject result = data.getJSONObject("result");
+				double searchTime = result.getDouble("searchtime");
+				long total = result.getLong("total");
+				long num = result.getLong("num");
+				long viewTotal = result.getLong("viewtotal");
+				JSONArray items = result.getJSONArray("items");
+				List<Theme> themes = new ArrayList<Theme>();
+				for (int i = 0; i < items.length(); i++) {
+					Theme theme = new Theme();
+					JSONObject obj = items.getJSONObject(i);
+					theme.setGuid(obj.getString("guid"));
+					theme.setAuthor(obj.getString("author"));
+					theme.setPublishDate(new Date(obj.getLong("publish_date")));
+					theme.setPriority(obj.getInt("priority"));
+					theme.setReplies(obj.getInt("replies"));
+					theme.setTags(obj.getString("tags"));
+					theme.setTitle(obj.getString("title"));
+					theme.setUrl(obj.getString("url"));
+					theme.setViews(obj.getInt("views"));
+					theme.setContent(FilterHTMLTag.delHTMLTag(obj.getString("content")));
+					themes.add(theme);
+				}
+				mv.addObject("status", status);
+				mv.addObject("themes", themes);
+				mv.addObject("searchTime", searchTime);
+				mv.addObject("count", total);
+				mv.addObject("curPage", curPage);
+				mv.addObject("pageSize", pageSize);
+				mv.addObject("keyword", keyword);
+			} catch (ClientProtocolException e) {
+				LOG.error("HTTP协议异常", e);
+			} catch (IOException e) {
+				LOG.error("IO异常", e);
+			} catch (JSONException e) {
+				LOG.error("JSON解析异常", e);
+			}
 		}
 		
 		return mv;

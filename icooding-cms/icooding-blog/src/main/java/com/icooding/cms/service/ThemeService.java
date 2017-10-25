@@ -2,6 +2,7 @@ package com.icooding.cms.service;
 
 import java.util.List;
 
+import com.icooding.cms.dto.Pagination;
 import com.icooding.cms.model.Theme;
 
 public interface ThemeService {
@@ -102,4 +103,5 @@ public interface ThemeService {
 	 */
 	public void multiDelete(List<String> guids);
 
+    public Pagination<Theme> search(Pagination<Theme> pagination);
 }

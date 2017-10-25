@@ -103,14 +103,14 @@
 <div class="panel panel-default panel-right animated fadeInRight delay3">
 	<!-- Default panel contents -->
 	<div class="panel-heading panel-title panel-static">
-		<i class="glyphicon glyphicon-stats"></i>&nbsp;&nbsp;站点统计
+		<i class="glyphicon glyphicon-stats"></i>&nbsp;&nbsp;访问统计
 	</div>
 
 	<!-- List group -->
 	<ul class="list-group">
 		<li class="list-group-item">统计时间 : <fmt:formatDate
 				value="${updateTime}" type="date" pattern="yyyy-MM-dd HH:mm" /></li>
-		<li class="list-group-item">主题 : ${theme}</li>
+		<li class="list-group-item">文章 : ${theme}</li>
 		<!-- <li class="list-group-item">用户 : ${user}</li> -->
 		<li class="list-group-item">评论 : ${comment}</li>
 		<li class="list-group-item">浏览总数 : ${views}</li>

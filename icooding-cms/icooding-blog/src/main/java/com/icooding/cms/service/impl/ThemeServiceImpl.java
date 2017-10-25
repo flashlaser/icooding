@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.icooding.cms.dto.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -150,5 +151,13 @@ public class ThemeServiceImpl implements ThemeService {
     @Override
     public void multiDelete(List<String> guids) {
         themeDao.multiDelete(guids);
+    }
+
+
+    @Override
+    public Pagination<Theme> search(Pagination<Theme> pagination) {
+        pagination.setRows(themeDao.listTheme(pagination));
+        pagination.setTotal(themeDao.getTotal(pagination));
+        return pagination;
     }
 }

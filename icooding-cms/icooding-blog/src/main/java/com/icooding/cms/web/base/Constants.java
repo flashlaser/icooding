@@ -172,4 +172,11 @@ public class Constants {
      * 搜索次数
      */
     public static final String SEARCH_COUNT = "search_count";
+
+    /**
+     * 搜索类型
+     * 1 本地搜索
+     * 2 阿里云搜索
+     */
+    public static final String SEARCH_TYPE = "search_type";
 }
