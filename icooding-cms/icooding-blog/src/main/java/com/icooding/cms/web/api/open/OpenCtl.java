@@ -84,7 +84,7 @@ public class OpenCtl {
 	public ModelAndView footer(){
 		ModelAndView mv = new ModelAndView("base/footer");
 		Calendar cal = Calendar.getInstance();
-		mv.addObject("year", cal.get(Calendar.YEAR));
+		mv.addObject("year", 2020);
 		Index index = Index.getInstance();
 		mv.addObject("friendLinks", index.getFriendLinks());
 		mv.addObject("adv", index.getAdvBottom());

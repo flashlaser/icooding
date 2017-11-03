@@ -47,6 +47,7 @@
 
 </div>
 </c:if>
+
 <div class="panel panel-danger panel-list panel-right animated fadeInRight delay1">
 	<!-- Default panel contents -->
 	<div class="panel-heading panel-title">
@@ -61,6 +62,7 @@
 		</c:forEach>
 	</div>
 </div>
+
 <div class="panel panel-info panel-list panel-right animated fadeInRight delay2"
 	style="margin-bottom: 20px;">
 	<!-- Default panel contents -->
@@ -76,6 +78,7 @@
 		</c:forEach>
 	</div>
 </div>
+
  <div class="panel panel-default panel-right animated fadeInRight delay3">
 	<div class="panel-heading panel-title panel-static">
 		<i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;标签

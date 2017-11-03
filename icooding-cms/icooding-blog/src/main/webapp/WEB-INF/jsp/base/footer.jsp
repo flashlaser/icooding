@@ -20,7 +20,7 @@
 			</div>
 </div>
 
-    <p>Copyright©2014-${year}  ${setting.appName} All Rights Reserved</p>
+    <p>Copyright©2017-${year}  ${setting.appName} All Rights Reserved</p>
     <p><a href="http://${setting.appUrl}/"><strong>${setting.appName}</strong></a>&nbsp;
 		<c:if test="${setting.icp!=null}">
 			(<a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">${setting.icp}</a>)&nbsp;

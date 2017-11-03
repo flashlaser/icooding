@@ -1,5 +1,9 @@
 # Compiled class file
 *.class
+icooding-cms/icooding-blog/target
+icooding-cms/icooding-qq/target
+icooding-cms/icooding-weibo/target
+icooding-cms/target
 icooding-utils/target
 icooding-doc/target
 icooding-jfinal-restful/target
