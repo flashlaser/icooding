@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>多说设置--${setting.siteName}</title>
+<title>评论设置--${setting.siteName}</title>
 <meta charset="utf-8">
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,7 +42,7 @@
 				<div class="page">
 					<div class="page-header">
 						<h1>
-							多说 <small></small>
+							畅言评论 <small></small>
 						</h1>
 					</div>
 					<form id="duoshuoForm" onsubmit="return false;">
@@ -63,21 +63,21 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="duoshuoKey">多说应用名</label> <input type="text" class="form-control" id="duoshuoKey" name="duoshuoKey" value="${setting.duoshuoKey}" >
+									<label for="changyanAppId">畅言应用名</label> <input type="text" class="form-control" id="changyanAppId" name="changyanAppId" value="${setting.changyanAppId}" >
 								</div>
 							</div>
 							<div class="col-md-6">
-								<label class="help-block">从多说申请到的应用二级域名，多说申请地址：<a href="http://duoshuo.com/" target="_blank" rel="nofollow">http://duoshuo.com/</a></label>
+								<label class="help-block">从畅言申请到的应用APPID</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="duoshuoSecret">多说密钥</label> <input type="password" class="form-control" id="duoshuoSecret" name="duoshuoSecret" value="${setting.duoshuoSecret}" >
+									<label for="duoshuoSecret">畅言密钥</label> <input type="text" class="form-control" id="duoshuoSecret" name="changyanSecret" value="${setting.changyanSecret}" >
 								</div>
 							</div>
 							<div class="col-md-6">
-								<label class="help-block">从多说申请到的应用的密钥</label>
+								<label class="help-block">从畅言申请到的应用的密钥</label>
 							</div>
 						</div>
 						<button class="btn btn-default" onclick="duoshuoSubmit()">提交</button>

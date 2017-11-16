@@ -183,6 +183,8 @@ public class ThemeCtl {
 		ThirdPartyAccess weibo = thirdPartyAccessService.findByType(ThirdPartyAccess.TYPE_XINLANG);
         mv.addObject("weibo", weibo==null?"":weibo.getAccessKey());
 		
+		mv.addObject("changyanAppId", globalSetting.getChangyanAppId());
+		mv.addObject("changyanSecret", globalSetting.getChangyanSecret());
 		mv.addObject("theme", theme);
 		mv.addObject("desc", FilterHTMLTag.delHTMLTag(theme.getContent()));
 		mv.addObject("sid", request.getSession(false).getId());

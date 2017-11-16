@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="http://open.reinforce.cn/nprogress/nprogress.css" >
 <link rel="stylesheet" href="http://open.reinforce.cn/toastr/css/toastr.min.css" >
 <link rel="stylesheet" href="http://open.reinforce.cn/animate/animate.css" >
-<link rel="stylesheet" href="css/style.css" >
+<link rel="stylesheet" href="/css/style.css" >
 
 <style>
 .ui-autocomplete {

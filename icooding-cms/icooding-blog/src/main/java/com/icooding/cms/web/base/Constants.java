@@ -136,9 +136,9 @@ public class Constants {
     
     public static final String GEETEST_KEY = "geetest_key";
     
-    public static final String DUOSHUO_KEY = "duoshuo_key";
+    public static final String CHANGYAN_APP_ID = "changyan_app_id";
     
-    public static final String DUOSHUO_SECRET = "duoshuo_secret";
+    public static final String CHANGYAN_SECRET = "changyan_secret";
     
     public static final String TX_APP_KEY = "tx_app_key";
     
@@ -147,6 +147,11 @@ public class Constants {
     public static final String REDIS_OPEN = "redis_open";
     
     public static final String SMS_KEY = "sms_key";
+
+    /**
+     * 开启打赏
+     */
+    public static final String GRANT = "grant";
     
     /**
      * 谷歌ping地址
@@ -179,4 +184,5 @@ public class Constants {
      * 2 阿里云搜索
      */
     public static final String SEARCH_TYPE = "search_type";
+
 }

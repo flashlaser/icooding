@@ -283,7 +283,7 @@ public class AThemeCtl {
             String year = DateUtil.format(theme.getPublishDate(), "yyyy");
             String month = DateUtil.format(theme.getPublishDate(), "MM");
             String day = DateUtil.format(theme.getPublishDate(), "dd");
-            theme.setUrl("http://" + globalSetting.getAppUrl() + "/" + year + "/" + month + "/"
+            theme.setUrl("/" + year + "/" + month + "/"
                     + day + "/" + URLEncoder.encode(theme.getTitle(), "utf-8").replace("+", "%20")
                     + ".html");
             theme = themeService.update(theme, globalSetting.getRedisOpen());

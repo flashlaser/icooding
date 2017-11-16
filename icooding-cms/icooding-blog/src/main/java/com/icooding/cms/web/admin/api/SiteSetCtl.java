@@ -30,6 +30,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailMessage;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -68,7 +71,7 @@ public class SiteSetCtl {
 	@ResponseBody
 	public Object updateSiteInfo(HttpSession session, String siteName,
 			String appName, String appUrl, String adminEmail, String icp, String appEnName,
-			String statistics, String statisticsHead, boolean redisOpen) {
+			String statistics, String statisticsHead, boolean redisOpen,boolean grant) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			GlobalSetting siteSet = GlobalSetting.getInstance();
@@ -81,7 +84,7 @@ public class SiteSetCtl {
 			siteSet.setStatistics(statistics);
 			siteSet.setStatisticsHead(statisticsHead);
 			siteSet.setRedisOpen(redisOpen);
-			
+			siteSet.setGrant(grant);
 			updateParam(Constants.SITE_NAME, siteName, Param.TYPE_TEXT);
 			updateParam(Constants.APP_NAME, appName, Param.TYPE_TEXT);
 			updateParam(Constants.APP_URL, appUrl, Param.TYPE_TEXT);
@@ -91,6 +94,7 @@ public class SiteSetCtl {
 			updateParam(Constants.STATISTICS, statistics, Param.TYPE_TEXT);
 			updateParam(Constants.STATISTICSHEAD, statisticsHead, Param.TYPE_TEXT);
 			updateParam(Constants.REDIS_OPEN, redisOpen?1:0, Param.TYPE_INT);
+			updateParam(Constants.GRANT, grant?1:0, Param.TYPE_INT);
 			map.put("success", true);
 			map.put("msg", Constants.UPDATE_SET_SUCCESS);
 		} catch (Exception e) {
@@ -577,22 +581,22 @@ public class SiteSetCtl {
 		index.setNavis(list);
 	}
 	
-	@RequestMapping("/duoshuo")
+	@RequestMapping("/changyan")
     public ModelAndView duoshuo(){
-        ModelAndView mv = new ModelAndView("admin/siteSet/duoshuo");
+        ModelAndView mv = new ModelAndView("admin/siteSet/changyan");
         return mv;
     }
 	
-	@RequestMapping("/updateDuoshuo")
+	@RequestMapping("/updateChangyan")
 	@ResponseBody
-	public Object updateDuoshuo(String duoshuoKey, String duoshuoSecret){
+	public Object updateDuoshuo(String changyanAppId, String changyanSecret){
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    try{
     	    GlobalSetting globalSetting = GlobalSetting.getInstance();
-    	    globalSetting.setDuoshuoKey(duoshuoKey);
-    	    globalSetting.setDuoshuoSecret(duoshuoSecret);
-    	    updateParam(Constants.DUOSHUO_KEY, duoshuoKey, Param.TYPE_TEXT);
-    	    updateParam(Constants.DUOSHUO_SECRET, duoshuoSecret, Param.TYPE_TEXT);
+    	    globalSetting.setChangyanAppId(changyanAppId);
+    	    globalSetting.setChangyanSecret(changyanSecret);
+    	    updateParam(Constants.CHANGYAN_APP_ID, changyanAppId, Param.TYPE_TEXT);
+    	    updateParam(Constants.CHANGYAN_SECRET, changyanSecret, Param.TYPE_TEXT);
     	    map.put("success", true);
             map.put("msg", Constants.UPDATE_SET_SUCCESS);
         } catch (Exception e) {
@@ -654,5 +658,5 @@ public class SiteSetCtl {
         }
         return map;
     }
-    
+
 }

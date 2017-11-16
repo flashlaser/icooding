@@ -319,7 +319,7 @@ public class OpenCtl {
         Index index = Index.getInstance();
         GlobalSetting globalSetting = GlobalSetting.getInstance();
         try {
-            String sign = signature(paramToString(request), globalSetting.getDuoshuoSecret());
+            String sign = signature(paramToString(request), globalSetting.getChangyanSecret());
             if(sign.equals(signature)){
                 syncFromDuoShuo(Long.parseLong(index.getLogId().getTextValue()));
             }
@@ -380,8 +380,8 @@ public class OpenCtl {
 	public void syncFromDuoShuo(long sinceId){
 		HttpClient client = new HttpClient();
 		
-		Param duoshuoKey = paramService.findByKey(Constants.DUOSHUO_KEY);
-        Param duoshuoSecret = paramService.findByKey(Constants.DUOSHUO_SECRET);
+		Param duoshuoKey = paramService.findByKey(Constants.CHANGYAN_APP_ID);
+        Param duoshuoSecret = paramService.findByKey(Constants.CHANGYAN_SECRET);
 		
 		GetMethod method = new GetMethod("http://api.duoshuo.com/log/list.json?short_name="+duoshuoKey.getTextValue()+"&secret="+duoshuoSecret.getTextValue()+"&since_id="+sinceId);
 		client.getParams().setContentCharset("UTF-8");

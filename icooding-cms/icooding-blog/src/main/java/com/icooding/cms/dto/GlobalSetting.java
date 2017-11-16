@@ -84,14 +84,16 @@ public class GlobalSetting {
 	
 	private ThirdPartyAccess weiboAccess;
 	
-	private String duoshuoKey;//多说的应用名称
+	private String changyanAppId;//畅言APPID
 	
-	private String duoshuoSecret;//多说的应用密钥
+	private String changyanSecret;//畅言的应用密钥
 	
 	private String txAppKey;//腾讯微博的appkey
 	
 	private boolean redisOpen;//是否开启redis
-	
+
+	private boolean grant;//开启打赏
+
 	private String smsKey;//聚合短信服务的key
 	
 	private static final GlobalSetting globalSetting = new GlobalSetting();
@@ -254,23 +256,23 @@ public class GlobalSetting {
 		this.weiboAccess = weiboAccess;
 	}
 
-    public String getDuoshuoKey() {
-        return duoshuoKey;
-    }
+	public String getChangyanAppId() {
+		return changyanAppId;
+	}
 
-    public void setDuoshuoKey(String duoshuoKey) {
-        this.duoshuoKey = duoshuoKey;
-    }
+	public void setChangyanAppId(String changyanAppId) {
+		this.changyanAppId = changyanAppId;
+	}
 
-    public String getDuoshuoSecret() {
-        return duoshuoSecret;
-    }
+	public String getChangyanSecret() {
+		return changyanSecret;
+	}
 
-    public void setDuoshuoSecret(String duoshuoSecret) {
-        this.duoshuoSecret = duoshuoSecret;
-    }
+	public void setChangyanSecret(String changyanSecret) {
+		this.changyanSecret = changyanSecret;
+	}
 
-    public String getTxAppKey() {
+	public String getTxAppKey() {
         return txAppKey;
     }
 
@@ -278,7 +280,15 @@ public class GlobalSetting {
         this.txAppKey = txAppKey;
     }
 
-    public boolean getRedisOpen() {
+	public boolean isGrant() {
+		return grant;
+	}
+
+	public void setGrant(boolean grant) {
+		this.grant = grant;
+	}
+
+	public boolean getRedisOpen() {
         return redisOpen;
     }
 

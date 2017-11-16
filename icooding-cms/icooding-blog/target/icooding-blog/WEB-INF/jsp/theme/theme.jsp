@@ -114,119 +114,22 @@
 								，${userSession.user.nickName},转载请注明链接~~
 							</div>
 						</div>
+						<div class="col-md-12" style="text-align: center;">
+							<c:if test="${setting.grant}">
+								<div id="cyReward" role="cylabs" data-use="reward"></div>
+							</c:if>
+						</div>
+
 					</div>
 				</div>
-				<div class="comment">
-					<!-- 多说评论框 start -->
-					<div class="ds-thread" data-thread-key="${theme.guid}"
-						data-title="${theme.title}" data-url="${theme.url}"></div>
-					<!-- 多说评论框 end -->
 
+				<div class="comment">
+ 					<!-- 评论 -->
+					<div id="SOHUCS" sid="${theme.guid}" ></div>
+					<!-- 评论 -->
 				</div>
 				
-				<div class="comment hidden" id="respond" >
-					<h4>发表评论</h4>
-					<c:if test="${userSession!=null}">
-						<p class="login-help">
-							当前登陆用户为：<a href="profile/basicInfo">${userSession.user.nickName}</a>。&nbsp;&nbsp;<a
-								href="javascript:logout()" title="切换账号" rel="nofollow">登出&raquo;</a>
-						</p>
-						<form action="" method="post" id="respondForm">
-							<input type="hidden" name="themeGuid" value="${theme.guid}">
-							<textarea name="commentContent" class="form-control"
-								autocomplete="off"></textarea>
-						</form>
-						<button class="btn btn-default" onclick="respond('')">评论</button>
-					</c:if>
-					<c:if test="${userSession==null}">
-						要发表评论，请先<a
-							href="op/login/goLogin?redirect_to=${theme.url}%23respond"
-							rel="nofollow">登陆</a>。
-					</c:if>
-					<c:if test="${fn:length(theme.comments)>0}">
-						<ul class="comments list-group">
-							<li class="list-group-item">评论列表</li>
-							<c:forEach items="${theme.comments}" var="comment">
-								<li class="list-group-item">
-									<div class="comment-votes" data-toggle="tooltip"
-										data-placement="top"
-										data-original-title="★ ${comment.up} ☆ ${comment.down}"
-										guid="${comment.guid}">
-										<a href="javascript:;" class="up" data-type="2" rel="nofollow"><span
-											class="glyphicon glyphicon-chevron-up"></span> <span
-											class="votes">${comment.up}</span></a> <a href="javascript:;"
-											class="down" data-type="2" rel="nofollow"><span
-											class="glyphicon glyphicon-chevron-down"></span></a>
-									</div>
-									<div class="comment-body">
-										<div class="fn">
-											<a href="javascript:dialog.alert('个人中心开发中...');"
-												rel="nofollow" target="_blank">${comment.user.nickName}</a>
-										</div>
-										<div class="comment-content">
-											<div>${comment.commentContent}</div>
-										</div>
-										<div class="comment-meta">
-											<time datetime=""
-												title="<fmt:formatDate value="${comment.commentDate}" type="date" pattern="yyyy年MM月dd日 HH:mm"/>">
-												<fmt:formatDate value="${comment.commentDate}" type="date"
-													pattern="yyyy年MM月dd日 HH:mm" />
-											</time>
-											<c:if test="${userSession.user.uid!=comment.user.uid}">
-												<a rel="nofollow"
-													class="comment-reply-login ${userSession!=null?"
-													reply":""}" href="javascript:;" reply="${comment.guid}"
-													to="${comment.user.uid}"
-													${userSession==null?"onclick='toLogin()'":""}> <span
-													class="glyphicon glyphicon-transfer"></span>${userSession==null?"登录以":""}回复</a>
-												<a class="pm" href="javascript:dialog.alert('开发中....')"
-													title="私信" target="_blank" style="display: none;"
-													rel="nofollow"> <span
-													class="glyphicon glyphicon-share-alt"></span>私信
-												</a>
-											</c:if>
-										</div>
-
-									</div> <c:if test="${fn:length(comment.comments)>0}">
-										<ul class="list-group sub-comment">
-											<c:forEach items="${comment.comments}" var="c">
-												<li class="list-group-item sub-comment-item">
-													<div class="comment-body">
-														<div class="fn">
-															<a href="javascript:;" rel="nofollow" target="_blank">${c.user.nickName}</a>
-														</div>
-														<div class="sub-comment-content">
-															<div>回复&nbsp;${c.to.nickName}：${c.commentContent}</div>
-														</div>
-														<div class="comment-meta">
-															<time datetime=""
-																title="<fmt:formatDate value="${c.commentDate}" type="date" pattern="yyyy年MM月dd日 HH:mm"/>">
-																<fmt:formatDate value="${c.commentDate}" type="date"
-																	pattern="yyyy年MM月dd日 HH:mm" />
-															</time>
-															<a rel="nofollow"
-																class="comment-reply-login ${userSession!=null?"
-																reply":""}"
-																	href="javascript:;"
-																reply="${c.commentParent.guid}" to="${c.user.uid}"
-																${userSession==null?"onclick='toLogin()'":""}> <span
-																class="glyphicon glyphicon-share-alt"></span>${userSession==null?"登录以":""}回复</a>
-															<a class="pm" href="javascript:dialog.alert('开发中....')"
-																title="私信" target="_blank" style="display: none;"
-																rel="nofollow"> <span
-																class="glyphicon glyphicon-share-alt"></span>私信
-															</a>
-														</div>
-													</div>
-												</li>
-											</c:forEach>
-										</ul>
-									</c:if>
-								</li>
-							</c:forEach>
-						</ul>
-					</c:if>
-				</div>
+				<
 			</div>
 			<div class="col-md-4">
 				<c:import url="/op/rightNavi?fid=${theme.forum.parentForum.fid}"></c:import>
@@ -245,40 +148,9 @@
 	-->
 	<script src="http://open.reinforce.cn/Bootstrap/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 	<script src="http://open.reinforce.cn/Bootstrap/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"  charset="UTF-8"></script>
-	<script src="js/theme/comment.min.js"></script>
-	<script type="text/javascript" src="js/syntaxhighlighter/scripts/shCore.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushBash.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushCpp.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushCSharp.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushCss.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushDelphi.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushDiff.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushGroovy.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushJava.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushJScript.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushPhp.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushPlain.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushPython.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushRuby.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushScala.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushSql.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushVb.js"></script>
-    <script type="text/javascript" src="js/syntaxhighlighter/scripts/shBrushXml.js"></script>
+
 	<script type="text/javascript">
-	$(function(){
-		SyntaxHighlighter.config.clipboardSwf = 'js/syntaxhighlighter/scripts/clipboard.swf';
-            SyntaxHighlighter.config.strings.expandSource = 'show source';
-            SyntaxHighlighter.config.strings.viewSource = '查看源代码';
-            SyntaxHighlighter.config.strings.copyToClipboard = '复制到剪贴板';
-            SyntaxHighlighter.config.strings.copyToClipboardConfirmation = '代码现在在你的剪贴板';
-            SyntaxHighlighter.config.strings.print = '打印';
-            SyntaxHighlighter.config.strings.help = '帮助';
-            SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
-            SyntaxHighlighter.config.strings.noBrush = '无法找到Brush：';
-            SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush不能设置 html-script选项';
-            SyntaxHighlighter.defaults['pad-line-numbers'] = false;
-            SyntaxHighlighter.all();
-	});
+
 		function respond(num) {
 			var options = {
 				url : "theme/addComment",

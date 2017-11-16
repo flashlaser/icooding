@@ -11,7 +11,7 @@
 		<li><a href="admin/siteSet/qq" class="list-title" rel="nofollow"><i class="fa fa-qq"></i>&nbsp;QQ登录</a></li>
 		<li><a href="admin/siteSet/xinlang" class="list-title" rel="nofollow"><i class="fa fa-weibo"></i>&nbsp;新浪登录</a></li>
 		<li><a href="admin/siteSet/baiduShare" class="list-title" rel="nofollow"><i class="fa fa-du"></i>&nbsp;百度一键分享</a></li>
-		<li><a href="admin/siteSet/duoshuo" class="list-title" rel="nofollow"><i class="fa fa-comments"></i>&nbsp;多说</a></li>
+		<li><a href="admin/siteSet/changyan" class="list-title" rel="nofollow"><i class="fa fa-comments"></i>&nbsp;畅言评论设置</a></li>
 		<li><a href="admin/siteSet/sms" class="list-title" rel="nofollow"><i class="fa fa-paperclip"></i>&nbsp;短信服务</a></li>
 	</ul>
 </div>

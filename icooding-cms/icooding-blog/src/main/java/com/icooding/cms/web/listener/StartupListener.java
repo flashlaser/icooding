@@ -171,13 +171,13 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 		if(geetestKey==null){
 			geetestKey = new Param();
 		}
-		Param duoshuoKey = paramService.findByKey(Constants.DUOSHUO_KEY);
-        if(duoshuoKey==null){
-            duoshuoKey = new Param();
+		Param changyanAppId = paramService.findByKey(Constants.CHANGYAN_APP_ID);
+        if(changyanAppId==null){
+			changyanAppId = new Param();
         }
-        Param duoshuoSecret = paramService.findByKey(Constants.DUOSHUO_SECRET);
-        if(duoshuoSecret==null){
-            duoshuoSecret = new Param();
+        Param changyanSecret = paramService.findByKey(Constants.CHANGYAN_SECRET);
+        if(changyanSecret==null){
+			changyanSecret = new Param();
         }
         Param txAppKey = paramService.findByKey(Constants.TX_APP_KEY);
         if(txAppKey==null){
@@ -191,7 +191,11 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
         if(smsKey==null){
             smsKey = new Param();
         }
-        
+		Param grant = paramService.findByKey(Constants.GRANT);
+		if(grant==null){
+			grant = new Param();
+		}
+
 		GlobalSetting globalSetting = GlobalSetting.getInstance();
 		globalSetting.setSiteName(siteName.getTextValue());
 		globalSetting.setAppName(appName.getTextValue());
@@ -210,8 +214,9 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 		globalSetting.setGeetestKey(geetestKey.getTextValue());
 		globalSetting.setQqAccess(thirdPartyAccessService.findByType(ThirdPartyAccess.TYPE_QQ));
 		globalSetting.setWeiboAccess(thirdPartyAccessService.findByType(ThirdPartyAccess.TYPE_XINLANG));
-		globalSetting.setDuoshuoKey(duoshuoKey.getTextValue());
-		globalSetting.setDuoshuoSecret(duoshuoSecret.getTextValue());
+		globalSetting.setChangyanAppId(changyanAppId.getTextValue());
+		globalSetting.setChangyanSecret(changyanSecret.getTextValue());
+		globalSetting.setGrant(grant.getIntValue() == 1);
 		globalSetting.setTxAppKey(txAppKey.getTextValue());
 		globalSetting.setRedisOpen(redisOpen.getIntValue()==1);
 		globalSetting.setSmsKey(smsKey.getTextValue());
