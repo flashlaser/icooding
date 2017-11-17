@@ -41,7 +41,7 @@ public class JHUtils {
 		try {
 			NameValuePair[] data = {
 					new NameValuePair("mobile", mobile),
-					new NameValuePair("tpl_id", "2556"),
+					new NameValuePair("tpl_id", "52197"),
 					new NameValuePair("tpl_value", "#code#=" + code + "&#hour#="
 							+ timeout),
 					new NameValuePair("key", key) };

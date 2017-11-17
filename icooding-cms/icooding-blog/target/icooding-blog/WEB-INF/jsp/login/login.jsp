@@ -53,36 +53,36 @@
     					</div>
     					<div class="col-sm-2"></div>
   					</div>
-					<jsp:useBean id="geetestSdk"
-							class="com.icooding.cms.web.api.open.GeetestLib" scope="request" />
-					<%
-							//TODO： replace your own ID here  after create a Captcha App in 'my.geetest.com'
-							GlobalSetting globalSetting = GlobalSetting.getInstance();
-							String captcha_id = globalSetting.getGeetestId();//It's a capthca whihc needs to be register
-							if(captcha_id!=null){
-							geetestSdk.setCaptchaId(captcha_id);
-							//geetestSdk.setIsHttps(true);
-							//geetestSdk.setProductType("popup");
-							//geetestSdk.setSubmitBtnId("submit-button");
-							//geetestSdk.setIsHttps(true);
-					%>
-					<div class="form-group">
-    					<label for="" class="col-sm-3 col-sm-offset-1 control-label">验证码：</label>
-    					<div class="col-sm-8">
-      						<%
-								if (geetestSdk.preProcess() != 1) {
-							%>
-							<h3>验证码加载失败，请刷新网页</h3>
-							<%
-								} else {
-							%>
-							<%=geetestSdk.getGtFrontSource()%>
-							<%
-								}
-							%>
-    					</div>
-  					</div>
-					<%} %>
+					<%--<jsp:useBean id="geetestSdk"--%>
+							<%--class="com.icooding.cms.web.api.open.GeetestLib" scope="request" />--%>
+					<%--<%--%>
+							<%--//TODO： replace your own ID here  after create a Captcha App in 'my.geetest.com'--%>
+							<%--GlobalSetting globalSetting = GlobalSetting.getInstance();--%>
+							<%--String captcha_id = globalSetting.getGeetestId();//It's a capthca whihc needs to be register--%>
+							<%--if(captcha_id!=null){--%>
+							<%--geetestSdk.setCaptchaId(captcha_id);--%>
+							<%--//geetestSdk.setIsHttps(true);--%>
+							<%--//geetestSdk.setProductType("popup");--%>
+							<%--//geetestSdk.setSubmitBtnId("submit-button");--%>
+							<%--//geetestSdk.setIsHttps(true);--%>
+					<%--%>--%>
+					<%--<div class="form-group">--%>
+    					<%--<label for="" class="col-sm-3 col-sm-offset-1 control-label">验证码：</label>--%>
+    					<%--<div class="col-sm-8">--%>
+      						<%--<%--%>
+								<%--if (geetestSdk.preProcess() != 1) {--%>
+							<%--%>--%>
+							<%--<h3>验证码加载失败，请刷新网页</h3>--%>
+							<%--<%--%>
+								<%--} else {--%>
+							<%--%>--%>
+							<%--<%=geetestSdk.getGtFrontSource()%>--%>
+							<%--<%--%>
+								<%--}--%>
+							<%--%>--%>
+    					<%--</div>--%>
+  					<%--</div>--%>
+					<%--<%} %>--%>
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-sm-8">
 						<div class="checkbox">
@@ -124,8 +124,7 @@
 	</div>
 	<c:import url="/op/footer"></c:import>
 	<script type="text/javascript" src="js/Validform/Validform_v5.3.2.js"></script>
-		<script type="text/javascript"
-			src="js/Validform/passwordStrength-min.js"></script>
+		<script type="text/javascript" src="js/Validform/passwordStrength-min.js"></script>
 </body>
 <script type="text/javascript">
 	

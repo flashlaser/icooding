@@ -41,23 +41,23 @@ public class SmsCtl {
 		}
 		
 		GlobalSetting globalSetting = GlobalSetting.getInstance();
-		String private_key = globalSetting.getGeetestKey();
-		GeetestLib geetest = new GeetestLib(private_key);
-
-		String gtResult = "fail";
-		if (geetest.resquestIsLegal(request)) {
-			gtResult = geetest.enhencedValidateRequest(request);
-		} 
-		switch (gtResult) {
-		case "success":break;
-		case "forbidden":
-		case "fail":
-					map.put("success", false);
-					map.put("msg", "滑动验证码错误");
-					return map;
-		default:
-			break;
-		}
+//		String private_key = globalSetting.getGeetestKey();
+//		GeetestLib geetest = new GeetestLib(private_key);
+//
+//		String gtResult = "fail";
+//		if (geetest.resquestIsLegal(request)) {
+//			gtResult = geetest.enhencedValidateRequest(request);
+//		}
+//		switch (gtResult) {
+//		case "success":break;
+//		case "forbidden":
+//		case "fail":
+//					map.put("success", false);
+//					map.put("msg", "滑动验证码错误");
+//					return map;
+//		default:
+//			break;
+//		}
 		String smsCode = TokenUtil.getRandomString(6, 1);
 		session.setAttribute("smsCode", smsCode);
 		session.setAttribute("mobile", mobile);

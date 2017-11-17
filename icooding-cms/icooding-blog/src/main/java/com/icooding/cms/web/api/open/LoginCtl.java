@@ -107,29 +107,29 @@ public class LoginCtl {
 			map.put("msg", "用户名不存在");
 			return map;
 		}
-		GlobalSetting globalSetting = GlobalSetting.getInstance();
-		String private_key = globalSetting.getGeetestKey();
-		if(private_key!=null){
-    		GeetestLib geetest = new GeetestLib(private_key);
-    
-    		String gtResult = "fail";
-    		if (geetest.resquestIsLegal(request)) {
-    			gtResult = geetest.enhencedValidateRequest(request);
-    		} 
-    		switch (gtResult) {
-    		case "success":break;
-    		case "forbidden":
-    						map.put("success", false);
-    						map.put("msg", "验证码错误");
-    						return map;
-    		case "fail":
-    					map.put("success", false);
-    					map.put("msg", "验证码错误");
-    					return map;
-    		default:
-    			break;
-    		}
-		}
+//		GlobalSetting globalSetting = GlobalSetting.getInstance();
+//		String private_key = globalSetting.getGeetestKey();
+//		if(private_key!=null){
+//    		GeetestLib geetest = new GeetestLib(private_key);
+//
+//    		String gtResult = "fail";
+//    		if (geetest.resquestIsLegal(request)) {
+//    			gtResult = geetest.enhencedValidateRequest(request);
+//    		}
+//    		switch (gtResult) {
+//    		case "success":break;
+//    		case "forbidden":
+//    						map.put("success", false);
+//    						map.put("msg", "验证码错误");
+//    						return map;
+//    		case "fail":
+//    					map.put("success", false);
+//    					map.put("msg", "验证码错误");
+//    					return map;
+//    		default:
+//    			break;
+//    		}
+//		}
 		User user = userService.login(loginName, pwd);
 		// 没找到用户则直接返回错误0
 		if (user == null) {
