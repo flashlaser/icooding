@@ -73,9 +73,7 @@ public class OpenCtl {
 	
 	@Autowired
 	private AdvertisementService advertisementService;
-	
-	@Autowired
-	private DuoShuoService duoShuoService;
+
 	
 	@Autowired
 	private ThemeTagService themeTagService;
@@ -101,6 +99,7 @@ public class OpenCtl {
 		ModelAndView mv = new ModelAndView("base/header2");
 		GlobalSetting globalSetting = GlobalSetting.getInstance();
 		mv.addObject("qq", globalSetting.getQqAccess());
+		mv.addObject("appUrl", globalSetting.getAppUrl());
 		mv.addObject("xinlang", globalSetting.getWeiboAccess());
 		Index index = Index.getInstance();
 		if(index.getNavis().isEmpty()){
@@ -313,28 +312,7 @@ public class OpenCtl {
 		return Aliyun.getInstance().suggest(query);
 	}
 	
-	@RequestMapping("/duoshuo")
-    public void duoshuo(String action, String signature, HttpServletRequest request){
-        /*同步 */
-        Index index = Index.getInstance();
-        GlobalSetting globalSetting = GlobalSetting.getInstance();
-        try {
-            String sign = signature(paramToString(request), globalSetting.getChangyanSecret());
-            if(sign.equals(signature)){
-                syncFromDuoShuo(Long.parseLong(index.getLogId().getTextValue()));
-            }
-        } catch (InvalidKeyException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
-    }
+
     
     /**
      * 多说签名
@@ -376,103 +354,5 @@ public class OpenCtl {
         }
         return sb.substring(0, sb.length()-1).toString();
     }
-	
-	public void syncFromDuoShuo(long sinceId){
-		HttpClient client = new HttpClient();
-		
-		Param duoshuoKey = paramService.findByKey(Constants.CHANGYAN_APP_ID);
-        Param duoshuoSecret = paramService.findByKey(Constants.CHANGYAN_SECRET);
-		
-		GetMethod method = new GetMethod("http://api.duoshuo.com/log/list.json?short_name="+duoshuoKey.getTextValue()+"&secret="+duoshuoSecret.getTextValue()+"&since_id="+sinceId);
-		client.getParams().setContentCharset("UTF-8");
-		method.setRequestHeader("ContentType", "application/x-www-form-urlencoded;charset=UTF-8");
-		Index index = Index.getInstance();
 
-		try {
-			client.executeMethod(method);
-
-			String submitResult = method.getResponseBodyAsString();
-
-			JSONObject dataJson = new JSONObject(submitResult);
-			
-			if(dataJson.getInt("code")!=0){
-				LOG.error(dataJson.getString("errorMessage"));
-			}else{
-				JSONArray response = dataJson.getJSONArray("response");
-				for(int i=0;i<response.length();i++){
-					JSONObject res = response.getJSONObject(i);
-					long logId = Long.parseLong(res.getString("log_id"));
-					int userId = res.getInt("user_id");
-					String action = res.getString("action");
-					switch (action) {
-					case "create":
-						JSONObject meta = res.getJSONObject("meta");
-						DuoShuo duoShuo = new DuoShuo();
-						duoShuo.setPostId(Long.parseLong(meta.getString("post_id")));
-						duoShuo.setThreadId(Long.parseLong(meta.getString("thread_id")));
-						duoShuo.setTheme(themeService.find(meta.getString("thread_key"), false));
-						duoShuo.setAuthorId(meta.getInt("author_id"));
-						duoShuo.setAuthorNmae(meta.getString("author_name"));
-						duoShuo.setAuthorEmail(meta.getString("author_email"));
-						duoShuo.setAuthorUrl(meta.getString("author_url"));
-						duoShuo.setAuthorKey(meta.getString("author_key"));
-						duoShuo.setIp(meta.getString("ip"));
-						try {
-							String date = meta.getString("created_at");
-							date = date.substring(0,date.lastIndexOf("+")).replace("T", " ");
-							duoShuo.setCreatedAt(DateUtil.parse(date, "yyyy-MM-dd HH:mm:ss"));
-						} catch (ParseException e) {
-							LOG.error("时间字符串转换异常", e);
-						}
-						duoShuo.setMessage(meta.getString("message"));
-						duoShuo.setStatus(meta.getString("status"));
-						String parentId = meta.getString("parent_id");
-                        parentId = "null".equals(parentId)?"0":parentId;
-                        if(Strings.isEmpty(parentId)){
-                            duoShuo.setParentId(0);
-                        }else{
-                            duoShuo.setParentId(Long.parseLong(parentId));//parent_id突然出现了一个null
-                        }
-						duoShuo.setType(meta.getString("type"));
-						duoShuo.setLastModify(new Date().getTime());
-						duoShuo.setLogId(logId);
-						duoShuoService.save(duoShuo);
-						break;
-					case "approve":
-					case "spam":
-					case "delete":
-						JSONArray meta2 = res.getJSONArray("meta");
-						String ids = meta2.toString();
-						ids = ids.substring(1, ids.length()-1).replace("\"", "");
-						duoShuoService.update(ids, action, logId);
-						break;
-					default:
-						JSONArray meta3 = res.getJSONArray("meta");
-						String ids2 = meta3.toString();
-						ids2 = ids2.substring(1, ids2.length()-1).replace("\"", "");
-						duoShuoService.delete(ids2);
-						break;
-					}
-					index.getLogId().setTextValue(""+logId);
-				}
-				paramService.update(index.getLogId());
-				Map<Integer,List<Theme>> list = new HashMap<Integer, List<Theme>>();
-				List<Theme> themes = themeService.pageByFid(0, Constants.INDEX_LIST_LENGTH, 1, false, true, false, Theme.STATE_PUBLISH);
-					
-				for(Theme theme:themes){
-					String c = FilterHTMLTag.delHTMLTag(theme.getContent());
-					theme.setContent((c.length()>200?c.substring(0, 200):c)+"...");
-					theme.setReplies(theme.getDuoShuos().size());
-				}
-				list.put(1, themes);
-				index.setThemes(list);
-			}
-
-
-		} catch (IOException e) {
-			LOG.error(e);
-		} catch (JSONException e) {
-		    LOG.error(e);
-		}
-	}
 }

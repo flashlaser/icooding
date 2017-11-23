@@ -301,37 +301,7 @@ public class SiteSetCtl {
 		}
 		return map;
 	} 
-	
-	/**
-	 * 极验验证
-	 * @return
-	 */
-	@RequestMapping("/geetest")
-	public ModelAndView geetest() {
-		ModelAndView mv = new ModelAndView("admin/siteSet/geetest");
-		return mv;
-	}
-	
-	@RequestMapping(value = "/updateGeetest", method = RequestMethod.POST)
-	@ResponseBody
-	public Object updateGeetest(String geetestId, String geetestKey) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			GlobalSetting siteSet = GlobalSetting.getInstance();
-			siteSet.setGeetestId(geetestId);
-			siteSet.setGeetestKey(geetestKey);
-			updateParam(Constants.GEETEST_ID, geetestId, Param.TYPE_TEXT);
-			updateParam(Constants.GEETEST_KEY, geetestKey, Param.TYPE_TEXT);
-			map.put("success", true);
-			map.put("msg", Constants.UPDATE_SET_SUCCESS);
-		} catch (Exception e) {
-		    LOG.error(Constants.UPDATE_SET_FAIL, e);
-            map.put("success", false);
-            map.put("msg", Constants.UPDATE_SET_FAIL);
-		}
-		return map;
-	}
-	
+
 	/**
 	 * QQ登录设置
 	 * @return

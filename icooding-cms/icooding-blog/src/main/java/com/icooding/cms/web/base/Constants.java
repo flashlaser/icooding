@@ -152,7 +152,12 @@ public class Constants {
      * 开启打赏
      */
     public static final String GRANT = "grant";
-    
+
+    /**
+     * 网站主题
+     */
+    public static final String WEB_THEME = "web_theme";
+
     /**
      * 谷歌ping地址
      */

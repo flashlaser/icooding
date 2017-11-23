@@ -175,7 +175,7 @@ public class ThemeCtl {
 		if(!isSpider(request)&&theme.getState()!=Theme.STATE_EDIT&&(userSession==null||(userSession!=null&&userSession.getUser().getUserType()== User.USER_TYPE_NORMAL))){
 			theme.setViews(theme.getViews()+1);
 		}
-		theme.setReplies(theme.getDuoShuos().size());
+		theme.setReplies(0);
 		theme = themeService.update(theme, globalSetting.getRedisOpen());
 		
 		Advertisement advertisement = advertisementService.findLastByType(Advertisement.TYPE_INSIDE);

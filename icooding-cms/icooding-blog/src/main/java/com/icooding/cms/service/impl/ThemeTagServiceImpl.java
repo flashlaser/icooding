@@ -40,6 +40,7 @@ public class ThemeTagServiceImpl implements ThemeTagService {
 
 	@Override
 	public List<ThemeTag> random(int pageSize) {
-		return themeTagDao.random(pageSize);
+		List<ThemeTag> random = themeTagDao.random(pageSize);
+		return random;
 	}
 }

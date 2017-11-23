@@ -25,6 +25,7 @@ public class ThemeTagDao extends BaseDao<ThemeTag>{
 	
 	public List<ThemeTag> random(int pageSize){
 		String sql = "SELECT t1.* FROM t_theme_tag t1 JOIN(SELECT ROUND(RAND() * (SELECT MAX(id) FROM t_theme_tag)) id) t2 WHERE t1.id>=t2.id ORDER BY t1.id ASC LIMIT :pageSize";
-		return em.createNativeQuery(sql, ThemeTag.class).setParameter("pageSize", pageSize).getResultList();
+		List<ThemeTag> page = em.createNativeQuery(sql, ThemeTag.class).setParameter("pageSize", pageSize).getResultList();
+		return page;
 	}
 }

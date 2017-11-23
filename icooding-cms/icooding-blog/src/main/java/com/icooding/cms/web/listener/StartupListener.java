@@ -63,10 +63,7 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 	
 	@Autowired
 	private ThirdPartyAccessService thirdPartyAccessService;
-	
-	@Autowired
-	private DuoShuoService duoShuoService;
-	
+
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent evt) {
 		// TODO Auto-generated method stub
@@ -163,14 +160,7 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 		if(siteMode==null){
 			siteMode = new Param();
 		}
-		Param geetestId = paramService.findByKey(Constants.GEETEST_ID);
-		if(geetestId==null){
-			geetestId = new Param();
-		}
-		Param geetestKey = paramService.findByKey(Constants.GEETEST_KEY);
-		if(geetestKey==null){
-			geetestKey = new Param();
-		}
+
 		Param changyanAppId = paramService.findByKey(Constants.CHANGYAN_APP_ID);
         if(changyanAppId==null){
 			changyanAppId = new Param();
@@ -196,6 +186,12 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 			grant = new Param();
 		}
 
+		Param web_theme = paramService.findByKey(Constants.WEB_THEME);
+		if(grant==null){
+			web_theme = new Param();
+		}
+
+
 		GlobalSetting globalSetting = GlobalSetting.getInstance();
 		globalSetting.setSiteName(siteName.getTextValue());
 		globalSetting.setAppName(appName.getTextValue());
@@ -210,8 +206,6 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 		globalSetting.setQq(qq.getIntValue()==1);
 		globalSetting.setWeibo(weibo.getIntValue()==1);
 		globalSetting.setStatisticsHead(statisticsHead.getTextValue());
-		globalSetting.setGeetestId(geetestId.getTextValue());
-		globalSetting.setGeetestKey(geetestKey.getTextValue());
 		globalSetting.setQqAccess(thirdPartyAccessService.findByType(ThirdPartyAccess.TYPE_QQ));
 		globalSetting.setWeiboAccess(thirdPartyAccessService.findByType(ThirdPartyAccess.TYPE_XINLANG));
 		globalSetting.setChangyanAppId(changyanAppId.getTextValue());
@@ -220,6 +214,7 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 		globalSetting.setTxAppKey(txAppKey.getTextValue());
 		globalSetting.setRedisOpen(redisOpen.getIntValue()==1);
 		globalSetting.setSmsKey(smsKey.getTextValue());
+		globalSetting.setWebTheme(web_theme.getTextValue());
 		
 		//邮件服务
 		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
@@ -329,7 +324,7 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
             public void run() {
             	SiteStatistics.setTheme(themeService.count(0, false, Theme.STATE_PUBLISH));
                 SiteStatistics.setUser(userService.count());
-                SiteStatistics.setComment(duoShuoService.count());
+                SiteStatistics.setComment(0);//评论数
                 SiteStatistics.setViews(themeService.countViews(0, false, Theme.STATE_PUBLISH));
                 Param param = paramService.findByKey(Constants.HISTORY_ONLINE);
                 if(param==null){
@@ -364,7 +359,7 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
         			for(Theme theme:themes){
         				String c = FilterHTMLTag.delHTMLTag(theme.getContent());
         				theme.setContent((c.length()>200?c.substring(0, 200):c)+"...");
-        				theme.setReplies(theme.getDuoShuos().size());
+        				theme.setReplies(0);//评论数
         			}
         			list1.put(i, themes);
         		}

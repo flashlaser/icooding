@@ -75,7 +75,7 @@ public class IndexCtl {
 			for(Theme theme:themes){
 				String c = FilterHTMLTag.delHTMLTag(theme.getContent());
 				theme.setContent((c.length()>200?c.substring(0, 200):c)+"...");
-				theme.setReplies(theme.getDuoShuos().size());
+				theme.setReplies(0);
 			}
 			list.put(curPage, themes);
 		}

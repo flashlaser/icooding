@@ -21,7 +21,7 @@
 		<property name="defaultAutoCommit" value="true" />
 		<property name="maxIdle" value="20" />
 		<property name="minIdle" value="1" />
-		<property name="initialSize" value="1" />
+		<property name="initialSize" value="3" />
 		<property name="maxWait" value="60000" />
 		<property name="removeAbandoned" value="true" />
 		<property name="removeAbandonedTimeout" value="180" />

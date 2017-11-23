@@ -164,11 +164,6 @@ public class Theme implements Serializable{
 	@OrderBy(value = "comment_date desc")
 	private List<Comments> comments;//文章下的本地评论
 	
-	@OneToMany(mappedBy = "theme",fetch = FetchType.EAGER)
-	@OrderBy(value = "post_id desc")
-	@Where(clause = "status = 'approved'")
-	private List<DuoShuo> duoShuos;//文章下的多说评论
-	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "forum_id")
 	private Forum forum;//所属版块
@@ -294,14 +289,6 @@ public class Theme implements Serializable{
 
 	public void setComments(List<Comments> comments) {
 		this.comments = comments;
-	}
-	
-	public List<DuoShuo> getDuoShuos() {
-		return duoShuos;
-	}
-
-	public void setDuoShuos(List<DuoShuo> duoShuos) {
-		this.duoShuos = duoShuos;
 	}
 
 	public int getUp() {

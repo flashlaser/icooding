@@ -83,28 +83,6 @@ public class RegisterCtl {
 		Map<String,Object> map = new HashMap<String, Object>();
 		GlobalSetting globalSetting = GlobalSetting.getInstance();
 		
-		//极验验证验证码验证
-		String private_key = globalSetting.getGeetestKey();
-		if(private_key!=null){
-    		GeetestLib geetest = new GeetestLib(private_key);
-    
-    		String gtResult = "fail";
-    		if (geetest.resquestIsLegal(request)) {
-    			gtResult = geetest.enhencedValidateRequest(request);
-    		} 
-    		switch (gtResult) {
-    		case "success":break;
-    		case "forbidden":
-    		case "fail":
-    			map.put("success", false);
-    			map.put("msg", "验证码错误");
-    			return map;
-    		default:
-    			break;
-    		}
-		}
-		
-		
 		User user = new User();
 		//可能各种原因导致的表单验证通过，但提交时又重复了
 		if(userService.checkLoginName(username)||userService.checkNickName(nickName)){

@@ -65,17 +65,7 @@ public class GlobalSetting {
 	 * 是否开启新浪微博登录
 	 */
 	private boolean weibo;
-	
-	/**
-	 * 极验验证id
-	 */
-	private String geetestId;
-	
-	/**
-	 * 极验验证key
-	 */
-	private String geetestKey;
-	
+
 	private JavaMailSender javaMailSender;
 	
 	private String smtpFrom;
@@ -95,7 +85,9 @@ public class GlobalSetting {
 	private boolean grant;//开启打赏
 
 	private String smsKey;//聚合短信服务的key
-	
+
+	private String webTheme;//网站主题
+
 	private static final GlobalSetting globalSetting = new GlobalSetting();
 	
 	private GlobalSetting() {
@@ -223,23 +215,6 @@ public class GlobalSetting {
 	public void setSmtpFrom(String smtpFrom) {
 		this.smtpFrom = smtpFrom;
 	}
-
-	public String getGeetestId() {
-		return geetestId;
-	}
-
-	public void setGeetestId(String geetestId) {
-		this.geetestId = geetestId;
-	}
-
-	public String getGeetestKey() {
-		return geetestKey;
-	}
-
-	public void setGeetestKey(String geetestKey) {
-		this.geetestKey = geetestKey;
-	}
-
 	public ThirdPartyAccess getQqAccess() {
 		return qqAccess;
 	}
@@ -303,5 +278,12 @@ public class GlobalSetting {
     public void setSmsKey(String smsKey) {
         this.smsKey = smsKey;
     }
-	
+
+	public String getWebTheme() {
+		return webTheme;
+	}
+
+	public void setWebTheme(String webTheme) {
+		this.webTheme = webTheme;
+	}
 }

@@ -104,7 +104,7 @@ public class User implements Serializable {
 	 * 性别
 	 */
 	@Column
-	private char sex;
+	private Integer sex;
 	/**
 	 * 生日
 	 */
@@ -220,11 +220,11 @@ public class User implements Serializable {
 		this.mobile = mobile;
 	}
 
-	public char getSex() {
+	public Integer getSex() {
 		return sex;
 	}
 
-	public void setSex(char sex) {
+	public void setSex(Integer  sex) {
 		this.sex = sex;
 	}
 

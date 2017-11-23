@@ -1,13 +1,22 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:websocket="http://www.springframework.org/schema/websocket"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+	   	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   	xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context"
+	   	xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		  xmlns:websocket="http://www.springframework.org/schema/websocket"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/websocket
+		http://www.springframework.org/schema/websocket/spring-websocket.xsd
 		">
 
 
@@ -22,7 +31,7 @@
 	<mvc:annotation-driven />
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="prefix" value="/WEB-INF/template/" />
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
@@ -67,14 +76,14 @@
 			<bean class="com.icooding.cms.web.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-	<!-- 加载全局设置 -->
+	<!-- 加载全局设置-->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.icooding.cms.web.interceptor.GlobalInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-	<!-- 
+<!--
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
@@ -84,18 +93,17 @@
 	 -->
 	<bean id="jPushService" class="com.icooding.cms.service.impl.JPushServiceImpl" init-method="init" />
 
-	<!-- 邮件发送器
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="${mail.host}" />
-		<property name="username" value="${mail.username}" />
-		<property name="password" value="${mail.password}" />
-		<property name="defaultEncoding" value="UTF-8"></property>
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
-				<prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
-			</props>
-		</property>
-	</bean>
- -->
+	<!-- 邮件发送器 -->
+	<!--<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">-->
+		<!--<property name="host" value="${mail.host}" />-->
+		<!--<property name="username" value="${mail.username}" />-->
+		<!--<property name="password" value="${mail.password}" />-->
+		<!--<property name="defaultEncoding" value="UTF-8"></property>-->
+		<!--<property name="javaMailProperties">-->
+			<!--<props>-->
+				<!--<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>-->
+				<!--<prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>-->
+			<!--</props>-->
+		<!--</property>-->
+	<!--</bean>-->
 </beans>
