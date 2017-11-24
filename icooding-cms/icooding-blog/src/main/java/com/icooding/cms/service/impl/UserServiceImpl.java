@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import com.icooding.cms.model.RegesterCode;
 import com.icooding.cms.persistence.RegesterCodeDao;
 import com.icooding.cms.utils.EncryptUtil;
+import com.icooding.cms.utils.ImageUtils;
+import com.icooding.cms.utils.QiniuCloudUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -80,6 +82,19 @@ public class UserServiceImpl implements UserService {
 		}
 		else{
 			user.setMobile(username);
+		}
+		String path = ImageUtils.class.getClassLoader().getResource("").getPath()+user.getNickName().hashCode()+".png";
+		try {
+			ImageUtils.createHeadImage(500,500,nickName.substring(0,1),path);
+			String url = QiniuCloudUtils.updateFile(path);
+			user.setHeadIconSmall(url+"-50x50");
+			user.setHeadIconMid(url+"-80x80");
+			user.setHeadIconBig(url+"-150x150");
+			user.setHeadIconHD(url+"-500x500");
+			user.setHeadIconLocal(url);
+			user.setHeadIconUsed(0);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		user.setActivateDate(date);
 		userDao.save(user);

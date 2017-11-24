@@ -88,6 +88,8 @@ public class GlobalSetting {
 
 	private String webTheme;//网站主题
 
+	private String imageServer;//图片服务地址
+
 	private static final GlobalSetting globalSetting = new GlobalSetting();
 	
 	private GlobalSetting() {
@@ -285,5 +287,13 @@ public class GlobalSetting {
 
 	public void setWebTheme(String webTheme) {
 		this.webTheme = webTheme;
+	}
+
+	public String getImageServer() {
+		return imageServer;
+	}
+
+	public void setImageServer(String imageServer) {
+		this.imageServer = imageServer;
 	}
 }

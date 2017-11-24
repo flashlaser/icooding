@@ -1,5 +1,7 @@
 package com.icooding.cms.web.admin.api.aliyun;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +21,8 @@ import com.icooding.cms.model.Param;
 import com.icooding.cms.service.OSSService;
 import com.icooding.cms.service.ParamService;
 import com.icooding.cms.utils.DateUtil;
+import com.icooding.cms.utils.ImageUtils;
+import com.icooding.cms.utils.QiniuCloudUtils;
 import com.icooding.cms.utils.Strings;
 import com.icooding.cms.web.base.Constants;
 import org.apache.log4j.Logger;
@@ -68,43 +72,29 @@ public class FileCtl {
 	 */
 	@RequestMapping("/uploadImg")
 	@ResponseBody
-	public Map<String, Object> uploadImg(
-			@RequestParam("imgFile") MultipartFile uploadFile, String dir,
-			HttpServletRequest request) {
+	public Map<String, Object> uploadImg( @RequestParam("imgFile") MultipartFile uploadFile, String dir, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String filename = uploadFile.getOriginalFilename();
-		GlobalSetting globalSetting = (GlobalSetting) request.getSession()
-				.getAttribute("setting");
-		Calendar cal = Calendar.getInstance();
-		Date now = cal.getTime();
-		String time = DateUtil.format(now, "yyyyMM/dd");
-		dir = "forum/" + time + "/" + dir + "/";
-		Param ossBucket = paramService.findByKey(Constants.OSS_BUCKET);
-		if (globalSetting.getAliyunUsed()) {
-			// 上传到OSS
-			PutObjectResult result = ossService.simpleUpload(ossBucket.getTextValue(), uploadFile, dir, filename);// 会自动关闭流？
-			if (result == null) {
-				map.put("error", 1);
-				map.put("message", "上传错误");
-				return map;
-			}
-		} else {
-			// 上传到本地
-		}
+		String path = ImageUtils.class.getClassLoader().getResource("").getPath()+filename.hashCode();
 
+		File file = new File(path);
+		if(!file.exists()){
+			file.mkdirs();
+		}
 		String url = null;
-		Param ossUrl = paramService.findByKey(Constants.OSS_URL);
-		Param ossEndpoint = paramService.findByKey(Constants.OSS_ENDPOINT);
-		if (globalSetting.getAliyunUsed()) {
-		    url = "http://"
-                    + (ossUrl == null||"".equals(ossUrl.getTextValue()) ? ossBucket.getTextValue()
-                            + "." + ossEndpoint.getTextValue() : ossUrl.getTextValue()) + "/" + dir + filename;
+		try {
+			uploadFile.transferTo(file);
+			url = QiniuCloudUtils.updateFile(path);
+			if (url == null) {
+                map.put("error", 1);
+                map.put("message", "上传错误");
+                return map;
+            }
+		} catch (IOException e) {
+			map.put("error", 1);
+			map.put("message", "上传错误");
+			return map;
 		}
-		else{
-		    url = request.getContextPath() + "/file/getfile/"
-                    + ossBucket.getTextValue() + "/" + dir + filename;
-		}
-			
 		map.put("url", url);
 		map.put("error", 0);
 

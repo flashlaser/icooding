@@ -1,14 +1,9 @@
 package com.icooding.cms.utils;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.color.ColorSpace;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.awt.image.CropImageFilter;
@@ -17,6 +12,7 @@ import java.awt.image.ImageFilter;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
@@ -348,4 +344,33 @@ public class ImageUtils {
 		}
 		return (length % 2 == 0) ? length / 2 : length / 2 + 1;
 	}
+
+	//    @Test
+	public static void createHeadImage(int width,int height,String str,String fileName) throws Exception{
+		Color[] colors = new Color[]{Color.orange,Color.BLUE,Color.GRAY,Color.blue,Color.CYAN,Color.GREEN,Color.MAGENTA,Color.pink};
+		BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+		Graphics2D graphics = image.createGraphics();
+		image=graphics.getDeviceConfiguration().createCompatibleImage(width, height,Transparency.TRANSLUCENT);
+		graphics.dispose();
+		graphics=image.createGraphics();
+		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		Random random = new Random();
+		graphics.setColor(colors[random.nextInt(colors.length)]);
+		graphics.fillRoundRect(0,0,width,height,width,width);
+		graphics.setColor(Color.white);
+		Font font = new Font("楷体", Font.BOLD, width/2+width/5);
+		graphics.setFont(font);
+		FontMetrics fm = graphics.getFontMetrics(font);
+		int textWidth = fm.stringWidth(str);
+		int x = width/2-(textWidth/2);
+		int y = height/2+(textWidth/2)-(height/10);
+		graphics.drawString(str,x,y);
+		graphics.dispose();
+		File file = new File(fileName);
+		if(!file.exists()){
+			file.mkdirs();
+		}
+		ImageIO.write(image,"PNG",file);
+	}
+
 }

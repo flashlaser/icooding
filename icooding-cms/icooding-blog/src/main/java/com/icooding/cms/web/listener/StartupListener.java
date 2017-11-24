@@ -187,10 +187,14 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 		}
 
 		Param web_theme = paramService.findByKey(Constants.WEB_THEME);
-		if(grant==null){
+		if(web_theme==null){
 			web_theme = new Param();
 		}
 
+		Param image_server = paramService.findByKey("image_server");
+		if(image_server==null){
+			image_server = new Param();
+		}
 
 		GlobalSetting globalSetting = GlobalSetting.getInstance();
 		globalSetting.setSiteName(siteName.getTextValue());
@@ -215,7 +219,8 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 		globalSetting.setRedisOpen(redisOpen.getIntValue()==1);
 		globalSetting.setSmsKey(smsKey.getTextValue());
 		globalSetting.setWebTheme(web_theme.getTextValue());
-		
+		globalSetting.setImageServer(image_server.getTextValue());
+
 		//邮件服务
 		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 		javaMailSender.setHost(smtp_server.getTextValue());
