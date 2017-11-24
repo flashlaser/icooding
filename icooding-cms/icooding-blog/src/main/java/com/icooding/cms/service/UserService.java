@@ -34,5 +34,6 @@ public interface UserService {
 	public long count();
 	
 	public List<User> page(int curPage, int pageSize);
-	
+
+	public User register(String nickName, String password, String username, int type, String registerCode);
 }

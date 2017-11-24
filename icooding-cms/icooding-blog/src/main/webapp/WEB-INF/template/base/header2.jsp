@@ -27,8 +27,8 @@
 						<li><a href="${navi.url}" url="${navi.url}">${navi.name}</a></li>
 					</c:if>
 					<c:if test="${fn:length(navi.children)>0}">
-						<li class="dropdown"><a href="javascript:;"
-							class="dropdown-toggle" data-toggle="dropdown" role="button"
+						<li class="dropdown">
+							<a href="javascript:;" target="${navi.target}" class="dropdown-toggle" data-toggle="dropdown" role="button"
 							aria-expanded="false" url="${navi.childUrl}"> ${navi.name} <span
 								class="caret"></span>
 						</a>
@@ -52,12 +52,6 @@
 				<c:if test="${userSession==null}">
 					<li><a href="op/register/goRegister" ><img src="static/images/filetype/34.png" style="margin-right: 4px; float: left; top: 0px;" width="18" height="18" alt="注册"/>注册</a></li>
 					<li><a href="op/login/toLogin" ><img src="static/images/filetype/35.png" style="margin-right: 4px; float: left; top: 0px;" width="18" height="18" alt="登录"/>登录</a></li>
-					<%--<c:if test="${setting.qq}">--%>
-						<%--<li><a href="op/login/toQQ" class="login-icon"><img src="images/qq/qq.png" width="18" height="18" alt="QQ登录"/></a></li>--%>
-					<%--</c:if>--%>
-					<%--<c:if test="${setting.weibo}">--%>
-						<%--<li><a href="op/login/toWeibo" class="login-icon"><img src="images/weibo/weibo.png" width="18" height="18" alt="新浪登录" /></a></li>--%>
-					<%--</c:if>--%>
 				</c:if>
 				<c:if test="${userSession!=null}">
 					<li class="dropdown">

@@ -78,42 +78,12 @@
 						<span class="Validform_checktip help"></span>
 					</div>
 				</div>
-				<%--<jsp:useBean id="geetestSdk" class="com.icooding.cms.web.api.open.GeetestLib" scope="request" />--%>
-				<%--<%--%>
-					<%--GlobalSetting globalSetting = GlobalSetting.getInstance();--%>
-					<%--String captcha_id = globalSetting.getGeetestId();//It's a capthca whihc needs to be register--%>
-					<%--if(captcha_id!=null){--%>
-						<%--geetestSdk.setCaptchaId(captcha_id);--%>
-				<%--%>--%>
-				<%--<div class="form-group">--%>
-						<%--<label for="" class="col-sm-3 control-label">--%>
-							<%--<span class="neccess">*</span>滑动验证码：--%>
-						<%--</label>--%>
-						<%--<div class="col-md-5">--%>
-							<%--<%--%>
-								<%--if (geetestSdk.preProcess() != 1) {--%>
-							<%--%>--%>
-							<%--<h1>Geetest Server is down,Please use your own captcha system--%>
-								<%--in your web page</h1>--%>
-							<%--<%--%>
-								<%--} else {--%>
-							<%--%>--%>
-							<%--<%=geetestSdk.getGtFrontSource()%>--%>
-							<%--<%--%>
-								<%--}--%>
-							<%--%>--%>
-						<%--</div>--%>
-					<%--</div>--%>
-				<%--<%} %>--%>
-				<div class="form-group" id="mcode">
-					<label for="code" class="col-sm-3 control-label">
-						<span class="neccess">*</span>手机验证码：
+				<div class="form-group">
+					<label for="registerCode" class="col-sm-3 control-label">
+						<span class="neccess">*</span>注册码：
 					</label>
-					<div class="col-md-3">
-						<input name="code" id="code" class="form-control" placeholder="6位验证码" datatype="code" sucmsg="&nbsp;" nullmsg="请输入您收到的验证码！" errormsg="验证码为6位数字" maxlength="6"/>
-        			</div>
-        			<div class="col-md-2">
-        				<button class="btn btn-success btn-sm" type="button" id="sendCode">发送验证码</button>
+					<div class="col-md-5">
+						<input type="text" name="registerCode" id="registerCode" value="" class="form-control"  ajaxurl="op/register/checkCode"  sucmsg="该注册码可以使用！" datatype="*"  nullmsg="请输入注册码！"  sucmsg="&nbsp;" maxlength="16"/>
 					</div>
 					<div class="col-md-4">
 						<span class="Validform_checktip help"></span>
@@ -145,68 +115,7 @@
 
 		<script type="text/javascript" src="static/js/Validform/passwordStrength-min.js"></script>
 <script type="text/javascript">
-
-/*验证码倒计时*/
-			
-	function countDown() {
-		var $send = $("#sendCode");
-		var i = 120;
-		$("#sendCode").addClass("gray").css({
-			cursor : "default"
-		}).attr("disabled", "disabled");
-		var interval = setInterval(function() {
-			$send.html("剩余" + i + "秒");
-			i--;
-			if (i < 0) {
-				$("#sendCode").removeClass("gray").css({
-					cursor : "pointer"
-				}).removeAttr("disabled");
-				$send.html("重新获取");
-				clearInterval(interval);
-			}
-		}, 1000);
-	}
-
 	$(function() {
-
-		$("#sendCode").click(
-				function() {
-					countDown();
-					if ($("#username").parent().next().children(
-							".Validform_wrong").length == 0) {
-						$.ajax({
-							url : "op/sendVerificationCode",
-							type : 'post',
-							dataType : 'json',
-							data : {
-								mobile : $("#username").val(),
-								geetest_challenge : $(".geetest_challenge").val(),
-								geetest_validate : $(".geetest_validate").val(),
-								geetest_seccode : $(".geetest_seccode").val()
-							},
-							success : function(data) {
-								if (data.success) {
-									var d2 = dialog({
-										content : data.msg
-									});
-									d2.show();
-									setTimeout(function() {
-										d2.close().remove();
-									}, 2000);
-								}else{
-									dialog.alert(data.msg);
-								}
-
-							},
-							error : function(data) {
-								dialog.alert("请求发送失败，请稍后再试");
-							}
-						});
-					} else
-						dialog.alert($("#username").parent().next().children(
-								".Validform_wrong").html());
-				});
-
 		var form = $("#registerForm")
 				.Validform(
 						{
@@ -274,8 +183,7 @@
 									return false;
 
 									//注意return可以返回true 或 false 或 字符串文字，true表示验证通过，返回字符串表示验证失败，字符串作为错误提示显示，返回false则用errmsg或默认的错误提示;
-								},
-								"code" : /^\d{6}$/
+								}
 							},
 							usePlugin : {
 								passwordstrength : {

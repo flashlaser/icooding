@@ -18,6 +18,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.google.zxing.common.StringUtils;
 import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.dto.Index;
 import com.icooding.cms.model.*;
@@ -480,6 +481,7 @@ public class SiteSetCtl {
 		map.put("url", navi.getUrl());
 		map.put("type", navi.getType());
 		map.put("order", navi.getOrder());
+		map.put("target", navi.getTarget());
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		for(Navi n:navi.getChilds()){
 			list.add(naviToJson(n));
@@ -502,6 +504,7 @@ public class SiteSetCtl {
 				int order = obj.getInt("order");
 				String url = obj.getString("url");
 				String name = obj.getString("name");
+				String target = obj.getString("target");
 				Navi navi = naviService.find(id);
 				if(navi==null){
 					navi = new Navi();
@@ -512,6 +515,7 @@ public class SiteSetCtl {
 					}
 				}
 				navi.setUrl(url);
+				navi.setTarget(org.apache.commons.lang.StringUtils.equals(target,"_blank") ?Navi.NaviTarget._blank:Navi.NaviTarget._self);
 				navi.setName(name);
 				navi.setOrder(order);
 				naviService.update(navi);
@@ -559,7 +563,7 @@ public class SiteSetCtl {
 	
 	@RequestMapping("/updateChangyan")
 	@ResponseBody
-	public Object updateDuoshuo(String changyanAppId, String changyanSecret){
+	public Object updateChangyan(String changyanAppId, String changyanSecret){
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    try{
     	    GlobalSetting globalSetting = GlobalSetting.getInstance();

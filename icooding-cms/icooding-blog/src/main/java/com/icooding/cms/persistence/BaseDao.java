@@ -1,34 +1,35 @@
 package com.icooding.cms.persistence;
 
+import com.icooding.cms.model.RegesterCode;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 public class BaseDao<T> {
 
 	@PersistenceContext(unitName = "fate-persistence")
     protected EntityManager em;
-	
+
+	protected Class<T> entityClass = null;
+
+	public BaseDao() {
+		Type t = getClass().getGenericSuperclass();
+		if(t instanceof ParameterizedType){
+			Type[] p = ((ParameterizedType)t).getActualTypeArguments();
+			entityClass = (Class<T>)p[0];
+		}
+	}
+
 	public T find(String guid){
-		Class<T> entityClass = null;
-        Type t = getClass().getGenericSuperclass();
-        if(t instanceof ParameterizedType){
-            Type[] p = ((ParameterizedType)t).getActualTypeArguments();
-            entityClass = (Class<T>)p[0];
-        }
 		return em.find(entityClass, guid);
 	}
 	
 	public T find(int id){
-		Class<T> entityClass = null;
-        Type t = getClass().getGenericSuperclass();
-        if(t instanceof ParameterizedType){
-            Type[] p = ((ParameterizedType)t).getActualTypeArguments();
-            entityClass = (Class<T>)p[0];
-        }
 		return em.find(entityClass, id);
 	}
 	
@@ -43,17 +44,17 @@ public class BaseDao<T> {
 	public void delete(T t){
 		em.remove(em.merge(t));
 	}
-	
+
+	public Long total(){
+		String hql = "select count(*) from "+entityClass.getSimpleName();
+		return (Long)em.createQuery(hql, Long.class).getSingleResult();
+	}
+	public List<T> list(int pageIndex,int pageSize){
+		String hql = "from "+entityClass.getSimpleName();
+		return em.createQuery(hql, entityClass).setMaxResults(pageSize).setFirstResult((pageIndex-1)*pageSize).getResultList();
+	}
 	public List<T> findAll(){
-		Class<T> entityClass = null;
-        Type t = getClass().getGenericSuperclass();
-        if(t instanceof ParameterizedType){
-            Type[] p = ((ParameterizedType)t).getActualTypeArguments();
-            entityClass = (Class<T>)p[0];
-        }
-        String className = entityClass.getName();
-        className = className.substring(className.lastIndexOf(".")+1);
-        String hql = "from "+className;
+        String hql = "from "+entityClass.getSimpleName();
 		return em.createQuery(hql, entityClass).getResultList();
 	}
 }

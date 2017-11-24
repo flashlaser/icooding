@@ -175,7 +175,6 @@
 							default:
 								break;
 							}
-
 						},
 						ignoreHidden : true,
 						dragonfly : true,

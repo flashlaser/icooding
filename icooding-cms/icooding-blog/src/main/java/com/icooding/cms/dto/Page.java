@@ -1,5 +1,7 @@
 package com.icooding.cms.dto;
 
+import java.util.List;
+
 /**
  * 分页类，简化分页操作，配合特定的js使用
  * @author Fate
@@ -31,6 +33,9 @@ public class Page {
 	 * 中间位置
 	 */
 	private int middle;
+
+
+	private List<?> rows;
 	
 	public Page(int curPage, int pageSize, int count){
 		this.curPage = curPage;
@@ -90,6 +95,12 @@ public class Page {
 	public int getMiddle() {
 		return middle;
 	}
-	
-	
+
+	public List<?> getRows() {
+		return rows;
+	}
+
+	public void setRows(List<?> rows) {
+		this.rows = rows;
+	}
 }

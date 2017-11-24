@@ -56,18 +56,20 @@
 							<c:forEach items="${themes}" var="theme">
 								<tr>
 									<td style="vertical-align:middle;">
-										<c:if test="${theme.priority!=0}">
-											<span class="label label-danger">置顶</span>
-										</c:if>
-										<a href="${theme.url}">${theme.title}${theme.state==1?"&nbsp;<span class='badge'>草</span>":""}</a>
-										<c:if test="${userSession!=null}">
-											<c:if test="${theme.priority==0}">
-												<button class="btn btn-warning btn-xs pull-right btn-top" style="display: none;" data-guid="${theme.guid}">置顶</button>
-											</c:if>
 											<c:if test="${theme.priority!=0}">
-												<button class="btn btn-warning btn-xs pull-right btn-top-cancel" style="display: none;" data-guid="${theme.guid}">取消置顶</button>
+												<span class="label label-danger">置顶</span>
 											</c:if>
-										</c:if>
+											<a href="${theme.url}">${theme.title}${theme.state==1?"&nbsp;<span class='badge'>草</span>":""}</a>
+											<c:if test="${userSession!=null}">
+												<c:if test="${userSession.user.userType==1}">
+													<c:if test="${theme.priority==0}">
+														<button class="btn btn-warning btn-xs pull-right btn-top" style="display: none;" data-guid="${theme.guid}">置顶</button>
+													</c:if>
+													<c:if test="${theme.priority!=0}">
+														<button class="btn btn-warning btn-xs pull-right btn-top-cancel" style="display: none;" data-guid="${theme.guid}">取消置顶</button>
+													</c:if>
+												</c:if>
+											</c:if>
 									</td>
 									<td style="font-size: 12px;">${theme.author}<span  class="gray" style="font-size: 10px;display: block;"><fmt:formatDate value="${theme.publishDate}" pattern="yyyy-MM-dd"/></span></td>
 									<td style="vertical-align:middle;">${theme.replies}/${theme.views}</td>

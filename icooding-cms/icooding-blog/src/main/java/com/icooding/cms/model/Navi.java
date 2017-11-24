@@ -2,17 +2,7 @@ package com.icooding.cms.model;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,6 +14,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "t_navi")
 public class Navi {
+
+	public enum NaviTarget {_blank,_self }
 
 	/**
 	 * 主导航
@@ -44,10 +36,14 @@ public class Navi {
 	
 	@Column
 	private String url;//对应地址
-	
+
+	@Column
+	@Enumerated(value = EnumType.STRING)
+	private NaviTarget target = NaviTarget._self;//打开方式
+
 	@Column
 	private int type;
-	
+
 	@Column(name = "navi_order")
 	private int order;//显示顺序
 	
@@ -116,6 +112,12 @@ public class Navi {
 	public void setType(int type) {
 		this.type = type;
 	}
-	
-	
+
+	public NaviTarget getTarget() {
+		return target;
+	}
+
+	public void setTarget(NaviTarget target) {
+		this.target = target;
+	}
 }

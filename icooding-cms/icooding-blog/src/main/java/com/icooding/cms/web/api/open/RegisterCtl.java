@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.icooding.cms.dto.GlobalSetting;
+import com.icooding.cms.model.RegesterCode;
 import com.icooding.cms.model.SecurityVerification;
 import com.icooding.cms.model.User;
 import com.icooding.cms.model.UserSession;
+import com.icooding.cms.service.RegesterCodeService;
 import com.icooding.cms.service.SecurityVerificationService;
 import com.icooding.cms.service.UserService;
 import com.icooding.cms.service.UserSessionService;
@@ -52,6 +54,9 @@ public class RegisterCtl {
 	
 	@Autowired
 	private SecurityVerificationService securityVerificationService;
+
+	@Autowired
+	private RegesterCodeService regesterCodeService;
 	
 	@RequestMapping("/goRegister")
 	public String goRegister(HttpServletRequest request,HttpServletResponse response){
@@ -77,13 +82,9 @@ public class RegisterCtl {
 	
 	@RequestMapping("/submit")
 	@ResponseBody
-	public Object submit(String nickName, String password, String username, int type,String code, HttpSession session,HttpServletRequest request){
+	public Object submit(String nickName, String password, String username, int type,String registerCode, HttpSession session,HttpServletRequest request){
 		LOG.info("IP:"+ ClientInfo.getIp(request)+" \""+request.getHeader("User-Agent")+"\" 进行了注册。");
-		
 		Map<String,Object> map = new HashMap<String, Object>();
-		GlobalSetting globalSetting = GlobalSetting.getInstance();
-		
-		User user = new User();
 		//可能各种原因导致的表单验证通过，但提交时又重复了
 		if(userService.checkLoginName(username)||userService.checkNickName(nickName)){
 			map.put("msg", "请勿重复提交");
@@ -91,60 +92,10 @@ public class RegisterCtl {
 			return map;
 		}
 		try{
-    		user.setNickName(nickName);
-    		Date date = Calendar.getInstance().getTime();
-    		user.setPassword(EncryptUtil.pwd(date, password));
-    		if(type==1){
-    			user.setEmail(username);
-    		}
-    		else{
-    			user.setMobile(username);
-    		}
-    		
-    		user.setActivateDate(date);
-    		
-    		userService.save(user);
-    		
-    		
-    		String url = "";
-    		if(type==1&&globalSetting.getNeedEmailVerify()){
-    			sendEmail(user.getEmail(), user.getUid());
-    			url = (String) session.getAttribute("callback");
-    			map.put("msg", "验证邮件已发送...");
-    			map.put("success", true);
-    		}else if(type==2){
-    			//手机验证
-    			String smsCode = (String) session.getAttribute("smsCode");
-    			String mobile = (String) session.getAttribute("mobile");
-    			if(!mobile.equals(user.getMobile())){
-    				user.setMobile(mobile);
-    				userService.update(user);
-    				map.put("msg", "手机号与验证码不匹配，请至个人中心重新验证");
-    				map.put("success", true);
-    			}else{
-    				String guid = (String) session.getAttribute("security");
-    				SecurityVerification securityVerification = securityVerificationService.find(guid);
-    				Date now = new Date();
-    				long time = now.getTime() - securityVerification.getVerificationTime().getTime();
-    				if(time>securityVerification.getTimeout()*60*1000){
-    					map.put("msg", "验证码超时，请至个人中心重新验证");
-    					map.put("success", true);
-    				}else if(code.trim().equals(smsCode)){
-    					user.setMobileStatus(true);
-    					userService.update(user);
-    					securityVerificationService.delete(securityVerification);
-    					map.put("msg", "注册成功");
-    					map.put("success", true);
-    				}
-    			}
-    			session.removeAttribute("smsCode");
-    			session.removeAttribute("mobile");
-    		}
-    		else{
-    			url = (String) session.getAttribute("callback");
-    			map.put("msg", "注册成功");
-    			map.put("success", true);
-    		}
+			User user = userService.register(nickName,password,username,type,registerCode);
+			String url = (String) session.getAttribute("callback");
+			map.put("msg", "注册成功");
+			map.put("success", true);
     		session.removeAttribute("callback");
     		userSessionService.login(user, request);
     		map.put("url", url);
@@ -154,7 +105,6 @@ public class RegisterCtl {
 			map.put("msg", "注册失败");
 			map.put("success", false);
 		}
-		
 		return map;
 	}
 		
@@ -162,7 +112,6 @@ public class RegisterCtl {
 	 * 发送邮件验证码
 	 * @param toMails 接收人
 	 * @param uid
-	 * @param globalSetting
 	 * @throws UnsupportedEncodingException
 	 */
 	public void sendEmail(String toMails, int uid) throws MessagingException, UnsupportedEncodingException{
@@ -257,4 +206,22 @@ public class RegisterCtl {
 		}
 		return map;
 	}
+
+
+
+	@RequestMapping("/checkCode")
+	@ResponseBody
+	public Object checkCode(String name, String param, HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		RegesterCode byCode = regesterCodeService.findByCode(param);
+		if(byCode == null){
+			map.put("status","n");
+			map.put("info","注册码不存在!");
+			return map;
+		}
+		map.put("status", byCode.getStatus()==0?"n":"y");
+		map.put("info",byCode.getStatus()==0?"该注册码已被使用！":"该注册码可用");
+		return map;
+	}
+
 }

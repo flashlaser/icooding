@@ -21,8 +21,7 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="description"
 	content="${userSession.user.nickName}的个人资料,${setting.appName}">
-<link rel="stylesheet" type="text/css"
-	href="static/css/Validform/datePicker-min.css">
+<link rel="stylesheet" type="text/css" href="static/css/Validform/datePicker-min.css">
 <link rel="stylesheet" type="text/css" href="static/css/Validform/style.css">
 <link rel="stylesheet" type="text/css" href="static/css/Validform.css">
 <c:import url="/op/head"></c:import>
@@ -61,8 +60,7 @@
 								<label for="username" class="col-sm-3 control-label"><span
 									class="neccess">*</span>手机号：</label>
 								<div class="col-sm-5">
-									<input name="mobile" id="mobile" class="form-control"
-										placeholder="手机号" datatype="m" ajaxurl="op/register/check"
+									<input name="mobile" id="mobile" class="form-control" placeholder="手机号" datatype="m" ajaxurl="op/register/check"
 										sucmsg="该手机号可以使用！" nullmsg="请输入您的手机号！" errormsg="请填写正确的手机号！"
 										maxlength="11" value="${mobile}" />
 								</div>
@@ -94,8 +92,7 @@
 		</div>
 	</div>
 	<c:import url="/op/footer"></c:import>
-	<script type="text/javascript"
-		src="static/js/Validform/Validform_v5.3.2_min.js"></script>
+	<script type="text/javascript" src="static/js/Validform/Validform_v5.3.2_min.js"></script>
 	<script type="text/javascript" src="static/js/base/sms.min.js"></script>
 </body>
 </html>

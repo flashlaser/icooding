@@ -279,20 +279,23 @@ $(function() {
 function decodeNavi(data) {
 	var content = "";
 	for (var i = 0; i < data.length; i++) {
-		content += "<tr class='forum'>"
-				+ "<td><input type='text' class='form-control order_of_show' name='order' value='"
+		content += "<tr class='forum'>";
+        content += "<td";
+        if (data[i].type == 2) {
+            content += " class='td-forum'";
+        }
+        content += "><input class='form-control navi_name pull-left' type='text' name='name' value='" + data[i].name + "' /><input type='hidden' name='id' value='" + data[i].id + "' /></td>";
+
+
+        content += "<td><select class='form-control' name='target'> <option value='_slef' " +( data[i].target=="_self"?"selected ":"")+">本页</option><option value='_blank' " +( data[i].target=="_blank"?"selected ":"")+">外部</option> </select></td>"
+            + "<td><input type='text' class='form-control order_of_show' name='order' value='"
 				+ data[i].order
 				+ "' /><input type='hidden' name='type' value='" + data[i].type
-				+ "' /></td>" + "<td";
-		if (data[i].type == 2)
-			content += " class='td-forum'";
-		content += "><input class='form-control navi_name pull-left' type='text' name='name' value='"
-				+ data[i].name
-				+ "' /><input type='hidden' name='id' value='"
-				+ data[i].id + "' />";
+				+ "' /></td>";
 
-		content += "</td>"
-				+ "<td><input class='form-control navi_url pull-left' type='text' name='url' value='"
+
+
+        content +=  "<td><input class='form-control navi_url pull-left' type='text' name='url' value='"
 				+ data[i].url + "' /></td>" + "<td align='reinforce-content'>"
 				+ "<div class='btn-group btn-group-xs'>" + "</div>&nbsp;&nbsp;"
 				+ "<div class='btn-group btn-group-xs'>"
@@ -313,8 +316,9 @@ function decodeNavi(data) {
 //新建导航项
 function newNavi() {
 	var content = "<tr class='forum'>"
-			+ "<td><input class='form-control order_of_show' type='text' name='order' value='0' /><input type='hidden' name='type' value='1' /></td>"
 			+ "<td><input class='form-control navi_name pull-left' type='text' name='name' /><a class='pull-left close deleterow' aria-label='Close'><span aria-hidden='true'>&times;</span></a><input type='hidden' name='id' value='0' /></td>"
+			+ "<td><select class='form-control' name='target'> <option value='_slef'>本页</option><option value='_blank'>外部</option> </select></td>"
+			+ "<td><input class='form-control order_of_show' type='text' name='order' value='0' /><input type='hidden' name='type' value='1' /></td>"
 			+ "<td><input class='form-control navi_url pull-left' type='text' name='url' /></td>"
 			+ "<td align='reinforce-content'>" + "</td>" + "</tr>";
 	$(".reinforce-content").find(".table").children("tbody").append(content);
@@ -323,10 +327,11 @@ function newNavi() {
 //新建二级导航
 $(document).on("click", ".newSubNavi", function() {
 	var content = "<tr class='forum'>"
-			+ "<td><input class='form-control order_of_show' type='text' name='order' value='0' /><input type='hidden' name='type' value='2' /></td>"
 			+ "<td class='td-forum'><input class='form-control navi_name pull-left' type='text' name='name'/><a class='pull-left close deleterow' aria-label='Close'><span aria-hidden='true'>&times;</span></a><input type='hidden' name='id' value='0' /><input type='hidden' name='parentId' value='"
 			+ $(this).attr("id")
 			+ "' /></td>"
+            + "<td><select class='form-control' name='target'> <option value='_slef'>本页</option><option value='_blank'>外部</option> </select></td>"
+			+ "<td><input class='form-control order_of_show' type='text' name='order' value='0' /><input type='hidden' name='type' value='2' /></td>"
 			+ "<td><input class='form-control navi_url pull-left' type='text' name='url' /></td>"
 			+ "<td align='reinforce-content'>" + "</td>"
 			+ "</tr>";
@@ -346,21 +351,23 @@ function naviSubmit() {
 			.children(".forum")
 			.each(
 					function() {
-						result += "{type:'"
-								+ $(this).find("input[name=type]").val()
-								+ "',order:'"
-								+ $(this).find("input[name=order]").val()
-								+ "',name:'"
-								+ $(this).find("input[name=name]").val()
-								+ "',url:'"
-								+ $(this).find("input[name=url]").val()
-								+ "',id:'"
-								+ $(this).find("input[name=id]").val()
-								+ "',parentId:"
-								+ ($(this).find("input[name=parentId]").length == 0 ? 0
-										: $(this).find("input[name=parentId]")
-												.val()) + "},";
-
+						console.log($("#naviTable").serializeArray())
+                        result += "{type:'"
+                            + $(this).find("input[name=type]").val()
+                            + "',order:'"
+                            + $(this).find("input[name=order]").val()
+                            + "',target:'"
+                            + $(this).find("select[name=target]").val()
+                            + "',name:'"
+                            + $(this).find("input[name=name]").val()
+                            + "',url:'"
+                            + $(this).find("input[name=url]").val()
+                            + "',id:'"
+                            + $(this).find("input[name=id]").val()
+                            + "',parentId:"
+                            + ($(this).find("input[name=parentId]").length == 0 ? 0
+                                : $(this).find("input[name=parentId]")
+                                    .val()) + "},";
 					});
 	if (result.length > 0) {
 		result = result.substring(0, result.length - 1);

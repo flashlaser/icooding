@@ -118,10 +118,10 @@
 				value="${updateTime}" type="date" pattern="yyyy-MM-dd HH:mm" /></li>
 		<li class="list-group-item">文章 : ${theme}</li>
 		<!-- <li class="list-group-item">用户 : ${user}</li> -->
-		<li class="list-group-item">评论 : ${comment}</li>
+		<%--<li class="list-group-item">评论 : ${comment}</li>--%>
 		<li class="list-group-item">浏览总数 : ${views}</li>
-		<li class="list-group-item">搜索次数 : ${search}</li>
-		<li class="list-group-item">在线人数 : ${online}</li>
+		<%--<li class="list-group-item">搜索次数 : ${search}</li>--%>
+		<%--<li class="list-group-item">在线人数 : ${online}</li>--%>
 		<li class="list-group-item">历史最高在线人数 : ${history_online}</li>
 	</ul>
 </div>

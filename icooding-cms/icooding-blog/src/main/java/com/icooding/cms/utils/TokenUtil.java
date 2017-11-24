@@ -2,7 +2,7 @@ package com.icooding.cms.utils;
 
 public class TokenUtil {
 
-	private static String[] src = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"}; 
+	private static String[] src = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 	
 	private TokenUtil() {
         super();
@@ -18,9 +18,8 @@ public class TokenUtil {
 	public static String getRandomString(int length,int type){
 		String code = "";
 		for(int i=0;i<length;i++){
-			code+=src[(int)(Math.random()*(type==1?10:16))];
+			code+=src[(int)(Math.random()*(type==1?10:src.length))];
 		}
 		return code;
 	}
-	
 }

@@ -56,11 +56,12 @@
 					<div class="site_right"></div>
 				</div>
 				<div class="page">
-					<table class="table table-hover">
+					<table class="table table-hover" id="naviTable">
 						<thead>
 							<tr>
+								<td style="width:40%;">导航名称</td>
+								<td style="min-width:100px;">打开方式</td>
 								<td style="min-width:80px;">显示顺序</td>
-								<td style="width:70%;">导航名称</td>
 								<td style="min-width:80px;">地址</td>
 								<td style="min-width:150px;" align="reinforce-content">操作&nbsp;</td>
 							</tr>
@@ -70,8 +71,7 @@
 					</table>
 					<c:import url="/op/base/loading?size=10"></c:import>
 					<br>
-					<a href="javascript:newNavi();" class="add">
-						<span class="glyphicon glyphicon-plus"></span>
+					<a href="javascript:newNavi();" class="add"> <span class="glyphicon glyphicon-plus"></span>
 						&nbsp;添加新导航
 					</a>
 					<div class="clear"></div>
@@ -83,7 +83,7 @@
 		</div>
 	</div>
 	<c:import url="/op/base/foot"></c:import>
-	<script type="text/javascript" src="static/js/select.js"></script>
-	<script type="text/javascript" src="static/js/admin/siteSet.js"></script>
+	<script type="text/javascript" src="/static/js/select.js"></script>
+	<script type="text/javascript" src="/static/js/admin/siteSet.js"></script>
 </body>
 </html>

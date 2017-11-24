@@ -14,6 +14,8 @@
 			</ul>
 		</li>
 		<li><a href="admin/user/userList" class="list-title" rel="nofollow"><i class="fa fa-users"></i>&nbsp;用户列表</a></li>
+		<li><a href="/admin/registerCode/list" class="list-title" rel="nofollow"><i class="fa fa-users"></i>&nbsp;注册码</a></li>
+
 		<li><a href="admin/announcement/list" class="list-title" rel="nofollow"><i class="fa fa-volume-up"></i>&nbsp;公告列表</a></li>
 		<li><a href="javascript:dialog.alert('优化中');" class="list-title" rel="nofollow"><i class="fa fa-info-circle"></i>&nbsp;广告列表</a></li>
 		<li>
