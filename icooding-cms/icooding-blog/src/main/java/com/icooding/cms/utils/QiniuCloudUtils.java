@@ -27,14 +27,18 @@ public class QiniuCloudUtils {
     static String accessKey = "ISvHZm5Xhg_LGne9mlJpkaOfvt-K3qiAh_4flz1K";
     static String secretKey = "0qFrKgY4UWmdiC-slAOPJppy2gN5hS0ndNATrjRq";
     static String bucket = "icooding";
+    static String prefix = "img/%s/";
+
+
+
     static Configuration cfg = new Configuration(Zone.zone2());
     static UploadManager uploadManager = new UploadManager(cfg);
     static Auth auth = Auth.create(accessKey, secretKey);
 
 
-    public static String updateFile(String localFilePath) throws QiniuException{
+    public static String updateFile(String localFilePath,int id) throws QiniuException{
         String upToken = auth.uploadToken(bucket);
-        String key = String.format("static/images/%s.png", UUID.randomUUID().toString().replace("-",""));
+        String key = String.format(prefix+"%s.png",id, TokenUtil.uuid());
         Response response = uploadManager.put(localFilePath, key, upToken);
         //解析上传成功的结果
         DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);

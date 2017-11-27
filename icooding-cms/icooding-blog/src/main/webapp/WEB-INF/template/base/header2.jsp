@@ -56,7 +56,7 @@
 				<c:if test="${userSession!=null}">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle user-info" data-toggle="dropdown" role="button" aria-expanded="false" rel="nofollow">
-							<img src="${userSession.user.headIconBig==null?" static/images/default_headicon.png":userSession.user.headIconBig}" class="img-circle" width=28 alt="${userSession.user.nickName}" />
+							<img src="${userSession.user.headIconSmall}" class="img-circle" width=30 alt="${userSession.user.nickName}" />
 							${userSession.user.nickName}<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">

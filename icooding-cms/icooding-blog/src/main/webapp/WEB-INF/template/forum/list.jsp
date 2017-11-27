@@ -30,8 +30,7 @@
 		</c:import>
 		<div class="container">
 		<ol class="breadcrumb">
-			<li><a href="javascript:;" rel="nofollow"><span
-					class="glyphicon glyphicon-home"></span></a></li>
+			<li> <a href="javascript:;" rel="nofollow"> <span class="glyphicon glyphicon-home"> </span> </a> </li>
 			<li><a href="/">首页</a></li>
 			<li class="active">${forum==null?"我的主题":forum.forumName}</li>
 		</ol>

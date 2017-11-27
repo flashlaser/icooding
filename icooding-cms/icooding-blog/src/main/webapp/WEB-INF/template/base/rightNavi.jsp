@@ -25,32 +25,32 @@
 	};
 </script>
 <c:if test="${fn:length(announcements)>0}">
-<div class="panel panel-default panel-right animated fadeInRight">
-	<!-- Default panel contents -->
-	<div class="panel-heading panel-title panel-static">
-		<i class="glyphicon glyphicon-volume-up"></i>&nbsp;&nbsp;${announcement!=null?announcement.title:"公告"}
-	</div>
-	<div class="panel-body">
-		<c:forEach items="${announcements}" var="announcement">
-			<div class="">
-				
-			</div>
-			<c:if test="${announcement!=null}">
-	  			${announcement.content}
-	  		</c:if>
-			<c:if test="${announcement==null}">
-				<span class="gray">暂无公告</span>
-			</c:if>
-		</c:forEach>
-		
-	</div>
+	<div class="panel panel-default panel-right animated fadeInRight">
+		<!-- Default panel contents -->
+		<div class="panel-heading panel-title panel-static">
+			<i class="glyphicon glyphicon-volume-up"></i>&nbsp;&nbsp;${announcement!=null?announcement.title:"公告"}
+		</div>
+		<div class="panel-body">
+			<c:forEach items="${announcements}" var="announcement">
+				<div class="">
 
-</div>
+				</div>
+				<c:if test="${announcement!=null}">
+					${announcement.content}
+				</c:if>
+				<c:if test="${announcement==null}">
+					<span class="gray">暂无公告</span>
+				</c:if>
+			</c:forEach>
+
+		</div>
+
+	</div>
 </c:if>
 
-<div class="panel panel-danger panel-list panel-right animated fadeInRight delay1">
+<div class="panel panel-default panel-right animated fadeInRight delay1">
 	<!-- Default panel contents -->
-	<div class="panel-heading panel-title">
+	<div class="panel-heading">
 		<i class="glyphicon glyphicon-fire"></i>&nbsp;&nbsp;热门
 	</div>
 

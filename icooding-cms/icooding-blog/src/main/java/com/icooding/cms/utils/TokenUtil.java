@@ -1,5 +1,7 @@
 package com.icooding.cms.utils;
 
+import java.util.UUID;
+
 public class TokenUtil {
 
 	private static String[] src = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
@@ -21,5 +23,10 @@ public class TokenUtil {
 			code+=src[(int)(Math.random()*(type==1?10:src.length))];
 		}
 		return code;
+	}
+
+
+	public static String uuid(){
+		return UUID.randomUUID().toString().replace("-","");
 	}
 }

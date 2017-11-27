@@ -5,9 +5,7 @@ import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.dto.Index;
 import com.icooding.cms.model.*;
 import com.icooding.cms.service.*;
-import com.icooding.cms.utils.DateUtil;
-import com.icooding.cms.utils.FilterHTMLTag;
-import com.icooding.cms.utils.FriendLinkUtil;
+import com.icooding.cms.utils.*;
 import com.icooding.cms.web.base.Constants;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
@@ -75,8 +73,9 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
             friendLinkCheck();
             initOthers();
             Param aliyunUsed = paramService.findByKey(Constants.ALIYUN_USED);
-    		if(aliyunUsed!=null&&aliyunUsed.getIntValue()==1)
-            	initOSS();
+    		if(aliyunUsed!=null&&aliyunUsed.getIntValue()==1) {
+				initOSS();
+			}
         }
 	}
 	
@@ -196,6 +195,11 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 			image_server = new Param();
 		}
 
+		Param temp_dir = paramService.findByKey("temp_dir");
+		if(temp_dir==null){
+			temp_dir = new Param();
+		}
+
 		GlobalSetting globalSetting = GlobalSetting.getInstance();
 		globalSetting.setSiteName(siteName.getTextValue());
 		globalSetting.setAppName(appName.getTextValue());
@@ -220,6 +224,7 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 		globalSetting.setSmsKey(smsKey.getTextValue());
 		globalSetting.setWebTheme(web_theme.getTextValue());
 		globalSetting.setImageServer(image_server.getTextValue());
+		globalSetting.setTemp_dir(temp_dir.getTextValue());
 
 		//邮件服务
 		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();

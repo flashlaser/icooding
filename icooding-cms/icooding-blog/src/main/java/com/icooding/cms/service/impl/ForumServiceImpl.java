@@ -53,4 +53,8 @@ public class ForumServiceImpl implements ForumService {
 		return forumDao.searchChildPoint();
 	}
 
+	@Override
+	public List<Forum> findAll() {
+		return forumDao.findAll();
+	}
 }

@@ -40,10 +40,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -69,6 +66,12 @@ public class ProfileCtl {
 
 	@Autowired
 	private ParamService paramService;
+
+	@Autowired
+	private ThemeService themeService;
+
+	@Autowired
+	private ForumService forumService;
 
 	@RequestMapping("basicInfo")
 	public ModelAndView basicInfo(HttpSession session) {
@@ -117,6 +120,28 @@ public class ProfileCtl {
 		}
 		return map;
 	}
+
+
+	/**
+	 * 我的主题
+	 * @param curPage
+	 * @return
+	 */
+	@RequestMapping("/myTheme/{curpage}")
+	public ModelAndView myTheme(@PathVariable("curpage")int curPage, HttpSession session){
+		ModelAndView mv = new ModelAndView("profile/myTheme");
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		List<Forum> forums = forumService.searchChildPoint();
+		List<Theme> themes = themeService.pageByUid(userSession.getUser().getUid(), Constants.THEME_LIST_LENGTH, curPage, false, true, 0);
+		mv.addObject("forums", forums);
+		mv.addObject("themes", themes);
+		long count = themeService.countByUid(userSession.getUser().getUid(), false, 0);
+		mv.addObject("count", count);
+		mv.addObject("pageSize", Constants.THEME_LIST_LENGTH);
+		mv.addObject("curPage", curPage);
+		return mv;
+	}
+
 
 	@RequestMapping("/headIcon")
 	public ModelAndView headIcon(HttpSession session) {

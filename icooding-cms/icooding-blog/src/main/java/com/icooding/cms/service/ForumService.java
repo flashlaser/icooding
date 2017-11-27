@@ -32,4 +32,7 @@ public interface ForumService {
 	 * @return
 	 */
 	public List<Forum> searchChildPoint();
+
+	public List<Forum> findAll();
+
 }

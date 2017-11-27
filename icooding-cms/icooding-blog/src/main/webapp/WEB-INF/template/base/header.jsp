@@ -85,8 +85,7 @@
 						|<a href="admin/siteSet/siteInfo" rel="nofollow">管理中心</a>
 					</c:if>
 					<div class="headIcon">
-						<img src="${userSession.user.headIconBig==null?"
-							images/default_headicon.png":userSession.user.headIconBig}" class="img-thumbnail"
+						<img src="${userSession.user.headIconSmall}" class="img-thumbnail"
 							width=80 alt="${userSession.user.nickName}" />
 					</div>
 				</div>

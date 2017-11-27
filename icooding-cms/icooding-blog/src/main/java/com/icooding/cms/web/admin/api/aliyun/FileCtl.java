@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import com.icooding.cms.dto.GlobalSetting;
 import com.icooding.cms.model.Param;
+import com.icooding.cms.model.UserSession;
 import com.icooding.cms.service.OSSService;
 import com.icooding.cms.service.ParamService;
 import com.icooding.cms.utils.DateUtil;
@@ -74,9 +75,9 @@ public class FileCtl {
 	@ResponseBody
 	public Map<String, Object> uploadImg( @RequestParam("imgFile") MultipartFile uploadFile, String dir, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
 		String filename = uploadFile.getOriginalFilename();
-		String path = ImageUtils.class.getClassLoader().getResource("").getPath()+filename.hashCode();
-
+		String path = GlobalSetting.getInstance().getTemp_dir()+filename.hashCode();
 		File file = new File(path);
 		if(!file.exists()){
 			file.mkdirs();
@@ -84,7 +85,7 @@ public class FileCtl {
 		String url = null;
 		try {
 			uploadFile.transferTo(file);
-			url = QiniuCloudUtils.updateFile(path);
+			url = QiniuCloudUtils.updateFile(path,userSession.getUser().getUid());
 			if (url == null) {
                 map.put("error", 1);
                 map.put("message", "上传错误");
@@ -102,9 +103,7 @@ public class FileCtl {
 	}
 
 	@RequestMapping("/upload")
-	public Map<String, Object> upload(String bucketName,
-			@RequestParam("uploadFile") MultipartFile uploadFile,
-			String folder, HttpSession session, HttpServletRequest request) {
+	public Map<String, Object> upload(String bucketName, @RequestParam("uploadFile") MultipartFile uploadFile, String folder, HttpSession session, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String key = uploadFile.getOriginalFilename();
 		if (uploadFile.getSize() > PART_SIZE) {

@@ -90,6 +90,8 @@ public class GlobalSetting {
 
 	private String imageServer;//图片服务地址
 
+	private String temp_dir;//临时目录
+
 	private static final GlobalSetting globalSetting = new GlobalSetting();
 	
 	private GlobalSetting() {
@@ -295,5 +297,13 @@ public class GlobalSetting {
 
 	public void setImageServer(String imageServer) {
 		this.imageServer = imageServer;
+	}
+
+	public String getTemp_dir() {
+		return temp_dir;
+	}
+
+	public void setTemp_dir(String temp_dir) {
+		this.temp_dir = temp_dir;
 	}
 }

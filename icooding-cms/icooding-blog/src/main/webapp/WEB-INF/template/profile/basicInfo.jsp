@@ -41,99 +41,99 @@
 				<c:param name="index" value="1" />
 			</c:import>
 			<div class=" col-md-10 col-xs-12">
-			<div class="title">
-				<span><strong>${userSession.user.nickName}的个人资料</strong></span>
-			</div>
-			<div class="info">
-				<form class="form" id="infoForm" method="post">
-					<div class="row">
-						<div class="col-md-7 col-xs-10">
-							<div class="input-group">
-								<span class="input-group-addon">电子邮箱</span> <input type="text"
-									class="form-control" placeholder="email"
-									value="${userSession.user.email}" readonly />
-							</div>
-						</div>
-						<div class="col-md-2 col-xs-2">
-							<span class="help"><button type="button" class="btn btn-warning">修改</button></span>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-md-7 col-xs-10">
-							<div class="input-group">
-								<span class="input-group-addon">手机号</span> <input type="text"
-									class="form-control" placeholder="mobile"
-									value="${userSession.user.mobile}" readonly />
-							</div>
-						</div>
-						<div class="col-md-2 col-xs-2">
-							<span class="help"><button type="button" class="btn btn-warning">修改</button></span>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-md-5">
-							<div class="input-group">
-								<span class="input-group-addon" id="basic-addon1">性别</span> <select
-									class="form-control" name="sex">
-									<!-- 这里为什么是109和119呢，是因为char类型被当作Long处理了，而字符m的ascii码为109,w为119 -->
-									<option value="m" ${userSession.user.sex==109?"selected":""}>男</option>
-									<option value="w" ${userSession.user.sex==119?"selected":""}>女</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-7">
-							<span class="Validform_checktip help"></span>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-md-7">
-							<div class="input-group">
-								<span class="input-group-addon">生日</span> <input type="text"
-									class="form-control time-picker" placeholder="birthday" name="birthday"
-									datatype="date" errormsg="请输入正确的日期，格式：1900-01-01"
-									sucmsg="&nbsp;" ignore="ignore" 
-									 type="date" pattern="yyyy-MM-dd"/>
-							</div>
-						</div>
-						<div class="col-md-5">
-							<span class="Validform_checktip help"></span>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-md-7">
-							<div class="input-group">
-								<span class="input-group-addon">家庭地址</span> <input type="text"
-									class="form-control" placeholder="address" name="address"
-									value="${userSession.user.address}">
-							</div>
-						</div>
-						<div class="col-md-5">
-							<span class="Validform_checktip help"></span>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label for="headicon">头像</label>
-							<div id="headicon">
-								<img class="img-rounded" src="${userSession.user.headIconLocal==null||userSession.user.headIconLocal==''?"images/default_headicon.png":userSession.user.headIconLocal}" width="40"/>&nbsp;<input id="local" type="radio" name="headIcon" value="0" ${userSession.user.headIconUsed==0?"checked":""} /><label for="local">本地头像</label>
-								<img class="img-rounded" src="${qq==''?"images/default_headicon.png":qq}" width="40" />&nbsp;<input id="qq" type="radio" name="headIcon" value="1" ${userSession.user.headIconUsed==1?"checked":""} /><label for="qq">QQ头像</label>
-								<img class="img-rounded" src="${weibo==''?"images/default_headicon.png":weibo}" width="40" />&nbsp;<input id="weibo" type="radio" name="headIcon" value="2" ${userSession.user.headIconUsed==2?"checked":""} /><label for="weibo">微博头像</label>
-							</div>
-						</div>
-					</div>
+				<div class="title">
+					<span><strong>${userSession.user.nickName}的个人资料</strong></span>
 				</div>
-					<br>
-					<div class="btns">
-						<button type="submit" class="btn btn-info" id="infoSubmit">保存</button>
+				<div class="info">
+					<form class="form" id="infoForm" method="post">
+						<div class="row">
+							<div class="col-md-7 col-xs-10">
+								<div class="input-group">
+									<span class="input-group-addon">邮箱</span> <input type="text"
+										class="form-control" placeholder="email"
+										value="${userSession.user.email}" readonly />
+								</div>
+							</div>
+							<div class="col-md-2 col-xs-2">
+								<span class="help"><button type="button" class="btn btn-warning">修改</button></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-7 col-xs-10">
+								<div class="input-group">
+									<span class="input-group-addon">手机</span> <input type="text"
+										class="form-control" placeholder="mobile"
+										value="${userSession.user.mobile}" readonly />
+								</div>
+							</div>
+							<div class="col-md-2 col-xs-2">
+								<span class="help"><button type="button" class="btn btn-warning">修改</button></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-5">
+								<div class="input-group">
+									<span class="input-group-addon" id="basic-addon1">性别</span> <select
+										class="form-control" name="sex">
+										<!-- 这里为什么是109和119呢，是因为char类型被当作Long处理了，而字符m的ascii码为109,w为119 -->
+										<option value="m" ${userSession.user.sex==109?"selected":""}>男</option>
+										<option value="w" ${userSession.user.sex==119?"selected":""}>女</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<span class="Validform_checktip help"></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<span class="input-group-addon">生日</span> <input type="text"
+										class="form-control time-picker" placeholder="birthday" name="birthday"
+										datatype="date" errormsg="请输入正确的日期，格式：1900-01-01"
+										sucmsg="&nbsp;" ignore="ignore"
+										 type="date" pattern="yyyy-MM-dd"/>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<span class="Validform_checktip help"></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-7">
+								<div class="input-group">
+									<span class="input-group-addon">地址</span> <input type="text"
+										class="form-control" placeholder="address" name="address"
+										value="${userSession.user.address}">
+								</div>
+							</div>
+							<div class="col-md-5">
+								<span class="Validform_checktip help"></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="headicon">头像</label>
+								<div id="headicon">
+									<img class="img-rounded" src="${userSession.user.headIconLocal==null||userSession.user.headIconLocal==''?"images/default_headicon.png":userSession.user.headIconLocal}" width="40"/>&nbsp;<input id="local" type="radio" name="headIcon" value="0" ${userSession.user.headIconUsed==0?"checked":""} /><label for="local">本地头像</label>
+									<img class="img-rounded" src="${qq==''?"images/default_headicon.png":qq}" width="40" />&nbsp;<input id="qq" type="radio" name="headIcon" value="1" ${userSession.user.headIconUsed==1?"checked":""} /><label for="qq">QQ头像</label>
+									<img class="img-rounded" src="${weibo==''?"images/default_headicon.png":weibo}" width="40" />&nbsp;<input id="weibo" type="radio" name="headIcon" value="2" ${userSession.user.headIconUsed==2?"checked":""} /><label for="weibo">微博头像</label>
+								</div>
+							</div>
+						</div>
 					</div>
-				</form>
-			</div>
+						<br>
+						<div class="btns">
+							<button type="submit" class="btn btn-info" id="infoSubmit">保存</button>
+						</div>
+					</form>
+				</div>
 			</div>
 			</div>
 		</div>

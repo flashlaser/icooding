@@ -24,7 +24,7 @@ public class ForumDao extends BaseDao<Forum>{
 	}
 	
 	public List<Forum> searchChildPoint(){
-		String hql = "from Forum f where f.parentForum is not null";
+		String hql = "from Forum f where f.parentForum is not null order by f.forumOrder asc";
 		return em.createQuery(hql, Forum.class).getResultList();
 	}
 }
