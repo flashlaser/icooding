@@ -1,11 +1,11 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <script src="static/js/jquery/jquery-1.11.1.min.js"></script>
-<script src="http://open.reinforce.cn/poshytip/1.2/jquery.poshytip.min.js"></script>
+<script src="static/js/poshytip/jquery.poshytip.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/jquery/jquery.md5.min.js"></script>
 <script src="static/js/jquery/jquery.form.min.js"></script>
-<script src="http://open.reinforce.cn/artdialog/6.0.4/js/dialog-plus-min.js"></script>
-<script src="http://open.reinforce.cn/toastr/js/toastr.min.js"></script>
+<script src="static/js/artdialog/dialog-plus-min.js"></script>
+<script src="static/js/toastr/toastr.min.js"></script>
 <script src="static/js/base/admin.min.js"></script>
 <script type="text/javascript">
 //初始化toastr设置 

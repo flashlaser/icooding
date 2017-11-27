@@ -11,9 +11,9 @@
 <base href="<%=basePath%>">
 
 <title></title>
-<link rel="stylesheet" href="http://open.reinforce.cn/artdialog/6.0.4/css/ui-dialog.css">
-<script src="http://open.reinforce.cn/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://open.reinforce.cn/artdialog/6.0.4/js/dialog-plus-min.js"></script>
+<link rel="stylesheet" href="static/css/ui-dialog.css">
+<script src="static/js/jquery/jquery-1.11.1.min.js"></script>
+<script src="static/js/artdialog/dialog-plus-min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		setTimeout(function(){location.href = "op/login/goLogin";},1000);

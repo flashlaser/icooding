@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
  *
  */
 @Table
-@Entity(name = "t_apiLog")
+@Entity(name = "t_apilog")
 public class ApiLog {
 	
 	@Id

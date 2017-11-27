@@ -2,16 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-<!DOCTYPE HTML>
-<html>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<base href="<%=basePath%>">
+	<base href="/">
+
 
 <title>${theme==null?"发布主题":theme.title}--${setting.siteName}</title>
 <meta charset="utf-8">
@@ -20,7 +16,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <c:import url="/op/head"></c:import>
-<link rel="stylesheet" href="http://open.reinforce.cn/Bootstrap/datetimepicker/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="static/css/bootstrap-datetimepicker.min.css">
 <style type="text/css">
 #contentEditer {
 	width: 100%;

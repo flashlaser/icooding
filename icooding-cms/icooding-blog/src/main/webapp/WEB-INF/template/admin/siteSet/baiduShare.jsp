@@ -1,16 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
 
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<base href="<%=basePath%>">
+	<base href="/">
+
 
 <title>百度一键分享--${setting.siteName}</title>
 <meta charset="utf-8">

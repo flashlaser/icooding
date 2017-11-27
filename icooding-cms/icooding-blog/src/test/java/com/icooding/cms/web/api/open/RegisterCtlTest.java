@@ -10,15 +10,15 @@ import static org.junit.Assert.*;
 
 public class RegisterCtlTest {
 
-    ClassPathXmlApplicationContext applicationContext;
+//    ClassPathXmlApplicationContext applicationContext;
     @Before
     public void setUp() throws Exception {
-       applicationContext = new ClassPathXmlApplicationContext("applicationContext-mvc.xml");
+//       applicationContext = new ClassPathXmlApplicationContext("applicationContext-mvc.xml");
     }
 
     @Test
     public void goRegister() throws Exception {
-        System.out.println(applicationContext.getBeanDefinitionNames());
+//        System.out.println(applicationContext.getBeanDefinitionNames());
     }
 
     @Test

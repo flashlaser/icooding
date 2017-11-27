@@ -1,15 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<base href="<%=basePath%>">
+	<base href="/">
+
 
 <title>${setting.appName}邮箱验证确认页</title>
 

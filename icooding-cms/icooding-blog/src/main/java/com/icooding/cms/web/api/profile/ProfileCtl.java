@@ -127,8 +127,8 @@ public class ProfileCtl {
 	 * @param curPage
 	 * @return
 	 */
-	@RequestMapping("/myTheme/{curpage}")
-	public ModelAndView myTheme(@PathVariable("curpage")int curPage, HttpSession session){
+	@RequestMapping("/myTheme")
+	public ModelAndView myTheme(@RequestParam(defaultValue = "1")int curPage, HttpSession session){
 		ModelAndView mv = new ModelAndView("profile/myTheme");
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		List<Forum> forums = forumService.searchChildPoint();

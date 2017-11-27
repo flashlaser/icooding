@@ -11,7 +11,7 @@
 <div class="navi col-md-2 visible-md-block visible-lg-block">
 	<ul class="nav nav-pills nav-stacked">
 		<li role="presentation" class="active" ><a href="profile/basicInfo"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;个人资料</a></li>
-		<li role="presentation" ><a href="profile/myTheme/1"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;我的文章</a></li>
+		<li role="presentation" ><a href="profile/myTheme"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;我的文章</a></li>
 		<%--<li role="presentation"><a href="profile/headIcon"><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;本地头像</a></li>--%>
 		<li role="presentation"><a href="profile/security"><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;安全设置</a></li>
 		<li role="presentation"><a href="javascript:;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;修改密码</a></li>

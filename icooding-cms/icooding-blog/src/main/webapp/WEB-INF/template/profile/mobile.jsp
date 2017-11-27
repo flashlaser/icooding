@@ -1,17 +1,12 @@
 <%@ page language="java"  import="java.util.*,fate.webapp.blog.model.GlobalSetting" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
 
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<base href="<%=basePath%>">
+	<base href="/">
+
 
 <title>手机绑定</title>
 <meta name="renderer" content="webkit">

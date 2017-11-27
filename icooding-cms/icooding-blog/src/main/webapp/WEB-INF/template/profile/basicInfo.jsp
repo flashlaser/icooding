@@ -1,16 +1,12 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-<!DOCTYPE HTML>
-<html>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<base href="<%=basePath%>">
+	<base href="/">
+
 
 <title>${userSession.user.nickName}的个人资料</title>
 <meta charset="utf-8">
@@ -122,8 +118,8 @@
 								<label for="headicon">头像</label>
 								<div id="headicon">
 									<img class="img-rounded" src="${userSession.user.headIconLocal==null||userSession.user.headIconLocal==''?"images/default_headicon.png":userSession.user.headIconLocal}" width="40"/>&nbsp;<input id="local" type="radio" name="headIcon" value="0" ${userSession.user.headIconUsed==0?"checked":""} /><label for="local">本地头像</label>
-									<img class="img-rounded" src="${qq==''?"images/default_headicon.png":qq}" width="40" />&nbsp;<input id="qq" type="radio" name="headIcon" value="1" ${userSession.user.headIconUsed==1?"checked":""} /><label for="qq">QQ头像</label>
-									<img class="img-rounded" src="${weibo==''?"images/default_headicon.png":weibo}" width="40" />&nbsp;<input id="weibo" type="radio" name="headIcon" value="2" ${userSession.user.headIconUsed==2?"checked":""} /><label for="weibo">微博头像</label>
+									<%--<img class="img-rounded" src="${qq==''?"images/default_headicon.png":qq}" width="40" />&nbsp;<input id="qq" type="radio" name="headIcon" value="1" ${userSession.user.headIconUsed==1?"checked":""} /><label for="qq">QQ头像</label>--%>
+									<%--<img class="img-rounded" src="${weibo==''?"images/default_headicon.png":weibo}" width="40" />&nbsp;<input id="weibo" type="radio" name="headIcon" value="2" ${userSession.user.headIconUsed==2?"checked":""} /><label for="weibo">微博头像</label>--%>
 								</div>
 							</div>
 						</div>
@@ -139,12 +135,10 @@
 		</div>
 		<c:import url="/op/footer"></c:import>
 	</div>
-	<script type="text/javascript"
-			src="static/js/Validform/Validform_v5.3.2_min.js" charset="utf-8"></script>
-		<script type="text/javascript"
-			src="static/js/Validform/jquery.datePicker-min.js" charset="utf-8"></script>
-	<script src="http://open.reinforce.cn/Bootstrap/datetimepicker/bootstrap-datetimepicker.min.js"></script>
-	<script src="http://open.reinforce.cn/Bootstrap/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"  charset="UTF-8"></script>
+	<script type="text/javascript" src="static/js/Validform/Validform_v5.3.2_min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="static/js/Validform/jquery.datePicker-min.js" charset="utf-8"></script>
+	<script src="static/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="static/js/bootstrap-datetimepicker.zh-CN.js"  charset="UTF-8"></script>
 		
 	<script type="text/javascript">
 		$(function() {

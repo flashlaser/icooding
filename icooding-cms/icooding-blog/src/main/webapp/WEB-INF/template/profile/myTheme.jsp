@@ -2,16 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://"
-            + request.getServerName() + ":" + request.getServerPort()
-            + path + "/";
-%>
-<!DOCTYPE HTML>
-<html>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-    <base href="<%=basePath%>">
+    <base href="/">
+
 
     <title>${userSession.user.nickName}--我的主题</title>
     <meta charset="utf-8">
@@ -144,7 +140,7 @@
                     </div>
 
                     <div class="page pull-right">
-                        <c:import url="/op/staticPage/1/${curPage}/?pageSize=${pageSize}&count=${count}"></c:import>
+                        <c:import url="/op/page/1/${curPage}/?pageSize=${pageSize}&count=${count}"></c:import>
                     </div>
                 </div>
             </div>

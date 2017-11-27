@@ -76,18 +76,18 @@
     </div><!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<script src="http://open.reinforce.cn/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://g.alicdn.com/opensearch/opensearch-console/0.16.0/scripts/jquery-ui-1.10.2.js"></script>
-<script src="http://open.reinforce.cn/poshytip/1.2/jquery.poshytip.min.js"></script>
-<script src="http://open.reinforce.cn/Bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="http://open.reinforce.cn/jquery/jquery.md5.min.js"></script>
-<script src="http://open.reinforce.cn/jquery/jquery.form.min.js"></script>
-<script src="http://open.reinforce.cn/jquery/jquery.cookie.min.js"></script>
-<script src="http://open.reinforce.cn/artdialog/6.0.4/js/dialog-plus-min.js"></script>
-<script src="http://open.reinforce.cn/headroom/headroom.min.js"></script>
-<script src="http://open.reinforce.cn/Validform/js/Validform_v5.3.2_min.js"></script>
-<script src="http://open.reinforce.cn/nprogress/nprogress.js"></script>
-<script src="http://open.reinforce.cn/toastr/js/toastr.min.js"></script>
+<script src="static/js/jquery/jquery-1.11.1.min.js"></script>
+<script src="static/js/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+<script src="static/js/poshytip/jquery.poshytip.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/jquery/jquery.md5.min.js"></script>
+<script src="static/js/jquery/jquery.form.min.js"></script>
+<script src="static/js/jquery/jquery.cookie.min.js"></script>
+<script src="static/js/artdialog/dialog-plus-min.js"></script>
+<script src="static/js/headroom/headroom.min.js"></script>
+<script src="static/js/Validform/Validform_v5.3.2_min.js"></script>
+<script src="static/js/nprogress/nprogress.js"></script>
+<script src="static/js/toastr/toastr.min.js"></script>
 <script src="static/js/base/header.js" charset="utf-8"></script>
 <script src="static/js/sockjs-0.3.min.js"></script>
 <script>
@@ -367,7 +367,7 @@
                     }
                     c.appendChild(b)
                 };
-                loadJs("http://changyan.sohu.com/upload/changyan.js", function () {
+                loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
                     window.changyan.api.config({appid: appid, conf: conf})
                 });
             }

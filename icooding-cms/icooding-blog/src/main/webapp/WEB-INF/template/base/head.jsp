@@ -1,13 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="http://open.reinforce.cn/jqueryui/css/custom-theme/jquery-ui-1.10.0.custom.css">
+<link rel="stylesheet" href="static/css/jquery-ui-1.10.0.custom.css">
 <link rel="stylesheet" href="static/css/Validform.css">
 <link rel="stylesheet" href="static/css/font-awesome.min.css">
 <link rel="stylesheet" href="static/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://open.reinforce.cn/artdialog/6.0.4/css/ui-dialog.css">
-<link rel="stylesheet" href="http://open.reinforce.cn/poshytip/1.2/tip-twitter/tip-twitter.css" >
-<link rel="stylesheet" href="http://open.reinforce.cn/nprogress/nprogress.css" >
-<link rel="stylesheet" href="http://open.reinforce.cn/toastr/css/toastr.min.css" >
-<link rel="stylesheet" href="http://open.reinforce.cn/animate/animate.css" >
+<link rel="stylesheet" href="static/css/ui-dialog.css">
+<link rel="stylesheet" href="static/css/tip-twitter.css" >
+<link rel="stylesheet" href="static/css/nprogress.css" >
+<link rel="stylesheet" href="static/css/toastr.min.css" >
+<link rel="stylesheet" href="static/css/animate.css" >
 <link rel="stylesheet" href="static/css/style.css" >
 
 <style>
