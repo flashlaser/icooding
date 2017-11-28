@@ -12,7 +12,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="    line-height: 30px;" href="http://${appUrl}">
+            <a class="navbar-brand" style="    line-height: 30px;" href="${appUrl}">
                 <%--<img src="static/images/logo-white.png" width="40" height="40" alt="${setting.appName}" >--%>
                 首页
             </a>
@@ -35,7 +35,7 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <c:forEach items="${navi.children}" var="n">
-                                    <li><a href="${n.url}">${n.name}</a></li>
+                                    <li><a href="${n.url}" target="${n.target}">${n.name}</a></li>
                                 </c:forEach>
                             </ul>
                         </li>

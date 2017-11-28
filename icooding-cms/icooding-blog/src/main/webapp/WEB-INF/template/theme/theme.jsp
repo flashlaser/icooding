@@ -123,8 +123,7 @@
 					<div id="SOHUCS" sid="${theme.guid}" ></div>
 					<!-- 评论 -->
 				</div>
-				
-				<
+
 			</div>
 			<div class="col-md-4">
 				<c:import url="/op/rightNavi?fid=${theme.forum.parentForum.fid}"></c:import>

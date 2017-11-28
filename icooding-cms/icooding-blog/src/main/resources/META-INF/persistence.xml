@@ -32,6 +32,7 @@
 		<class>com.icooding.cms.model.ApiLog</class>
 		<class>com.icooding.cms.model.FriendLink</class>
 		<class>com.icooding.cms.model.ExceptionLog</class>
+		<class>com.icooding.cms.model.BrowseLog</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

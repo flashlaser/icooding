@@ -1,15 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
-<base href="<%=basePath%>">
+<base href="/">
 <style type="text/css">
 body {
   background-color: #ECECEC;
@@ -84,7 +77,7 @@ body {
 <body>
   <div class="demo">
     <p><span>4</span><span>0</span><span>4</span></p>
-    <p>您查找的页面不在线(´･ω･`)</p>
+    <p>您查找的页面不存在</p>
   </div>
 </body>
 </html>

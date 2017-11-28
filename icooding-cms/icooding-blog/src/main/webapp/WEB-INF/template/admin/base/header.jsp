@@ -26,7 +26,7 @@
           <a href="admin/forum/forumList" rel="nofollow"><span class="fa fa-cogs"></span>&nbsp;站点功能 </a>
         </li>
         <li>
-          <a href="admin/statistics/theme" rel="nofollow"><span class="fa fa-bar-chart"></span>&nbsp;统计 </a>
+          <a href="admin/statistics/theme/0" rel="nofollow"><span class="fa fa-bar-chart"></span>&nbsp;统计 </a>
         </li>
       </ul>
       <form class="navbar-form navbar-left" role="search" style="position: relative;">

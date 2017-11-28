@@ -83,14 +83,15 @@
 			<bean class="com.icooding.cms.web.interceptor.GlobalInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-<!--
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="fate.webapp.blog.interceptor.ApiLogInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors>
-	 -->
+
+	<aop:config>
+		<aop:aspect ref="browseInterceptor">
+			<aop:pointcut expression="execution(* com.icooding.cms.web.api..*.*(..))" id="go"/>
+			<aop:before pointcut-ref="go" method="beforeRun" />
+			<aop:after pointcut-ref="go" method="afterRun" />
+		</aop:aspect>
+	</aop:config>
+
 	<bean id="jPushService" class="com.icooding.cms.service.impl.JPushServiceImpl" init-method="init" />
 
 	<!-- 邮件发送器 -->
