@@ -23,6 +23,9 @@
 .adv {
 	margin-top: 10px;
 }
+.content img{
+	max-width: 100%;
+}
 </style>
 
 <c:import url="/op/head"></c:import>
@@ -119,8 +122,8 @@
 				</div>
 
 				<div class="comment">
- 					<!-- 评论 -->
-					<div id="SOHUCS" sid="${theme.guid}" ></div>
+ 					<!-- 评论
+					<div id="SOHUCS" sid="${theme.guid}" ></div>-->
 					<!-- 评论 -->
 				</div>
 
