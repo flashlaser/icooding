@@ -235,7 +235,7 @@ public class OpenCtl {
 					theme.setReplies(obj.getInt("replies"));
 					theme.setTags(obj.getString("tags"));
 					theme.setTitle(obj.getString("title"));
-					theme.setUrl(obj.getString("url"));
+					theme.setUrlId(obj.getString("urlId"));
 					theme.setViews(obj.getInt("views"));
 					theme.setContent(FilterHTMLTag.delHTMLTag(obj.getString("content")));
 					themes.add(theme);

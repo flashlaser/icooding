@@ -64,7 +64,7 @@ public class IndexThread implements Runnable{
 			map.put("theme", count);
 			if(theme!=null){
 				map.put("title", theme.getTitle());
-				map.put("url", theme.getUrl());
+				map.put("url", "/"+theme.getAuthorDomain()+"/"+theme.getUrlId()+".html");
 				map.put("author", theme.getAuthor());
 				map.put("publishDate", theme.getPublishDate());
 				map.put("img", getImg(theme.getContent()));

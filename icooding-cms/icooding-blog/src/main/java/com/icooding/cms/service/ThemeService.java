@@ -54,7 +54,7 @@ public interface ThemeService {
 	 */
 	public long statistics(int fid, int datetype, String day);
 	
-	public Theme findByDateAndTitle(String date, String title, boolean redisOpen);
+	public Theme findByDomainAndUrlId(String domain, String urlId, boolean redisOpen);
 	
 	public List<Theme> pageByFid(int fid, int per, int curPage, boolean isDelete, boolean timeOrder, boolean priority, int state);
 	

@@ -40,6 +40,11 @@ public class AThemeCtl {
 
     private static final Logger LOG = Logger.getLogger(AThemeCtl.class.getName());
 
+
+    @Autowired
+    private UserService userService;
+
+
     @Autowired
     private ThemeService themeService;
 
@@ -85,6 +90,7 @@ public class AThemeCtl {
                 return map;
             }
             theme.setForum(forum);
+            theme.setAuthorDomain(userSession.getUser().getDomain());
             theme.setAuthor(userSession.getUser().getNickName());
             theme.setAuthorId(userSession.getUser().getUid());
             theme.setState(state);
@@ -136,12 +142,8 @@ public class AThemeCtl {
                 theme.setPublishDate(new Date());
             }
 
-            String year = DateUtil.format(theme.getPublishDate(), "yyyy");
-            String month = DateUtil.format(theme.getPublishDate(), "MM");
-            String day = DateUtil.format(theme.getPublishDate(), "dd");
-            theme.setUrl("http://" + globalSetting.getAppUrl() + "/" + year + "/" + month + "/"
-                    + day + "/" + URLEncoder.encode(theme.getTitle(), "utf-8").replace("+", "%20")
-                    + ".html");
+            theme = themeService.update(theme, globalSetting.getRedisOpen());
+            theme.setUrlId(String.valueOf(theme.getGuid().hashCode()));
             theme = themeService.update(theme, globalSetting.getRedisOpen());
             if (theme.getType() == Theme.TYPE_VIDEO && files != null){
                 for (String media : files) {
@@ -169,23 +171,8 @@ public class AThemeCtl {
                     mediaService.update(m);
                 }
             }
-               
-            if (state == Theme.STATE_PUBLISH) {
-                // ping百度
-                boolean baidu = PingUtils.ping(Constants.BAIDU_PING, theme.getTitle(), "http://"
-                        + globalSetting.getAppUrl() + "/", theme.getUrl(), null);
-                PingRecord pingRecord = pingRecordService.findByThemeGuid(theme.getGuid());
-                if (pingRecord == null) {
-                    pingRecord = new PingRecord();
-                    pingRecord.setTheme(theme);
-                }
-                pingRecord.setBaidu(baidu);
-                pingRecord.setPingDate(new Date());
-                pingRecordService.update(pingRecord);
-            }
-
             refresh();
-            map.put("url", theme.getUrl());
+            map.put("url", theme.getUrlId());
             map.put("success", true);
             map.put("msg", "保存成功");
         } catch (Exception e) {
@@ -241,7 +228,7 @@ public class AThemeCtl {
             map.put("theme", count);
             if (theme != null) {
                 map.put("title", theme.getTitle());
-                map.put("url", theme.getUrl());
+                map.put("url", "/"+theme.getAuthorDomain()+"/"+theme.getUrlId()+".html");
                 map.put("author", theme.getAuthor());
                 map.put("publishDate", theme.getPublishDate());
                 map.put("img", getImg(theme.getContent()));
@@ -280,26 +267,11 @@ public class AThemeCtl {
         List<Theme> themes = themeService.findAll(false);
         GlobalSetting globalSetting = GlobalSetting.getInstance();
         for (Theme theme : themes) {
-            String year = DateUtil.format(theme.getPublishDate(), "yyyy");
-            String month = DateUtil.format(theme.getPublishDate(), "MM");
-            String day = DateUtil.format(theme.getPublishDate(), "dd");
-            theme.setUrl("/" + year + "/" + month + "/"
-                    + day + "/" + URLEncoder.encode(theme.getTitle(), "utf-8").replace("+", "%20")
-                    + ".html");
+            theme.setUrlId(String.valueOf(theme.getGuid().hashCode()));
+            User user = userService.find(theme.getAuthorId());
+            theme.setAuthorDomain(user.getDomain());
+            theme.setAuthor(user.getNickName());
             theme = themeService.update(theme, globalSetting.getRedisOpen());
-            if (theme.getState() == Theme.STATE_PUBLISH) {
-                // ping百度
-                boolean baidu = PingUtils.ping(Constants.BAIDU_PING, theme.getTitle(), "http://"
-                        + globalSetting.getAppUrl() + "/", theme.getUrl(), null);
-                PingRecord pingRecord = pingRecordService.findByThemeGuid(theme.getGuid());
-                if (pingRecord == null) {
-                    pingRecord = new PingRecord();
-                    pingRecord.setTheme(theme);
-                }
-                pingRecord.setBaidu(baidu);
-                pingRecord.setPingDate(new Date());
-                pingRecordService.update(pingRecord);
-            }
         }
         refresh();
         return true;
@@ -322,6 +294,9 @@ public class AThemeCtl {
             GlobalSetting globalSetting = GlobalSetting.getInstance();
             Theme theme = themeService.find(guid, globalSetting.getRedisOpen());
             // theme.setThemeType(themeTypeService.find(type));
+            User user = userService.find(theme.getAuthorId());
+            theme.setAuthorDomain(user.getDomain());
+            theme.setAuthor(user.getNickName());
             theme.setContent(content);
             theme.setTitle(title);
             themeService.update(theme, globalSetting.getRedisOpen());
@@ -371,7 +346,7 @@ public class AThemeCtl {
             PingRecord pingRecord = pingRecordService.find(id);
             GlobalSetting globalSetting = (GlobalSetting) session.getAttribute("setting");
             boolean baidu = PingUtils.ping(Constants.BAIDU_PING, pingRecord.getTheme().getTitle(),
-                    "http://" + globalSetting.getAppUrl() + "/", pingRecord.getTheme().getUrl(),
+                     globalSetting.getAppUrl() + "/", pingRecord.getTheme().getUrlId()+".html",
                     null);
             pingRecord.setBaidu(baidu);
             pingRecord.setPingDate(new Date());

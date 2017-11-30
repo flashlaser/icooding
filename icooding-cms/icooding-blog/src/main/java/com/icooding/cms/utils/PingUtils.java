@@ -85,7 +85,7 @@ public class PingUtils {
 			IOException, DocumentException {
 		HttpPost post = new HttpPost(rpc);
 		post.addHeader("User-Agent", "request");
-		post.addHeader("Host", rpc.substring(rpc.indexOf("http://") + 7,
+		post.addHeader("Host", rpc.substring(rpc.indexOf("https://") + 7,
 				rpc.indexOf(".com/") + 4));
 		post.addHeader("Content-Type", "text/xml");
 		String methodCall = buildMethodCall(title, url, shareURL, rssURL);

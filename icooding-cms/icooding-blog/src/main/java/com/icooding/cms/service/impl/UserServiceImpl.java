@@ -12,6 +12,7 @@ import com.icooding.cms.persistence.RegesterCodeDao;
 import com.icooding.cms.utils.EncryptUtil;
 import com.icooding.cms.utils.ImageUtils;
 import com.icooding.cms.utils.QiniuCloudUtils;
+import com.icooding.cms.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,6 +77,7 @@ public class UserServiceImpl implements UserService {
 	public User register(String nickName, String password, String username, int type, String registerCode) {
 		User user = new User();
 		user.setNickName(nickName);
+		user.setDomain(TokenUtil.getRandomString(10,0));
 		Date date = Calendar.getInstance().getTime();
 		user.setPassword(EncryptUtil.pwd(date, password));
 		if(type==1){

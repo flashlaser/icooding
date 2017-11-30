@@ -4,18 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Index;
@@ -58,6 +47,7 @@ public class Theme implements Serializable{
 	@GenericGenerator(name = "themeGuid", strategy = "uuid")   
     @Column(name = "guid", length=32, nullable=false)
 	private String guid;
+
 	
 	/**
 	 * 文章标题
@@ -83,16 +73,22 @@ public class Theme implements Serializable{
 	private Date lastModify;
 	
 	/**
-	 * 作者昵称
+	 * 作者自定义域名
 	 */
-	@Column(nullable=false)
-	private String author;
+	@Column(name = "author_domain", nullable=false)
+	private String authorDomain;
 	
 	/**
 	 * 作者Id,查看作者信息用的，暂时保留
 	 */
 	@Column(name = "author_id", nullable=false)
 	private int authorId;
+
+	/**
+	 * 作者昵称
+	 */
+	@Column(name = "author", nullable=false)
+	private String author;
 	
 	/**
 	 * 逻辑删除，供回收站使用
@@ -115,8 +111,8 @@ public class Theme implements Serializable{
 	/**
 	 * 文章对应的url
 	 */
-	@Column(name = "url", length=500)
-	private String url;
+	@Column(name = "url_id", length=500)
+	private String urlId;
 	
 	/**
 	 * 浏览次数
@@ -175,6 +171,11 @@ public class Theme implements Serializable{
 		return guid;
 	}
 
+	@Transient
+	public String getUrl(){
+		return "/"+this.authorDomain+"/"+this.urlId+".html";
+	}
+
 	public void setGuid(String guid) {
 		this.guid = guid;
 	}
@@ -210,14 +211,6 @@ public class Theme implements Serializable{
 	public void setState(int state) {
 		this.state = state;
 	}
-	
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
 
 	public Date getPublishDate() {
 		return publishDate;
@@ -241,6 +234,22 @@ public class Theme implements Serializable{
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public String getAuthorDomain() {
+		return authorDomain;
+	}
+
+	public void setAuthorDomain(String authorDomain) {
+		this.authorDomain = authorDomain;
+	}
+
+	public String getUrlId() {
+		return urlId;
+	}
+
+	public void setUrlId(String urlId) {
+		this.urlId = urlId;
 	}
 
 	public int getAuthorId() {

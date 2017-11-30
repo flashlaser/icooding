@@ -134,8 +134,8 @@
 	<script src="static/kindeditor/kindeditor-all-min.js"></script>
 	<script src="static/kindeditor/lang/zh_CN.js"></script>
 
-	<script src="http://open.reinforce.cn/Bootstrap/datetimepicker/bootstrap-datetimepicker.min.js"></script>
-	<script src="http://open.reinforce.cn/Bootstrap/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"  charset="UTF-8"></script>
+	<script src="static/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="static/js/bootstrap-datetimepicker.zh-CN.js"  charset="UTF-8"></script>
 	<script>
 		var $this;
 		var $type;

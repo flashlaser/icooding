@@ -84,18 +84,18 @@ public class ThemeServiceImpl implements ThemeService {
         return themeDao.statistics(fid, datetype, day);
     }
     
-    public Theme findByDateAndTitle(String date, String title, boolean redisOpen){
-        String key = date+"-"+title;
+    public Theme findByDomainAndUrlId(String domain, String urlId, boolean redisOpen){
+        String key = domain+"-"+urlId;
         if(redisOpen){
             Theme theme = themeRedisDao.redisThemeFetch(themeRedisDao.redisGuidFetch(key));
             if(theme==null){
-                theme = themeDao.findByDateAndTitle(date, title);
+                theme = themeDao.findByDomainAndUrlId(domain, urlId);
                 if(theme!=null)
                 themeRedisDao.redisGuidUpdate(key, theme.getGuid());
             }
             return theme;
         }else{
-            return themeDao.findByDateAndTitle(date, title);
+            return themeDao.findByDomainAndUrlId(domain, urlId);
         }
         
     }

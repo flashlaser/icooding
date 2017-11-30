@@ -29,4 +29,11 @@ public class TokenUtil {
 	public static String uuid(){
 		return UUID.randomUUID().toString().replace("-","");
 	}
+
+
+	public static int hash(String key){
+		int h;
+		return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+	}
+
 }

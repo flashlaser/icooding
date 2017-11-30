@@ -431,7 +431,7 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 		for(Theme t:themes){
 			if(t.getState()==Theme.STATE_PUBLISH){
 				Element url = urlset.addElement("url");
-				url.addElement("loc").addText(t.getUrl());
+				url.addElement("loc").addText("/"+t.getAuthorDomain()+"/"+t.getUrlId()+".html");
 				url.addElement("lastmod").addText(DateUtil.format(t.getLastModify(),"yyyy-MM-dd"));
 				url.addElement("changefreq").addText("hourly");
 				url.addElement("priority").addText("0.7");

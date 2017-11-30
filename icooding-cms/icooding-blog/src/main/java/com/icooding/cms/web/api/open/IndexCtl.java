@@ -48,25 +48,6 @@ public class IndexCtl {
 		ModelAndView mv = new ModelAndView("index");
 		LOG.info("IP："+ ClientInfo.getIp(request)+" \""+request.getHeader("User-Agent")+"\" 进入了网站首页");
 		Index index = Index.getInstance();
-		if(index.getTitle()==null){
-			//原本论坛首页的
-			List<Forum> forums = forumService.searchRoot();
-			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-//			for (Forum f : forums) {
-//				list.add(forumToJson(f));
-//			}
-			if(forums.size()>2)
-			    list.add(forumToJson(forums.get(2)));
-			index.setList(list);
-			LOG.info("查询SEO");
-			Param title = paramService.findByKey(Constants.SEO_INDEX_TITLE);
-			Param keywords = paramService.findByKey(Constants.SEO_INDEX_KEYWORDS);
-			Param description = paramService.findByKey(Constants.SEO_INDEX_DESCRIPTION);
-			
-			index.setTitle(title!=null?title.getTextValue():"");
-			index.setKeywords(keywords!=null?keywords.getTextValue():"");
-			index.setDescription(description!=null?description.getTextValue():"");
-		}
 		Map<Integer,List<Theme>> list = index.getThemes();
 		if(list.get(curPage)==null){
 		    LOG.info("查询文章列表");
@@ -123,7 +104,7 @@ public class IndexCtl {
 			map.put("theme", count);
 			if(theme!=null){
 				map.put("title", theme.getTitle());
-				map.put("url", theme.getUrl());
+				map.put("url", "/"+theme.getAuthorDomain()+"/"+theme.getUrlId()+".html");
 				map.put("author", theme.getAuthor());
 				map.put("publishDate", theme.getPublishDate());
 				map.put("img", getImg(theme.getContent()));

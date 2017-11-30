@@ -161,13 +161,14 @@ public class ThemeDao extends BaseDao<Theme>{
 		
 	}
 	
-	public Theme findByDateAndTitle(String date, String title){
-		String hql = "select * from t_theme t where t.title=:title and t.publish_date like :date";
-		List<Theme> themes = em.createNativeQuery(hql, Theme.class).setParameter("title", title).setParameter("date", "%"+date+"%").getResultList();
-		if(themes.size()==0)
+	public Theme findByDomainAndUrlId(String authorDomain, String urlId){
+		String hql = "select * from t_theme t where t.author_domain=:authorDomain and t.url_id =:urlId";
+		List<Theme> themes = em.createNativeQuery(hql, Theme.class).setParameter("authorDomain", authorDomain).setParameter("urlId", urlId).getResultList();
+		if(themes.size()==0) {
 			return null;
-		else
+		}else{
 			return themes.get(0);
+		}
 	}
 	
 	public List<Theme> pageHot(int per, int curPage, boolean isDelete, int state){

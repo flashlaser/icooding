@@ -16,11 +16,9 @@ import com.icooding.cms.utils.FilterHTMLTag;
 import com.icooding.cms.web.base.Constants;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -129,20 +127,17 @@ public class ThemeCtl {
 	
 	/**
 	 * 左边为新url，右边为了让搜索引擎也能访问到
-	 * @param year
-	 * @param month
-	 * @param date
-	 * @param title
+	 * @param domain
+	 * @param urlId
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping({"/{year}/{month}/{date}/{title}.html","/op/theme/{year}/{month}/{date}/{title}.html"})
-	public ModelAndView detail(@PathVariable("year") String year, @PathVariable("month") String month,@PathVariable("date") String date, @PathVariable("title") String title, HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value = {"/{domain}/{urlId}.html"},method = RequestMethod.GET)
+	public ModelAndView detail(@PathVariable("domain") String domain, @PathVariable("urlId") String urlId, HttpServletRequest request, HttpServletResponse response){
 		String referer = request.getHeader("Referer");
-		String day = year+"-"+month+"-"+date;
 		 GlobalSetting globalSetting = GlobalSetting.getInstance();
-		Theme theme = themeService.findByDateAndTitle(day, title, globalSetting.getRedisOpen());
+		Theme theme = themeService.findByDomainAndUrlId(domain, urlId, globalSetting.getRedisOpen());
 		if(theme==null){
 			try {
 				response.sendError(404);//发送404
@@ -191,58 +186,12 @@ public class ThemeCtl {
 		mv.addObject("adv", advertisement);
 		return mv;
 	}
-	
-	@RequestMapping("/theme/addComment")
-	@ResponseBody
-	public Object addComment(String commentContent,String themeGuid,String commentGuid,Integer toUid, HttpSession session){
-		Map<String, Object> map = new HashMap<String, Object>();
-		Comments comments = new Comments();
-		GlobalSetting globalSetting = GlobalSetting.getInstance();
-		try{
-			UserSession userSession = (UserSession) session.getAttribute("userSession");
-			
-			//正常用户才能评论
-			if(!(userSession.getUser().getEmailStatus()||userSession.getUser().getMobileStatus())&&userSession.getType()==0){
-				map.put("success", false);
-				map.put("msg", "您的帐号处于未验证状态，请先验证您的邮箱/手机！");
-				return map;
-			}
-			
-			if(themeGuid!=null){
-				comments.setTheme(themeService.find(themeGuid, globalSetting.getRedisOpen()));
-			}else if(commentGuid!=null){
-				comments.setCommentParent(commentsService.find(commentGuid));
-				if(toUid!=0){
-					comments.setTo(userService.find(toUid));
-				}
-			}else{
-				map.put("success", false);
-				map.put("msg", "数据异常");
-				return map;
-			}
-			comments.setCommentContent(commentContent);
-			comments.setUser(userSession.getUser());
-			commentsService.save(comments);
-			
-			//更新到redis
-			themeService.update(themeService.find(themeGuid, globalSetting.getRedisOpen()), globalSetting.getRedisOpen());
-			
-			map.put("success", true);
-			map.put("msg", "评论成功");
-		}catch(Exception e){
-			LOG.error("评论失败", e);
-			map.put("success", false);
-			map.put("msg", "评论失败");
-		}
-		
-		return map;
-	}
-	
+
 	@RequestMapping("/theme/addTheme")
 	public ModelAndView addTheme(@RequestParam(defaultValue = "0")int fid,String tid,HttpSession session){
 		ModelAndView mv = new ModelAndView("theme/addTheme");
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
-		 GlobalSetting globalSetting = GlobalSetting.getInstance();
+		GlobalSetting globalSetting = GlobalSetting.getInstance();
 		Forum forum = null;
 		if(tid!=null){
 			Theme theme = themeService.find(tid, globalSetting.getRedisOpen());
@@ -270,64 +219,7 @@ public class ThemeCtl {
 		}
 		return mv;
 	}
-	
-	@RequestMapping("/op/theme/comment/vote")
-	@ResponseBody
-	public Object vote(int type,String guid, int voteType, HttpSession session){
-		Map<String, Object> map = new HashMap<String, Object>();
-		 GlobalSetting globalSetting = GlobalSetting.getInstance();
-		try{
-			if((type!=1&&type!=2)||(guid==null||"".equals(guid.trim()))){
-				map.put("success", false);
-				map.put("msg", "数据异常");
-				return map;
-			}
-			if(!voteRecordService.exists(session.getId(), guid, type)){
-				VoteRecord voteRecord = new VoteRecord();
-				voteRecord.setSessionId(session.getId());
-				int up = 0;
-				int down = 0;
-				/*投票*/
-				if(type==1){
-					Theme theme = themeService.find(guid, globalSetting.getRedisOpen());
-					voteRecord.setTheme(theme);
-					if(voteType==1){
-						theme.setUp(theme.getUp()+1);
-					}else if(voteType==2){
-						theme.setDown(theme.getDown()+1);
-					}
-					up = theme.getUp();
-					down = theme.getDown();
-					themeService.update(theme, globalSetting.getRedisOpen());
-				}
-				else if(type==2){
-					Comments comments = commentsService.find(guid);
-					voteRecord.setComments(comments);
-					if(voteType==1){
-						comments.setUp(comments.getUp()+1);
-					}else if(voteType==2){
-						comments.setDown(comments.getDown()+1);
-					}
-					up = comments.getUp();
-					down = comments.getDown();
-					commentsService.update(comments);
-				}
-				voteRecordService.save(voteRecord);
-				map.put("success", true);
-				map.put("up", up);
-				map.put("down", down);
-			}else{
-				map.put("success", false);
-				map.put("msg", "请勿重复投票");
-			}
-			
-		}catch(Exception e){
-			LOG.error("投票失败", e);
-			map.put("success", false);
-			map.put("msg", "未知错误");
-		}
-		return map;
-	}
+
 	
 	@RequestMapping("/tag/{tagName}")
 	public ModelAndView tags(@PathVariable("tagName")String tagName, @RequestParam(defaultValue = "1")int curPage){

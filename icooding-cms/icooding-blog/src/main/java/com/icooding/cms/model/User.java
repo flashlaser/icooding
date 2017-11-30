@@ -73,6 +73,12 @@ public class User implements Serializable {
 	private String nickName;
 
 	/**
+	 * 自定义二级域名
+	 */
+	@Column(name = "domain")
+	private String domain;
+
+	/**
 	 * 密码
 	 */
 	@Column(name = "password")
@@ -348,4 +354,11 @@ public class User implements Serializable {
 		this.state = state;
 	}
 
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
 }
