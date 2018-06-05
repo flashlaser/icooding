@@ -1,11 +1,14 @@
 package com.icooding.practice.netty;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.sctp.nio.NioSctpServerChannel;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 
 /**
  * project_name icooding-practice
@@ -23,19 +26,27 @@ public class Client {
         try {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(work)
-            .channel(NioServerSocketChannel.class)
-            .handler(new ChannelInitializer<NioServerSocketChannel>() {
+            .channel(NioSocketChannel.class)
+            .handler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
-                protected void initChannel(NioServerSocketChannel channelHandler) throws Exception {
+                protected void initChannel(NioSocketChannel channelHandler) throws Exception {
                     channelHandler.pipeline().addLast(new ChannelInboundHandlerAdapter(){
                         @Override
                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                            ctx.writeAndFlush("hello word!");
+                            byte[] bytes = "Hello word!".getBytes();
+                            ByteBuf buffer = Unpooled.buffer(bytes.length);
+                            buffer.writeBytes(bytes);
+                            ctx.writeAndFlush(buffer);
                         }
 
                         @Override
                         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                            System.out.println("channelRead:"+msg);
+                            ByteBuf msg1 = (ByteBuf) msg;// (3)
+                            byte[] bytes = new byte[msg1.readableBytes()];
+                            msg1.readBytes(bytes);
+                            String msgstr = new String(bytes,"UTF-8");
+                            System.out.println("channelRead:"+msgstr);
+                            System.out.println("Object:"+msg);
                         }
 
                         @Override

@@ -1,0 +1,65 @@
+package ${servicePackage};
+
+import ${entityPackage}.*;
+import ${mapperPackage}.${t.className}Mapper;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+* ${t.className}ServiceImpl
+*/
+@Service
+public class ${t.className}ServiceImpl implements  ${t.className}Service{
+
+
+    @Autowired
+    private ${t.className}Mapper mapper;
+
+    @Override
+    public ${t.className} find(String id){
+        return mapper.find(id);
+    };
+
+    @Override
+    public ${t.className} findByColumnAndValue(String columnName,String value){
+        List<${t.className}> list = mapper.findByColumnAndValue(columnName,value);
+        return list.size()>0?list.get(0):null;
+    };
+
+    @Override
+    public List<${t.className}> findListByColumnAndValue(String columnName,String value){
+        return mapper.findByColumnAndValue(columnName,value);
+    };
+
+    @Override
+    public int count(${t.className} entity){
+        return mapper.count(entity);
+    };
+
+    @Override
+    public List<${t.className}> list(Integer pageIndex,Integer pageSize,${t.className} entity){
+        return mapper.list(pageIndex,pageSize,entity);
+    };
+
+    @Override
+    public int delete(String id){
+        return mapper.delete(id);
+    };
+
+    @Override
+    public int save(${t.className} entity){
+        return mapper.save(entity);
+    };
+
+    @Override
+    public int update(${t.className} entity){
+        return mapper.update(entity);
+    };
+
+    @Override
+    public boolean isExistence(String columnName,String value){
+        return mapper.isExistence(columnName,value);
+    };
+
+}

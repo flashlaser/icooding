@@ -2,6 +2,7 @@ package com.icooding.practice.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -63,10 +64,21 @@ class ChannelHanddler extends ChannelInitializer<SocketChannel>{
 class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
 
 
+
     public DiscardServerHandler() {
 
     }
 
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+//        byte[] bytes = ("欢迎你 ： "+ctx.channel().id()+"!").getBytes();
+//        ByteBuf buffer = Unpooled.buffer(bytes.length);
+//        buffer.writeBytes(bytes);
+//        ChannelFuture channelFuture = ctx.writeAndFlush(buffer);
+//        System.out.println(channelFuture.isSuccess());
+        super.channelActive(ctx);
+    }
 
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
@@ -81,19 +93,23 @@ class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
             byte[] bytes = new byte[msg1.readableBytes()];
             msg1.readBytes(bytes);
             String msgstr = new String(bytes,"UTF-8");
-            System.out.println(msg);
-            ctx.channel().writeAndFlush("Server 回复的消息");
+            System.out.println(msgstr);
+
+            byte[] re = ("我已经接收到了你的消息 ： "+ctx.channel().id()+"!").getBytes();
+            ByteBuf buffer = Unpooled.buffer(msg1.readableBytes());
+            buffer.writeBytes(bytes);
+            ChannelFuture channelFuture = ctx.writeAndFlush(buffer);
+            System.out.println(channelFuture.isSuccess());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
 
 
-
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) { // (4)
         // 出现异常时关闭连接。
-        cause.printStackTrace();
+        System.out.println(String.format("ID:%s 已断开连接。",ctx.channel().id()));
         ctx.close();
     }
 }

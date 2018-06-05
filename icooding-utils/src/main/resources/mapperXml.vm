@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${mapperPackage}.${t.className}Mapper">
+    <resultMap id="BaseResultMap" type="${entityPackage}.${t.className}">
+
+    #foreach($p in $t.fieldList)
+        #if($p.key == true)
+            <id column="${p.columnName}" jdbcType="${p.columnType}" property="${p.propertyName}" />
+        #end
+        #if($p.key == false)
+            <result column="${p.columnName}" jdbcType="${p.columnType}" property="${p.propertyName}" />
+        #end
+    #end
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    #foreach($p in $t.fieldList)
+        #if($velocityCount != 1),#end  ${p.columnName}
+    #end
+    </sql>
+
+    <select id="find" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from ${t.name} where id = #{id}
+    </select>
+
+    <select id="findByColumnAndValue" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from ${t.name} where ${columnName} = #{value}
+    </select>
+
+    <select id="isExistence" resultType="java.lang.Boolean" >
+        select
+        count(1)
+        from ${t.name} where ${columnName} = #{value}
+    </select>
+
+
+    <select id="count" resultType="java.lang.Integer" parameterType="${entityPackage}.${t.className}">
+        select
+        count(*)
+        from ${t.name}
+        where 1=1
+        #foreach($p in $t.fieldList)
+        <if test="${p.propertyName} != '' and ${p.propertyName} != null ">
+            and ${p.columnName} = #{${p.propertyName}}
+        </if>
+        #end
+    </select>
+
+
+    <select id="list" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from ${t.name}
+        where 1=1
+        #foreach($p in $t.fieldList)
+        <if test="entity.${p.propertyName} != '' and entity.${p.propertyName} != null ">
+           and ${p.columnName} = #{entity.${p.propertyName}}
+        </if>
+        #end
+        order by create_time desc
+        limit ${(pageIndex-1)*pageSize},${pageSize}
+    </select>
+
+
+    <insert id="save" parameterType="${entityPackage}.${t.className}">
+        insert into ${t.name}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        #foreach($p in $t.fieldList)
+        <if test="${p.propertyName} != null">
+            ${p.columnName},##
+        </if>
+        #end
+        </trim>
+
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        #foreach($p in $t.fieldList)
+        <if test="${p.propertyName} != null">
+            #{${p.propertyName}},##
+        </if>
+        #end
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="${entityPackage}.${t.className}">
+        update ${t.name}
+        <set>
+        #foreach($p in $t.fieldList)
+            #if($p.key != true)
+                <if test="${p.propertyName} != null">
+                ${p.columnName} = #{ ${p.propertyName}},##
+                </if>
+            #end
+        #end
+        </set>
+        where
+
+        #foreach($p in $t.fieldList)
+            #if($p.key == true)
+                #if($velocityCount != 1) and #end ${p.columnName} = #{ ${p.propertyName}}##
+            #end
+        #end
+
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from ${t.name} where
+        #foreach($p in $t.fieldList)
+            #if($p.key == true)
+                #if($velocityCount != 1) and #end ${p.columnName} = #{ ${p.propertyName}}##
+            #end
+        #end
+
+    </delete>
+
+</mapper>

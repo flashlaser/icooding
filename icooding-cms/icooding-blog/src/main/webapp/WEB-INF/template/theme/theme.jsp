@@ -122,8 +122,8 @@
 				</div>
 
 				<div class="comment">
- 					<!-- 评论
-					<div id="SOHUCS" sid="${theme.guid}" ></div>-->
+ 					<!-- 评论-->
+					<div id="SOHUCS" sid="${theme.guid}" ></div>
 					<!-- 评论 -->
 				</div>
 
@@ -143,8 +143,8 @@
 	<script src="http://cpro.baidustatic.com/cpro/ui/i.js"
 		type="text/javascript"></script>
 	-->
-	<script src="http://open.reinforce.cn/Bootstrap/datetimepicker/bootstrap-datetimepicker.min.js"></script>
-	<script src="http://open.reinforce.cn/Bootstrap/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"  charset="UTF-8"></script>
+	<script src="/static/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="/static/js/bootstrap-datetimepicker.zh-CN.js"  charset="UTF-8"></script>
 
 	<script type="text/javascript">
 
@@ -226,7 +226,7 @@
 		};
 		with (document)
 			0[(getElementsByTagName('head')[0] || body)
-					.appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='
+					.appendChild(createElement('script')).src = 'https://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='
 					+ ~(-new Date() / 36e5)];
 	</script>
 </body>

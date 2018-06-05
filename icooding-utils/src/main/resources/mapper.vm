@@ -1,0 +1,29 @@
+package ${mapperPackage};
+
+import ${entityPackage}.*;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
+
+/**
+* ${t.className}Mapper
+*/
+public interface ${t.className}Mapper {
+
+    ${t.className} find(String id);
+
+    List<${t.className}> findByColumnAndValue(@Param("columnName")String columnName,@Param("value")String value);
+
+    int count(${t.className} entity);
+
+    List<${t.className}> list(@Param("pageIndex")Integer pageIndex,@Param("pageSize")Integer pageSize,@Param("entity")${t.className} entity);
+
+    int delete(String id);
+
+    int save(${t.className} entity);
+
+    int update(${t.className} entity);
+
+    boolean isExistence(@Param("columnName")String columnName,@Param("value")String value);
+
+
+}

@@ -1,4 +1,4 @@
-package com.icooding.utils;
+package com.ic.utils;
 
 /**
  * JSON工具

@@ -1,10 +1,7 @@
-package com.icooding.doc;
+package com.ic.doc;
 
 
-import com.icooding.utils.JSON;
-
-import java.io.*;
-import java.util.List;
+import com.ic.utils.JSON;
 
 /**
  * Created by jagua on 2017/9/22.

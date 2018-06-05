@@ -1,6 +1,4 @@
-package com.icooding.utils;
-
-import org.apache.commons.lang.StringUtils;
+package com.ic.utils;
 
 public class ValidUtils {
 
@@ -227,7 +225,7 @@ public class ValidUtils {
 	}
 
 	public static boolean matches(String regex,String input){
-		if(StringUtils.isBlank(input)) return false;
+		if(isBlank(input)) return false;
 		if(input.matches(regex))return true;
 		return false;
 	}
@@ -243,5 +241,20 @@ public class ValidUtils {
 		System.out.println(isUInteger("1.3"));*/
 		System.out.println(isLetterAndSpace("tai  wan"));
 		
+	}
+
+	public static boolean isBlank(CharSequence cs) {
+		int strLen;
+		if (cs != null && (strLen = cs.length()) != 0) {
+			for(int i = 0; i < strLen; ++i) {
+				if (!Character.isWhitespace(cs.charAt(i))) {
+					return false;
+				}
+			}
+
+			return true;
+		} else {
+			return true;
+		}
 	}
 }

@@ -1,0 +1,30 @@
+package ${servicePackage};
+
+import ${entityPackage}.*;
+import java.util.List;
+
+/**
+* ${t.className}Service
+*/
+public interface ${t.className}Service {
+
+    ${t.className} find(String id);
+
+    ${t.className} findByColumnAndValue(String columnName,String value);
+
+    List<${t.className}> findListByColumnAndValue(String columnName,String value);
+
+    int count(${t.className} entity);
+
+    List<${t.className}> list(Integer pageIndex,Integer pageSize,${t.className} entity);
+
+    int delete(String id);
+
+    int save(${t.className} entity);
+
+    int update(${t.className} entity);
+
+    boolean isExistence(String columnName,String value);
+
+
+}

@@ -1,0 +1,34 @@
+package ${entityPackage};
+
+#foreach($p in $t.importPackages)
+import ${p};
+#end
+import java.io.Serializable;
+
+/**
+ * ${t.desc}
+ *
+ */
+public class ${t.className}  implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    #foreach($field in $t.fieldList)
+
+    /**
+     *  ${field.desc}
+     */
+    private ${field.propertySimpleType} ${field.propertyName};
+    #end
+
+    #foreach($field in $t.fieldList)
+
+    public ${field.propertySimpleType} get${field.methodName}() {
+        return ${field.propertyName};
+    }
+
+    public void set${field.methodName}(${field.propertySimpleType} ${field.propertyName}) {
+        this.${field.propertyName} = ${field.propertyName};
+    }
+    #end
+
+}

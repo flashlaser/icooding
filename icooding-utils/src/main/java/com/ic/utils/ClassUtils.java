@@ -1,4 +1,4 @@
-package com.icooding.utils;
+package com.ic.utils;
 
 
 import java.io.File;

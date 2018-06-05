@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  * version 1.0
  */
 public class RequestUtils {
+
     public static String getIp2(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
         if(StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)){
@@ -29,4 +30,5 @@ public class RequestUtils {
         }
         return request.getRemoteAddr();
     }
+
 }

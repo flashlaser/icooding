@@ -3,6 +3,7 @@ package com.icooding.cms.web.admin.api.aliyun;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.icooding.cms.dto.GlobalSetting;
@@ -26,6 +28,7 @@ import com.icooding.cms.utils.ImageUtils;
 import com.icooding.cms.utils.QiniuCloudUtils;
 import com.icooding.cms.utils.Strings;
 import com.icooding.cms.web.base.Constants;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,13 +42,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.aliyun.oss.model.OSSObjectSummary;
 import com.aliyun.oss.model.ObjectListing;
 import com.aliyun.oss.model.PutObjectResult;
+import sun.misc.BASE64Decoder;
 
 @Controller
 @RequestMapping("/file")
 public class FileCtl {
 
     private static final Logger LOG = Logger.getLogger(FileCtl.class);
-    
+	public final String IMAGETYPES = "gif,jpg,jpeg,png,bmp";
 	// 设置每块为 200K
 	private static final long PART_SIZE = 1024 * 200;
 
@@ -102,6 +106,48 @@ public class FileCtl {
 		return map;
 	}
 
+
+
+	/**
+	 * 描述：kindeditor 粘贴图片上传
+	 * @author Jack
+	 * @date 2017年5月23日上午11:04:16
+	 * @return
+	 */
+	@RequestMapping(value = "/imgUpload/base64", method = RequestMethod.POST)
+	@ResponseBody
+	public String  imageUploadBase64(HttpServletRequest request,String imageDataBase64) throws IOException {
+		UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
+		String url = "";
+		if(!StringUtils.isEmpty(imageDataBase64)){
+			String[] arrImageData = imageDataBase64.split(",");
+			String[] arrTypes = arrImageData[0].split(";");
+			String[] arrImageType = arrTypes[0].split(":");
+			String imageType = arrImageType[1];
+			String imageTypeSuffix = imageType.split("/")[1];
+			if("base64".equalsIgnoreCase(arrTypes[1])&&this.IMAGETYPES.indexOf(imageTypeSuffix.toLowerCase())!=-1){
+				BASE64Decoder decoder = new BASE64Decoder();
+				byte[] decodeBuffer = decoder.decodeBuffer(arrImageData[1]);
+				url = QiniuCloudUtils.updateFile(decodeBuffer, userSession.getUser().getUid());
+				System.out.println(url);
+			}
+		}
+		return url;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	@RequestMapping("/upload")
 	public Map<String, Object> upload(String bucketName, @RequestParam("uploadFile") MultipartFile uploadFile, String folder, HttpSession session, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -120,6 +166,20 @@ public class FileCtl {
 
 		return map;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	/**
 	 * 生成链接
@@ -199,6 +259,11 @@ public class FileCtl {
 				ossService.newFolder(folderName, curFolder));
 		return map;
 	}
+
+
+
+
+
 
 	
 	/**
